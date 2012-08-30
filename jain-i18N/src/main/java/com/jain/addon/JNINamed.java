@@ -1,6 +1,4 @@
 /* 
- * Copyright 2012 Lokesh Jain.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
@@ -20,8 +18,6 @@ import java.io.Serializable;
 /**
  * <code>JNINamed<code> indicates framework to use 
  * display name instead of toString for an component value.
- * @author Lokesh Jain
- * @since Aug 27, 2012
  * @version 1.0.0
  */
 public interface JNINamed extends Serializable {
