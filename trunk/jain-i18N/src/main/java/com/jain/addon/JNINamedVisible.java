@@ -1,6 +1,4 @@
 /* 
- * Copyright 2012 Lokesh Jain.
- * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
@@ -18,8 +16,6 @@ package com.jain.addon;
 /**
  * <code>JNINamedVisible<code> indicates framework to use 
  * display name instead of to string for an component value along with visibility.
- * @author Lokesh Jain
- * @since Aug 27, 2012
  * @version 1.0.0
  */
 public interface JNINamedVisible extends JNINamed {

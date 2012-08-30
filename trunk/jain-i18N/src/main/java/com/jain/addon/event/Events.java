@@ -17,6 +17,9 @@ package com.jain.addon.event;
 
 import java.io.Serializable;
 import java.util.Collection;
+
+import com.jain.addon.web.marker.authentication.JLoginHandler;
+import com.vaadin.ui.Root;
 /**
  * <pre> 
  * <code>Events<code> class to raise events for handler.
@@ -59,5 +62,21 @@ public final class Events implements Serializable {
 		for (MethodExpression expression : expressions) {
 			expression.invoke(parameters);
 		}
+	}
+	
+	/**
+	 * Raise an Login event, so that {@link EventHandler} can observe this event and call proper onLogin methods in the application.
+	 * @param {@link Root}
+	 */
+	public void raiseLoginEvent(Root root) {
+		JLoginHandler.onLogin(root);
+	}
+
+	/**
+	 * Raise an Logout event, so that {@link EventHandler} can observe this event and call proper Logout methods in the application.
+	 * @param {@link Root}
+	 */
+	public void raiseLogoutEvent(Root root) {
+		JLoginHandler.onLogin(root);
 	}
 }
