@@ -196,7 +196,7 @@ public final class JainHelper {
 		for (JNILayout layout : layouts) {
 			if(layout.getProperty().getType() == JPropertyType.RICH_TEXT_AREA 
 					|| layout.getProperty().getType() == JPropertyType.TEXT_AREA) {
-				
+
 				if(earlierLayout != null && earlierLayout.getProperty().getType() == JPropertyType.RICH_TEXT_AREA 
 						|| earlierLayout.getProperty().getType() == JPropertyType.TEXT_AREA) {
 					layout.setColSpan(columns/2);
@@ -210,7 +210,7 @@ public final class JainHelper {
 					layout.getGroup().setColumns(columns);
 				layout.getGroup().setColSpan(columns);
 			}
-			
+
 			earlierLayout = layout;
 		}
 	}
@@ -219,7 +219,7 @@ public final class JainHelper {
 	 * 
 	 * @param person
 	 * @param values
-	 * @return
+	 * @return String
 	 */
 	public static String getPojoState(Locale locale, Object bean, JNIProperty[] values) {
 		StringBuilder builder = new StringBuilder();
@@ -228,18 +228,20 @@ public final class JainHelper {
 			builder.append(provider.getTitle(locale, property.getDisplayName()));
 			builder.append(": ");
 			Object object = getPropertyValue(property.getName(), bean);
-			if (object instanceof JNINamed) {
-				String caption = ((JNINamed) object).getDisplayName();
-				if (object.getClass().isEnum()) {
-					String value = provider.getText(locale, caption);
-					if(caption.equals(value))
-						value = provider.getTitle(locale, caption);
-					builder.append(value);
+			if (object != null) {
+				if (object instanceof JNINamed) {
+					String caption = ((JNINamed) object).getDisplayName();
+					if (object.getClass().isEnum()) {
+						String value = provider.getText(locale, caption);
+						if(caption.equals(value))
+							value = provider.getTitle(locale, caption);
+						builder.append(value);
+					} else {
+						builder.append(caption);
+					}
 				} else {
-					builder.append(caption);
+					builder.append(object.toString());
 				}
-			} else {
-				builder.append(object.toString());
 			}
 
 			builder.append("<br/>");
