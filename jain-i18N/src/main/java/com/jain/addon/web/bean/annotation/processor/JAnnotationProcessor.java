@@ -26,7 +26,7 @@ import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.JNIPropertyConstraint;
 import com.jain.addon.web.bean.annotation.JNIAttribute;
 import com.jain.addon.web.bean.annotation.JNIConstraint;
-import com.jain.addon.web.bean.annotation.JNIEmbaded;
+import com.jain.addon.web.bean.annotation.JNIEmbedded;
 import com.jain.addon.web.layout.JNGroup;
 import com.jain.addon.web.layout.JNIGroup;
 import com.jain.addon.web.layout.JNILayout;
@@ -34,7 +34,7 @@ import com.jain.addon.web.layout.JNLayout;
 
 /**
  * <code>JAnnotationProcessor<code> process all the annotation provided for the UI generation.
- * @see {@link JNIAttribute} {@link JNIEmbaded} {@link JNIConstraint}
+ * @see {@link JNIAttribute} {@link JNIEmbedded} {@link JNIConstraint}
  * @author Lokesh Jain
  * @since Aug 27, 2012
  * @version 1.0.0
@@ -86,7 +86,7 @@ public final class JAnnotationProcessor implements Serializable {
 	private JProperties processAnnotation(Class <?> type) {
 		JProperties properties = new JProperties();
 
-		JNIEmbaded embaded = type.getAnnotation(JNIEmbaded.class);
+		JNIEmbedded embaded = type.getAnnotation(JNIEmbedded.class);
 		JNIGroup group = null;
 		if (embaded != null && StringHelper.isNotEmptyWithTrim(embaded.lable())) {
 			group = new JNGroup (embaded, null);
@@ -104,7 +104,7 @@ public final class JAnnotationProcessor implements Serializable {
 			if(StringHelper.isNotEmptyWithTrim(initials))
 				propertyName = initials + "." + propertyName;
 
-			JNIEmbaded embaded = method.getAnnotation(JNIEmbaded.class);
+			JNIEmbedded embaded = method.getAnnotation(JNIEmbedded.class);
 
 			if (embaded != null) {
 				JNIGroup jniGroup = group;

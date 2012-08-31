@@ -23,7 +23,7 @@ import java.util.Collection;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.annotation.JNIAttribute;
 import com.jain.addon.web.bean.annotation.JNIConstraint;
-import com.jain.addon.web.bean.annotation.JNIEmbaded;
+import com.jain.addon.web.bean.annotation.JNIEmbedded;
 import com.jain.addon.web.bean.annotation.processor.JAnnotationProcessor;
 import com.jain.addon.web.bean.filter.JainFilter;
 import com.jain.addon.web.bean.helper.JainBeanPropertyHelper;
@@ -47,7 +47,7 @@ public class JainBeanItemContainer<BT> extends AbstractJainBeanItemContainer<BT>
     /**
      * Create a bean Item container by passing only bean type.
      * In this case bean type should be annotated by the annotations
-     * @see {@link JNIAttribute} {@link JNIEmbaded} {@link JNIConstraint}
+     * @see {@link JNIAttribute} {@link JNIEmbedded} {@link JNIConstraint}
      * @param type
      */
     public JainBeanItemContainer(Class<? extends BT> type) {

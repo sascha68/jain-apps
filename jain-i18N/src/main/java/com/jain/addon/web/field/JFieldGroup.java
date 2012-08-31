@@ -23,7 +23,7 @@ import com.jain.addon.web.bean.JNIPropertyConstraint;
 import com.jain.addon.web.bean.JVisibilityType;
 import com.jain.addon.web.bean.annotation.JNIAttribute;
 import com.jain.addon.web.bean.annotation.JNIConstraint;
-import com.jain.addon.web.bean.annotation.JNIEmbaded;
+import com.jain.addon.web.bean.annotation.JNIEmbedded;
 import com.jain.addon.web.bean.annotation.processor.JAnnotationProcessor;
 import com.jain.addon.web.bean.annotation.processor.JProperties;
 import com.jain.addon.web.bean.factory.JFieldFactory;
@@ -82,7 +82,7 @@ public class JFieldGroup<T> extends JainGroupLayout {
 	 * @param beanType - Used to calculate {@link JNIProperty} and {@link JNIPropertyConstraint} based on annotations
 	 * @param item - Bean item having all these properties access logic.
 	 * @return {@link FieldGroup}
-	 * @see {@link JNIAttribute}, {@link JNIConstraint}, {@link JNIEmbaded}
+	 * @see {@link JNIAttribute}, {@link JNIConstraint}, {@link JNIEmbedded}
 	 */
 	public FieldGroup createFieldGroup(Class<? extends T> beanType, Item item) {
 		JProperties properties = JAnnotationProcessor.instance().getProperties(beanType);
