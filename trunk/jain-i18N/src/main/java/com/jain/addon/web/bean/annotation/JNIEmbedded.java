@@ -22,7 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <code>JNIEmbaded<code> annotation values used to calculate group for the complete object attributes. <br/>
+ * <code>JNIEmbedded<code> annotation values used to calculate group for the complete object attributes. <br/>
  * Method level annotation is used to create Group and parent group for the object attributes. <br/>
  * Class level annotation is used to create default group for the given class attributes 
  * except embedded object instances if they are having different group. 
@@ -33,7 +33,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface JNIEmbaded {
+public @interface JNIEmbedded {
 	public String lable () default "";
 	public int columns () default -1;
 }

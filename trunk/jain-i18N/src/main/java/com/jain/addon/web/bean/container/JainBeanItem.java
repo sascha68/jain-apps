@@ -25,7 +25,7 @@ import java.util.LinkedHashMap;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.annotation.JNIAttribute;
 import com.jain.addon.web.bean.annotation.JNIConstraint;
-import com.jain.addon.web.bean.annotation.JNIEmbaded;
+import com.jain.addon.web.bean.annotation.JNIEmbedded;
 import com.jain.addon.web.bean.annotation.processor.JAnnotationProcessor;
 import com.jain.addon.web.bean.annotation.processor.JProperties;
 import com.jain.addon.web.bean.helper.JainBeanPropertyHelper;
@@ -50,7 +50,7 @@ public class JainBeanItem<BT> extends BeanItem<BT> {
 	/**
 	 * Create Bean item instance by passing only bean object
 	 * In this case bean class should be annotated with the annotations.
-	 * @see {@link JNIAttribute} {@link JNIEmbaded} {@link JNIConstraint}
+	 * @see {@link JNIAttribute} {@link JNIEmbedded} {@link JNIConstraint}
 	 * @param bean
 	 */
 	public JainBeanItem(BT bean) {

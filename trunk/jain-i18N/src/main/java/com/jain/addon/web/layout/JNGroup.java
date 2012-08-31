@@ -16,7 +16,7 @@
 package com.jain.addon.web.layout;
 
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.web.bean.annotation.JNIEmbaded;
+import com.jain.addon.web.bean.annotation.JNIEmbedded;
 
 /**
  * <code>JNGroup<code> is a default implementation for the {@link JNIGroup}
@@ -40,11 +40,11 @@ public class JNGroup implements JNIGroup {
 	}
 
 	/**
-	 * Create a instance from the {@link JNIEmbaded} annotation
+	 * Create a instance from the {@link JNIEmbedded} annotation
 	 * @param embaded
 	 * @param parent
 	 */
-	public JNGroup(JNIEmbaded embaded, JNIGroup parent) {
+	public JNGroup(JNIEmbedded embaded, JNIGroup parent) {
 		this.parent = parent;
 		this.name = embaded.lable();
 		this.displayName = embaded.lable() + I18NProvider.TITLE_KEY;

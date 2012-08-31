@@ -18,12 +18,12 @@ package com.jain.addon.web.layout;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.annotation.JNIAttribute;
 import com.jain.addon.web.bean.annotation.JNIConstraint;
-import com.jain.addon.web.bean.annotation.JNIEmbaded;
+import com.jain.addon.web.bean.annotation.JNIEmbedded;
 
 /**
  * <code>JNLayout<code> is a default implementation for the {@link JNILayout}. <br/>
  * This default implementation is populated using Annotation.
- * @see {@link JNIAttribute} {@link JNIEmbaded} {@link JNIConstraint} 
+ * @see {@link JNIAttribute} {@link JNIEmbedded} {@link JNIConstraint} 
  * @author Lokesh Jain
  * @since Aug 28, 2012
  * @version 1.0.0
