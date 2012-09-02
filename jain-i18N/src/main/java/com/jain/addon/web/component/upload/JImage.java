@@ -16,6 +16,8 @@
 package com.jain.addon.web.component.upload;
 
 import java.io.ByteArrayInputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.jain.addon.web.component.JStreamSource;
 import com.vaadin.event.MouseEvents.ClickEvent;
@@ -46,7 +48,10 @@ public class JImage extends CustomField<Object> implements ClickListener {
 
 		image = new Embedded();
 		image.setWidth("100%");
-		image.addListener(this);
+		
+		if (!isReadOnly()) 
+			image.addListener(this);
+		
 		layout.addComponent(image);
 	}
 
@@ -57,10 +62,10 @@ public class JImage extends CustomField<Object> implements ClickListener {
 	public Object getValue() {
 		return uploader.getStream().toByteArray();
 	}
-	
+
 	protected Object getInternalValue() {
-        return uploader == null ? null : uploader.getStream() == null ? null : uploader.getStream().toByteArray();
-    }
+		return uploader == null ? null : uploader.getStream() == null ? null : uploader.getStream().toByteArray();
+	}
 
 	public void click(ClickEvent event) {
 		subWindow = new Window("Upload Window");
@@ -77,12 +82,21 @@ public class JImage extends CustomField<Object> implements ClickListener {
 		image.setSource(new StreamResource(source, fileName, getApplication()));
 		image.requestRepaint();
 	}
-	
+
 	@Override
 	protected Component initContent() {
 		layout = new VerticalLayout();
 		uploader = new JImageUpload(this);
-		layout.addComponent(uploader);
+		if (super.getInternalValue() == null) {
+			layout.addComponent(uploader);
+		} else {
+			createImage();
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+			String filename = "myfilename-" + df.format(new Date()) + ".png";
+			JStreamSource source = new JStreamSource(new ByteArrayInputStream((byte [])super.getInternalValue()));
+			image.setSource(new StreamResource(source, filename, getApplication()));
+			image.requestRepaint();
+		}
 		return layout;
 	}
 }
