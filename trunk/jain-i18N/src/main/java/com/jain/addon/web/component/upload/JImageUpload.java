@@ -17,14 +17,13 @@ package com.jain.addon.web.component.upload;
 
 import java.io.ByteArrayOutputStream;
 
-import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.Upload;
 import com.vaadin.ui.Upload.StartedEvent;
 import com.vaadin.ui.Upload.StartedListener;
 import com.vaadin.ui.Upload.SucceededEvent;
 import com.vaadin.ui.Upload.SucceededListener;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  * <code>JImageUpload<code> default Image unloader
@@ -33,9 +32,8 @@ import com.vaadin.ui.Upload.SucceededListener;
  * @version 1.0.0
  */
 @SuppressWarnings("serial")
-public class JImageUpload extends CustomComponent implements SucceededListener, StartedListener {
+public class JImageUpload extends VerticalLayout implements SucceededListener, StartedListener {
 	private ByteArrayOutputStream stream;
-	private Panel panel;
 	private JFileReceiver receiver;
 	private Upload upload;
 	private JImage jImage;
@@ -44,19 +42,21 @@ public class JImageUpload extends CustomComponent implements SucceededListener, 
 	public JImageUpload(JImage jImage) {
 		this.jImage = jImage;
 
-		panel = new Panel();
-
+		setWidth("100%");
+		setMargin(true, false, true, false);
+		setStyleName("image-upload");
+		
 		upload = new Upload();
 		upload.setImmediate(true);
 		upload.setButtonCaption("Upload");
 
-		panel.addComponent(upload);
+		addComponent(upload);
 		stream = new ByteArrayOutputStream(10240);
 		stream.reset();
 		
 		pi = new JProgressIndicator();
 		upload.addListener(pi);
-		panel.addComponent(pi);
+		addComponent(pi);
 		pi.setVisible(false);
 
 		receiver = new JFileReceiver(stream);
@@ -64,8 +64,6 @@ public class JImageUpload extends CustomComponent implements SucceededListener, 
 
 		upload.addListener((SucceededListener) this);
 		upload.addListener((StartedListener) this);
-
-		setCompositionRoot(panel);
 	}
 
 	public Object getValue() {
@@ -89,7 +87,8 @@ public class JImageUpload extends CustomComponent implements SucceededListener, 
 	}
 
 	public void uploadStarted(StartedEvent event) {
-		pi.setVisible(false);
+		pi.setVisible(true);
+		upload.setVisible(false);
 		long l = event.getContentLength();
 		if(l > 1000 * 1000 * 3) {
 			interruptUpload();
@@ -103,5 +102,6 @@ public class JImageUpload extends CustomComponent implements SucceededListener, 
 		final ByteArrayOutputStream stream = getStream();
 		jImage.updateImage(stream.toByteArray(), receiver.getFileName());
 		pi.setVisible(false);
+		upload.setVisible(true);
 	}
 }
