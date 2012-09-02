@@ -111,8 +111,15 @@ public final class JAnnotationProcessor implements Serializable {
 
 				if(StringHelper.isNotEmptyWithTrim(embaded.lable())) {
 					jniGroup = new JNGroup (embaded, parentGroup);
+					Class <?> embadedType = method.getReturnType();
+					if (embadedType != null) {
+						embaded = embadedType.getAnnotation(JNIEmbedded.class);
+						JNIGroup grp = jniGroup;	
+						if (embaded != null && StringHelper.isNotEmptyWithTrim(embaded.lable())) {
+							jniGroup = new JNGroup (embaded, grp);
+						}
+					}
 				}
-
 				processAnnotation (method.getReturnType(), properties, propertyName, jniGroup,  jniGroup);
 			}
 
