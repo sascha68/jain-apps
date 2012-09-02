@@ -16,12 +16,11 @@
 package com.jain.addon.web.component.upload;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
+import com.jain.addon.web.component.JStreamSource;
 import com.vaadin.event.MouseEvents.ClickEvent;
 import com.vaadin.event.MouseEvents.ClickListener;
 import com.vaadin.terminal.StreamResource;
-import com.vaadin.terminal.StreamResource.StreamSource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomField;
 import com.vaadin.ui.Embedded;
@@ -40,14 +39,13 @@ public class JImage extends CustomField<Object> implements ClickListener {
 	private VerticalLayout layout;
 	private JImageUpload uploader;
 	private Window subWindow;
-	private String width = "100%";
 
 	public void createImage() {
 		if(image != null)
 			layout.removeComponent(image);
 
 		image = new Embedded();
-		image.setWidth(width);
+		image.setWidth("100%");
 		image.addListener(this);
 		layout.addComponent(image);
 	}
@@ -59,6 +57,10 @@ public class JImage extends CustomField<Object> implements ClickListener {
 	public Object getValue() {
 		return uploader.getStream().toByteArray();
 	}
+	
+	protected Object getInternalValue() {
+        return uploader == null ? null : uploader.getStream() == null ? null : uploader.getStream().toByteArray();
+    }
 
 	public void click(ClickEvent event) {
 		subWindow = new Window("Upload Window");
@@ -71,21 +73,11 @@ public class JImage extends CustomField<Object> implements ClickListener {
 		layout.getRoot().removeWindow(subWindow);
 		layout.removeComponent(uploader);
 
-		StreamSource source = new StreamSource() {
-			private static final long serialVersionUID = -4905654404647215809L;
-			public InputStream getStream() {
-				return new ByteArrayInputStream(imageData);
-			}
-		};
+		JStreamSource source = new JStreamSource(new ByteArrayInputStream(imageData));
 		image.setSource(new StreamResource(source, fileName, getApplication()));
 		image.requestRepaint();
 	}
 	
-	@Override
-	public void setWidth(String width) {
-		this.width = width;
-	}
-
 	@Override
 	protected Component initContent() {
 		layout = new VerticalLayout();

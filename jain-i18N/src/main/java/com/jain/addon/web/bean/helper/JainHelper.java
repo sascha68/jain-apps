@@ -195,10 +195,14 @@ public final class JainHelper {
 		JNILayout earlierLayout = null;
 		for (JNILayout layout : layouts) {
 			if(layout.getProperty().getType() == JPropertyType.RICH_TEXT_AREA 
-					|| layout.getProperty().getType() == JPropertyType.TEXT_AREA) {
+					|| layout.getProperty().getType() == JPropertyType.TEXT_AREA 
+					|| layout.getProperty().getType() == JPropertyType.IMAGE) {
 
-				if(earlierLayout != null && earlierLayout.getProperty().getType() == JPropertyType.RICH_TEXT_AREA 
-						|| earlierLayout.getProperty().getType() == JPropertyType.TEXT_AREA) {
+				if(earlierLayout != null 
+						&& earlierLayout.getProperty().getType() == JPropertyType.RICH_TEXT_AREA 
+						|| earlierLayout.getProperty().getType() == JPropertyType.TEXT_AREA
+						|| earlierLayout.getProperty().getType() == JPropertyType.IMAGE) {
+					
 					layout.setColSpan(columns/2);
 					earlierLayout.setColSpan(columns - layout.getColSpan());
 					earlierLayout = null;

@@ -77,7 +77,7 @@ public class Person implements JNINamed {
 		this.address = address;
 	}
 
-	@JNIAttribute(lable = "picture", type = JPropertyType.IMAGE, order = 10)
+	@JNIAttribute(lable = "picture", type = JPropertyType.IMAGE, order = 899)
 	@JNIConstraint(width = "40%")
 	public byte[] getPicture() {
 		return picture;
