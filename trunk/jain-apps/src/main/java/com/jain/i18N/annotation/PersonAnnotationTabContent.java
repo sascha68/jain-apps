@@ -44,7 +44,7 @@ public class PersonAnnotationTabContent extends VerticalLayout implements JNICru
 
 	public void create() {
 		PersonAnnotationForm form = CDIComponent.getInstance(PersonAnnotationForm.class);
-		form.setCaption(JAction.ADD.getDisplayName(getLocale(), "review.name"));
+		form.setCaption(JAction.ADD.getDisplayName(getLocale(), "person.name"));
 		getRoot().addWindow(form);
 	}
 
