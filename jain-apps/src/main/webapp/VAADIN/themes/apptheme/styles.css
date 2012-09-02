@@ -63,6 +63,6 @@
 	border-radius: 10px;
 }
 
-img {
-	border-right: 10px;
+.v-embedded-image img {
+	border-radius: 5px;
 }
