@@ -28,7 +28,7 @@ public class PersonAnnotationGrid  extends VerticalLayout implements ValueChange
 	public void init () {
 		table = new JTable(getContainer(), getProperties());
 		table.addListener(this);
-		table.setPageLength(5);
+		table.setPageLength(15);
 		addComponent(table);
 	}
 

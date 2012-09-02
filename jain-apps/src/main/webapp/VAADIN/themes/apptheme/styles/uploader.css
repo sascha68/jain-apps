@@ -1,5 +1,12 @@
+.image-upload {
+	background: url(../images/bg-headliner.gif) repeat center;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
 .uploader {
-	background: url(../images/bg-uploader.jpg) repeat-x top center;
+	background: url(../images/bg-headliner.gif) repeat-x top center;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -9,7 +16,7 @@
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
-	background: url(../images/bg-navigation.gif) repeat-x;
+	background: url(../images/bg-headliner.gif) repeat-x;
 	color: #b99b5f;
 	text-decoration: none;
 	text-shadow: 1px 1px 0 #efd9c4;
@@ -21,7 +28,7 @@
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
-	background: url(../images/bg-navigation.gif) repeat-x;
+	background: url(../images/bg-headliner.gif) repeat-x;
 	color: #b99b5f;
 	text-decoration: none;
 	text-shadow: 1px 1px 0 #efd9c4;

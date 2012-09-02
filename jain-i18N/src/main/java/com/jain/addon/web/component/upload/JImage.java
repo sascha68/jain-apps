@@ -20,14 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.jain.addon.web.component.JStreamSource;
-import com.vaadin.event.MouseEvents.ClickEvent;
-import com.vaadin.event.MouseEvents.ClickListener;
 import com.vaadin.terminal.StreamResource;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomField;
 import com.vaadin.ui.Embedded;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.HorizontalLayout;
 
 /**
  * <code>JImage<code> is a Image custom component
@@ -35,12 +33,11 @@ import com.vaadin.ui.Window;
  * @since Aug 28, 2012
  * @version 1.0.0
  */
-public class JImage extends CustomField<Object> implements ClickListener {
+public class JImage extends CustomField<Object> {
 	private static final long serialVersionUID = 7490297043002025899L;
 	private Embedded image;
-	private VerticalLayout layout;
+	private HorizontalLayout layout;
 	private JImageUpload uploader;
-	private Window subWindow;
 
 	public void createImage() {
 		if(image != null)
@@ -48,11 +45,8 @@ public class JImage extends CustomField<Object> implements ClickListener {
 
 		image = new Embedded();
 		image.setWidth("100%");
-		
-		if (!isReadOnly()) 
-			image.addListener(this);
-		
-		layout.addComponent(image);
+		layout.addComponent(image, 0);
+		layout.setComponentAlignment(image, Alignment.MIDDLE_LEFT);
 	}
 
 	public Class<?> getType() {
@@ -67,17 +61,7 @@ public class JImage extends CustomField<Object> implements ClickListener {
 		return uploader == null ? null : uploader.getStream() == null ? null : uploader.getStream().toByteArray();
 	}
 
-	public void click(ClickEvent event) {
-		subWindow = new Window("Upload Window");
-		subWindow.addComponent(uploader);
-		subWindow.center();
-		layout.getRoot().addWindow(subWindow);
-	}
-
 	public void updateImage(final byte [] imageData, String fileName) {
-		layout.getRoot().removeWindow(subWindow);
-		layout.removeComponent(uploader);
-
 		JStreamSource source = new JStreamSource(new ByteArrayInputStream(imageData));
 		image.setSource(new StreamResource(source, fileName, getApplication()));
 		image.requestRepaint();
@@ -85,17 +69,21 @@ public class JImage extends CustomField<Object> implements ClickListener {
 
 	@Override
 	protected Component initContent() {
-		layout = new VerticalLayout();
+		layout = new HorizontalLayout();
+		layout.setSpacing(true);
+		layout.setWidth("100%");
 		uploader = new JImageUpload(this);
-		if (super.getInternalValue() == null) {
-			layout.addComponent(uploader);
-		} else {
+		
+		if (super.getInternalValue() != null) {
 			createImage();
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-			String filename = "myfilename-" + df.format(new Date()) + ".png";
-			JStreamSource source = new JStreamSource(new ByteArrayInputStream((byte [])super.getInternalValue()));
-			image.setSource(new StreamResource(source, filename, getApplication()));
-			image.requestRepaint();
+			String fileName = "myfilename-" + df.format(new Date()) + ".png";
+			updateImage((byte [])super.getInternalValue(), fileName);
+		} 
+
+		if (!isReadOnly()) {
+			layout.addComponent(uploader);
+			layout.setComponentAlignment(uploader, Alignment.MIDDLE_RIGHT);
 		}
 		return layout;
 	}
