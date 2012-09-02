@@ -22,10 +22,10 @@ import java.util.Date;
 
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.helper.JainHelper;
+import com.jain.addon.web.component.JStreamSource;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.terminal.StreamResource;
-import com.vaadin.terminal.StreamResource.StreamSource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Table;
@@ -64,13 +64,7 @@ public class JainColumnGenerator implements ColumnGenerator {
 	}
 
 	private Component createImage(final Property<?> itemProperty, final Table source) {
-		StreamSource streamSource = new StreamSource() {
-			public InputStream getStream() {
-				byte[] bas = (byte[]) itemProperty.getValue();
-				return (bas == null) ? null : new ByteArrayInputStream(bas);
-			}
-		};
-
+		JStreamSource streamSource = new JStreamSource((byte[]) itemProperty.getValue());
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String filename = "myfilename-" + df.format(new Date()) + ".png";
 		StreamResource resource = new StreamResource(streamSource, filename, source.getApplication());
