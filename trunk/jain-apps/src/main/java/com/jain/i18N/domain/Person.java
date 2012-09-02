@@ -5,6 +5,7 @@ import java.util.Date;
 import com.jain.addon.JNINamed;
 import com.jain.addon.web.bean.JConstraintType;
 import com.jain.addon.web.bean.JPropertyType;
+import com.jain.addon.web.bean.JVisibilityType;
 import com.jain.addon.web.bean.annotation.JNIAttribute;
 import com.jain.addon.web.bean.annotation.JNIConstraint;
 import com.jain.addon.web.bean.annotation.JNIEmbedded;
@@ -12,6 +13,7 @@ import com.jain.addon.web.bean.annotation.JNIEmbedded;
 @SuppressWarnings("serial")
 public class Person implements JNINamed {
 	private String name;
+	private String description;
 	private Gender gender;
 	private Date birthDate;
 	private String email;
@@ -26,6 +28,15 @@ public class Person implements JNINamed {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@JNIAttribute(lable = "description", order = 900, visibility = JVisibilityType.COLLAPSED, type = JPropertyType.RICH_TEXT_AREA)
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@JNIAttribute(lable = "gender", order = 2)
@@ -67,6 +78,7 @@ public class Person implements JNINamed {
 	}
 
 	@JNIAttribute(lable = "picture", type = JPropertyType.IMAGE, order = 10)
+	@JNIConstraint(width = "40%")
 	public byte[] getPicture() {
 		return picture;
 	}
@@ -76,10 +88,6 @@ public class Person implements JNINamed {
 	}
 
 	public String getDisplayName() {
-		return name;
-	}
-
-	public String getDescription() {
 		return name;
 	}
 }
