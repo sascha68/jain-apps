@@ -2,6 +2,7 @@ package com.jain.i18N.domain;
 
 import java.io.Serializable;
 
+import com.jain.addon.web.bean.JPropertyType;
 import com.jain.addon.web.bean.JVisibilityType;
 import com.jain.addon.web.bean.annotation.JNIAttribute;
 import com.jain.addon.web.bean.annotation.JNIEmbedded;
@@ -17,7 +18,7 @@ public class Address implements Serializable {
 		this.zip = zip;
 	}
 	
-	@JNIAttribute (lable = "address", order = 100)
+	@JNIAttribute (lable = "address", order = 100, type = JPropertyType.TEXT_AREA)
 	public String getAddress1() {
 		return address1;
 	}

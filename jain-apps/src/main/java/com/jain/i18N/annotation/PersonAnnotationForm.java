@@ -31,7 +31,7 @@ public class PersonAnnotationForm extends I18NWindow implements JNIEditLocal, JN
 
 	public void init () {
 		setModal(true);
-		setWidth("40%");
+		setWidth("70%");
 
 		VerticalLayout layout = new VerticalLayout();
 		layout.setWidth("100%");

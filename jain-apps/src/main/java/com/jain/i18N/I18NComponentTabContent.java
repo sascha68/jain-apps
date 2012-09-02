@@ -9,6 +9,6 @@ import com.vaadin.ui.TabSheet;
 public class I18NComponentTabContent extends TabSheet implements JNIComponent {
 	public void init() {
 		PersonAnnotationTabContent personAnnotationTabContent = CDIComponent.getInstance(PersonAnnotationTabContent.class);
-		addTab(personAnnotationTabContent, "person.crud.with.annotaion.name");
+		addTab(personAnnotationTabContent, "annotaion.approach.name");
 	}
 }
