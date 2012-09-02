@@ -40,14 +40,14 @@ public class JImage extends CustomField<Object> implements ClickListener {
 	private VerticalLayout layout;
 	private JImageUpload uploader;
 	private Window subWindow;
+	private String width = "100%";
 
 	public void createImage() {
 		if(image != null)
 			layout.removeComponent(image);
 
 		image = new Embedded();
-		image.setWidth("100%");
-		image.setHeight("100%");
+		image.setWidth(width);
 		image.addListener(this);
 		layout.addComponent(image);
 	}
@@ -79,6 +79,11 @@ public class JImage extends CustomField<Object> implements ClickListener {
 		};
 		image.setSource(new StreamResource(source, fileName, getApplication()));
 		image.requestRepaint();
+	}
+	
+	@Override
+	public void setWidth(String width) {
+		this.width = width;
 	}
 
 	@Override
