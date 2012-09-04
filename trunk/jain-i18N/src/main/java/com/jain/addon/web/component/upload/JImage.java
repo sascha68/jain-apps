@@ -39,6 +39,10 @@ public class JImage extends CustomField<Object> {
 	private HorizontalLayout layout;
 	private JImageUpload uploader;
 
+	public JImage() {
+		this.uploader = new JImageUpload(this);
+	}
+	
 	public void createImage() {
 		if(image != null)
 			layout.removeComponent(image);
@@ -51,10 +55,6 @@ public class JImage extends CustomField<Object> {
 
 	public Class<?> getType() {
 		return byte [].class;
-	}
-
-	public Object getValue() {
-		return uploader.getStream().toByteArray();
 	}
 
 	protected Object getInternalValue() {
@@ -72,8 +72,7 @@ public class JImage extends CustomField<Object> {
 		layout = new HorizontalLayout();
 		layout.setSpacing(true);
 		layout.setWidth("100%");
-		uploader = new JImageUpload(this);
-		
+
 		if (super.getInternalValue() != null) {
 			createImage();
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
@@ -83,8 +82,32 @@ public class JImage extends CustomField<Object> {
 
 		if (!isReadOnly()) {
 			layout.addComponent(uploader);
-			layout.setComponentAlignment(uploader, Alignment.MIDDLE_RIGHT);
+			layout.setComponentAlignment(uploader, Alignment.MIDDLE_CENTER);
 		}
 		return layout;
+	}
+
+	public String getInterruptionMessage() {
+		return uploader.getInterruptionMessage();
+	}
+
+	public void setInterruptionMessage(String interruptionMessage) {
+		uploader.setInterruptionMessage(interruptionMessage);
+	}
+
+	public long getMaxContentLength() {
+		return uploader.getMaxContentLength();
+	}
+
+	public void setMaxContentLength(long maxContentLength) {
+		uploader.setMaxContentLength(maxContentLength);
+	}
+
+	public String getUploadButtonCaption() {
+		return uploader.getButtonCaption();
+	}
+
+	public void setUploadButtonCaption(String uploadButtonCaption) {
+		uploader.setButtonCaption(uploadButtonCaption);
 	}
 }

@@ -35,6 +35,9 @@ public class JFileReceiver implements Receiver {
 	private String filePath;
 	private OutputStream stream;
 
+	public JFileReceiver() {
+	}
+	
 	public JFileReceiver(OutputStream stream) {
 		this.stream = stream;
 	}
