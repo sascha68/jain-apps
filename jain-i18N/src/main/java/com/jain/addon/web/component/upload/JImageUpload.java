@@ -17,53 +17,26 @@ package com.jain.addon.web.component.upload;
 
 import java.io.ByteArrayOutputStream;
 
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Upload;
 import com.vaadin.ui.Upload.StartedEvent;
-import com.vaadin.ui.Upload.StartedListener;
 import com.vaadin.ui.Upload.SucceededEvent;
-import com.vaadin.ui.Upload.SucceededListener;
-import com.vaadin.ui.VerticalLayout;
 
 /**
- * <code>JImageUpload<code> default Image unloader
+ * <code>JImageUpload<code> default Image uploader
  * @author Lokesh Jain
  * @since Aug 28, 2012
  * @version 1.0.0
  */
 @SuppressWarnings("serial")
-public class JImageUpload extends VerticalLayout implements SucceededListener, StartedListener {
+public class JImageUpload extends JUploader {
 	private ByteArrayOutputStream stream;
-	private JFileReceiver receiver;
-	private Upload upload;
 	private JImage jImage;
-	private JProgressIndicator pi;
 
 	public JImageUpload(JImage jImage) {
+		super ();
 		this.jImage = jImage;
-
-		setWidth("100%");
-		setMargin(true, false, true, false);
-		setStyleName("image-upload");
-		
-		upload = new Upload();
-		upload.setImmediate(true);
-		upload.setButtonCaption("Upload");
-
-		addComponent(upload);
 		stream = new ByteArrayOutputStream(10240);
 		stream.reset();
-		
-		pi = new JProgressIndicator();
-		upload.addListener(pi);
-		addComponent(pi);
-		pi.setVisible(false);
-
-		receiver = new JFileReceiver(stream);
-		upload.setReceiver(receiver);
-
-		upload.addListener((SucceededListener) this);
-		upload.addListener((StartedListener) this);
+		super.setStream(stream);
 	}
 
 	public Object getValue() {
@@ -78,30 +51,17 @@ public class JImageUpload extends VerticalLayout implements SucceededListener, S
 		this.stream = stream;
 	}
 
-	protected void interruptUpload() {
-		upload.interruptUpload();
-		Notification n = new Notification("Larger Size", Notification.TYPE_TRAY_NOTIFICATION);
-		n.setPosition(Notification.POSITION_CENTERED);
-		n.setDescription("Please provide file with smaller size");
-		n.show(getRoot().getPage());
-	}
-
 	public void uploadStarted(StartedEvent event) {
-		pi.setVisible(true);
-		upload.setVisible(false);
+		super.uploadStarted(event);
 		long l = event.getContentLength();
-		if(l > 1000 * 1000 * 3) {
-			interruptUpload();
-		} else {
-			getStream().reset();
+		if(l < getMaxContentLength()) {
+			stream.reset();
 			jImage.createImage();
 		}
 	}
 
 	public void uploadSucceeded(SucceededEvent event) {
-		final ByteArrayOutputStream stream = getStream();
-		jImage.updateImage(stream.toByteArray(), receiver.getFileName());
-		pi.setVisible(false);
-		upload.setVisible(true);
+		jImage.updateImage(stream.toByteArray(), event.getFilename());
+		super.uploadSucceeded(event);
 	}
 }

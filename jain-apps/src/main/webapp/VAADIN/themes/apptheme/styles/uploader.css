@@ -1,34 +1,16 @@
-.image-upload {
+.j-upload {
 	background: url(../images/bg-headliner.gif) repeat center;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
 
-.uploader {
-	background: url(../images/bg-headliner.gif) repeat-x top center;
+.j-upload .v-button .v-button-wrap {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-}
-
-.uploader-segment .v-button .v-button-wrap {
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	border-radius: 0;
-	background: url(../images/bg-headliner.gif) repeat-x;
-	color: #b99b5f;
-	text-decoration: none;
-	text-shadow: 1px 1px 0 #efd9c4;
-	text-transform: lowercase;
-	font-size: 20px;
-}
-
-.uploader-segment-small .v-button .v-button-wrap {
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	border-radius: 0;
-	background: url(../images/bg-headliner.gif) repeat-x;
+	width : auto;
+	background: url(../images/bg-navigation.gif) repeat-x;
 	color: #b99b5f;
 	text-decoration: none;
 	text-shadow: 1px 1px 0 #efd9c4;
@@ -36,7 +18,7 @@
 	font-size: 11px;
 }
 
-.uploader-segment  .v-button-caption {
+.j-upload  .v-button-caption {
 	vertical-align: middle;
 	white-space: nowrap;
 	font: inherit;
@@ -44,49 +26,12 @@
 	line-height: normal;
 }
 
-.uploader-segment .first {
-	-webkit-border-top-left-radius: 7px;
-	-webkit-border-bottom-left-radius: 7px;
-	-moz-border-radius-topleft: 7px;
-	-moz-border-radius-bottomleft: 7px;
-	border-top-left-radius: 7px;
-	border-bottom-left-radius: 7px;
-	border-left-width: 1px;
-}
-
-.uploader-segment .first .v-button-wrap {
-	-webkit-border-top-left-radius: 7px;
-	-webkit-border-bottom-left-radius: 7px;
-	-moz-border-radius-topleft: 7px;
-	-moz-border-radius-bottomleft: 7px;
-	border-top-left-radius: 7px;
-	border-bottom-left-radius: 7px;
-}
-
-.uploader-segment .last {
-	-webkit-border-top-right-radius: 7px;
-	-webkit-border-bottom-right-radius: 7px;
-	-moz-border-radius-topright: 7px;
-	-moz-border-radius-bottomright: 7px;
-	border-top-right-radius: 7px;
-	border-bottom-right-radius: 7px;
-}
-
-.uploader-segment .last .v-button-wrap {
-	-webkit-border-top-right-radius: 7px;
-	-webkit-border-bottom-right-radius: 7px;
-	-moz-border-radius-topright: 7px;
-	-moz-border-radius-bottomright: 7px;
-	border-top-right-radius: 7px;
-	border-bottom-right-radius: 7px;
-}
-
-.uploader-segment .v-button-caption:hover {
+.j-upload .v-button-caption:hover {
 	color: #2e5306;
 	text-shadow: 1px 1px 0 #f2fcd9;
 }
 
-.uploader-segment .selected .v-button-caption {
+.j-upload .selected .v-button-caption {
 	color: #2e5306;
 	text-shadow: 1px 1px 0 #f2fcd9;
 }

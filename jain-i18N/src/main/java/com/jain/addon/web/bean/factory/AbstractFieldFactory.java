@@ -107,6 +107,8 @@ public abstract class AbstractFieldFactory  implements Serializable {
 
 		if(property.getType() == JPropertyType.IMAGE) {
 			JImage image = new JImage();
+			image.setInterruptionMessage(property.getName() + ".upload.interruption");
+			image.setUploadButtonCaption(property.getName() + ".upload.button.caption");
 			return image;
 		}
 
