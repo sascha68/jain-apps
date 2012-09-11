@@ -109,12 +109,18 @@ public class I18NResourceProvider implements I18NProvider {
 
 	public String getText(Locale locale, String identifier, String sufix, Object... params) {
 		Object[] parsedParams = parseParams(locale, identifier, params);
-		String result = getProperty(locale, identifier + sufix, identifier);
+		
+		String defaultValue = identifier;
+		
+		if(identifier.contains(KEY_SPLITTER))
+			identifier = identifier.substring(0, identifier.indexOf(KEY_SPLITTER));
+
+		String result = getProperty(locale, identifier + sufix, defaultValue);
 		return MessageFormat.format(result, parsedParams);
 	}
 
 	private Object[] parseParams(Locale locale, String identifier, Object... params) {
-		if(params == null) {
+		if(params == null || params.length == 0) {
 			if(identifier.contains(KEY_SPLITTER)) {
 				String [] identifiers = identifier.split(KEY_SPLITTER);
 
