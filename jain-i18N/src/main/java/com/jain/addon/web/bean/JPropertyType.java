@@ -47,5 +47,6 @@ public enum JPropertyType {
 	RICH_TEXT_AREA,
 	MULTI_SELECT,
 	IMAGE,
-	DATE;
+	DATE,
+	FILE;
 }

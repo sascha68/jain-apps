@@ -5,33 +5,40 @@
 	border-radius: 10px;
 }
 
+.j-upload .v-button {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	width: 100%;
+}
+
 .j-upload .v-button .v-button-wrap {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	width : auto;
 	background: url(../images/bg-navigation.gif) repeat-x;
 	color: #b99b5f;
-	text-decoration: none;
+	text-decoration: underline;
 	text-shadow: 1px 1px 0 #efd9c4;
 	text-transform: lowercase;
 	font-size: 11px;
 }
 
-.j-upload  .v-button-caption {
+.j-upload  .v-button .v-button-wrap .v-button-caption {
 	vertical-align: middle;
 	white-space: nowrap;
+	text-align : center;
 	font: inherit;
 	color: inherit;
 	line-height: normal;
 }
 
-.j-upload .v-button-caption:hover {
+.j-upload .v-button .v-button-wrap .v-button-caption:hover {
 	color: #2e5306;
 	text-shadow: 1px 1px 0 #f2fcd9;
 }
 
-.j-upload .selected .v-button-caption {
+.j-upload .v-button .v-button-wrap .selected .v-button-caption {
 	color: #2e5306;
 	text-shadow: 1px 1px 0 #f2fcd9;
 }
