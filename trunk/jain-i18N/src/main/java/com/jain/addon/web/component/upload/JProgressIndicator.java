@@ -30,6 +30,7 @@ public class JProgressIndicator extends ProgressIndicator implements ProgressLis
 	private long contentLength;
 	
 	public JProgressIndicator() {
+		setWidth("100%");
 		setValue(0f);
 		setPollingInterval(500);
 	}

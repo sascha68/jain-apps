@@ -19,9 +19,11 @@ import com.jain.addon.i18N.handlers.I18NAbstractComponentHandler;
 import com.jain.addon.i18N.handlers.I18NAbstractSelectHandler;
 import com.jain.addon.i18N.handlers.I18NComponentHandler;
 import com.jain.addon.i18N.handlers.I18NFieldHandler;
+import com.jain.addon.i18N.handlers.I18NJUploadHandler;
 import com.jain.addon.i18N.handlers.I18NLableHandler;
 import com.jain.addon.i18N.handlers.I18NTabSheetHandler;
 import com.jain.addon.i18N.handlers.I18NTableHandler;
+import com.jain.addon.web.component.upload.JUploader;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.AbstractTextField;
@@ -52,6 +54,8 @@ public final class I18NComponentHandlerFactory {
 			return new I18NAbstractSelectHandler((AbstractSelect)component);
 		if (component instanceof TabSheet || component.getParent() instanceof TabSheet)
 			return new I18NTabSheetHandler(component);
+		if  (component instanceof JUploader) 
+			return new I18NJUploadHandler((JUploader) component);
 		if (component instanceof AbstractComponent)
 			return new I18NAbstractComponentHandler ((AbstractComponent)component);
 		return  new I18NComponentHandler(component);

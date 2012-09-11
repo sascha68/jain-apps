@@ -47,8 +47,8 @@ public class JUploader extends VerticalLayout implements SucceededListener, Star
 		setStyleName("j-upload");
 
 		upload = new Upload();
+		upload.setWidth("100%");
 		upload.setImmediate(true);
-		upload.setButtonCaption("Upload");
 		addComponent(upload);
 
 		pi = new JProgressIndicator();
@@ -78,6 +78,8 @@ public class JUploader extends VerticalLayout implements SucceededListener, Star
 		n.setPosition(Notification.POSITION_CENTERED);
 		n.setDescription(provider.getMessage(getLocale(), interruptionMessage));
 		n.show(getRoot().getPage());
+		pi.setVisible(false);
+		upload.setVisible(true);
 	}
 
 	public void uploadStarted(StartedEvent event) {
