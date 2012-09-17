@@ -2,14 +2,13 @@ package com.jain.common.header;
 
 import com.jain.addon.web.JNINamedResourceVisible;
 import com.jain.i18N.I18NComponentTabContent;
-import com.jain.xls.comparator.XLSComparatorTabContents;
-import com.jain.xml.editor.XMLEditorTabContents;
 import com.vaadin.ui.Component;
 
 public enum JHeaderItem implements JNINamedResourceVisible {
 	I18N_COMPONENT ("i18n.components.name", I18NComponentTabContent.class),
-	XML_EDITOR ("xml.editor.name", XMLEditorTabContents.class),
-	XLS_COMPARATOR ("xls.comparator.name", XLSComparatorTabContents.class);
+	//XML_EDITOR ("xml.editor.name", XMLEditorTabContents.class),
+	//XLS_COMPARATOR ("xls.comparator.name", XLSComparatorTabContents.class)
+	;
 	
 	private final String displayNameKey;
 	private final String resource;
