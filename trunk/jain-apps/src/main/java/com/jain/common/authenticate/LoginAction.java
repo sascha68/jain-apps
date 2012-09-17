@@ -63,6 +63,7 @@ public class LoginAction extends I18NWindow  implements ClickListener, JNICompon
 		I18NProvider provider = I18NResourceProvider.instance();
 		
 		userName = new TextField("user.name");
+		userName.setCursorPosition(0);
 		userName.setRequired(true);
 		userName.setRequiredError(provider.getMessage(getLocale(), "common.something.required", "user.name.title", JAction.LOGIN.getDisplayName()));
 		userName.setDescription("user.name");
