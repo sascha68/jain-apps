@@ -30,13 +30,13 @@ import java.util.Set;
 import com.vaadin.data.Container;
 import com.vaadin.data.Container.Filterable;
 import com.vaadin.data.Container.Indexed;
-import com.vaadin.data.Container.ItemSetChangeListener;
 import com.vaadin.data.Container.ItemSetChangeNotifier;
 import com.vaadin.data.Container.Sortable;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.Property.ValueChangeNotifier;
+import com.vaadin.data.util.AbstractContainer;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.DefaultItemSorter;
 import com.vaadin.data.util.ItemSorter;
@@ -49,7 +49,7 @@ import com.vaadin.data.util.filter.UnsupportedFilterException;
  * @param <BT>
  */
 @SuppressWarnings({"serial", "unchecked"})
-public abstract class AbstractJainBeanItemContainer<BT> implements Indexed, Sortable, Filterable, ItemSetChangeNotifier, ValueChangeListener {
+public abstract class AbstractJainBeanItemContainer<BT> extends AbstractContainer implements Indexed, Sortable, Filterable, ItemSetChangeNotifier, ValueChangeListener {
 	protected ListSet<BT> filteredItems;
 	protected ListSet<BT> allItems;
 	protected final Map<BT, BeanItem<BT>> beanToItem;
@@ -425,12 +425,12 @@ public abstract class AbstractJainBeanItemContainer<BT> implements Indexed, Sort
 
 	@Override
 	public void addItemSetChangeListener(ItemSetChangeListener listener) {
-		throw new IllegalArgumentException("UNIMPLEMENTED METHOD");
+		super.addItemSetChangeListener(listener);
 	}
 
 	@Override
 	public void removeItemSetChangeListener(ItemSetChangeListener listener) {
-		throw new IllegalArgumentException("UNIMPLEMENTED METHOD");
+		super.removeItemSetChangeListener(listener);
 	}
 
 	//Abstract Methods
