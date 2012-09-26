@@ -15,8 +15,6 @@
  */
 package com.jain.addon.web.table;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,7 +23,7 @@ import com.jain.addon.web.bean.helper.JainHelper;
 import com.jain.addon.web.component.JStreamSource;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
-import com.vaadin.terminal.StreamResource;
+import com.vaadin.server.StreamResource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Table;
@@ -67,7 +65,7 @@ public class JainColumnGenerator implements ColumnGenerator {
 		JStreamSource streamSource = new JStreamSource((byte[]) itemProperty.getValue());
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String filename = "myfilename-" + df.format(new Date()) + ".png";
-		StreamResource resource = new StreamResource(streamSource, filename, source.getApplication());
+		StreamResource resource = new StreamResource(streamSource, filename);
 		Embedded embedded = new Embedded("", resource);
 		embedded.setHeight("20px");
 		return embedded;

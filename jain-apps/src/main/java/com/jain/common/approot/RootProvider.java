@@ -15,18 +15,20 @@ package com.jain.common.approot;
 
 import javax.inject.Inject;
 
-import com.vaadin.Application;
-import com.vaadin.RootRequiresMoreInformationException;
-import com.vaadin.terminal.WrappedRequest;
-import com.vaadin.ui.Root;
+import com.vaadin.server.AbstractUIProvider;
+import com.vaadin.server.WrappedRequest;
+import com.vaadin.ui.UI;
 
-public class RootProvider extends Application {
-	private static final long serialVersionUID = 45678369L;
-
+public class RootProvider extends AbstractUIProvider {
 	@Inject
-	private ApplicationRoot rootProvider;
+	private ApplicationUI rootProvider;
 
-	protected Root getRoot(WrappedRequest request) throws RootRequiresMoreInformationException {
+	@Override
+	public UI createInstance(WrappedRequest request, Class<? extends UI> type) {
 		return rootProvider;
+	}
+	
+	public Class<? extends UI> getUIClass(WrappedRequest request) {
+		return ApplicationUI.class;
 	}
 }

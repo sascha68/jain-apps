@@ -97,7 +97,7 @@ public class I18NChangeListener implements ValueChangeListener {
 		Event event = (Event) valueChangeEvent;
 		Locale selected = ((Locale) valueChangeEvent.getProperty().getValue());
 		currentLocale = selected == null ? Locale.getDefault() : selected;
-		event.getComponent().getApplication().setLocale(currentLocale);
-		localeChanged(event.getComponent().getRoot());
+		event.getComponent().getUI().setLocale(currentLocale);
+		localeChanged(event.getComponent().getUI());
 	}
 }

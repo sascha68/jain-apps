@@ -17,11 +17,11 @@ package com.jain.addon.web.bean;
 
 import java.util.Date;
 
-import com.google.gwt.user.client.ui.RichTextArea;
 import com.jain.addon.web.component.upload.JImage;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.ListSelect;
 import com.vaadin.ui.PopupDateField;
+import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 

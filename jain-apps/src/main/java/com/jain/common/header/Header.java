@@ -17,7 +17,7 @@ import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.web.JNIComponent;
 import com.jain.theme.ApplicationTheme;
-import com.vaadin.terminal.ThemeResource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -67,7 +67,7 @@ public class Header extends HorizontalLayout implements ClickListener, JNICompon
 
 	public void addDefaultTab() {
 		findNCreateCurrentComponent();
-		VerticalLayout contentLayout = (VerticalLayout) getRoot().getContent();
+		VerticalLayout contentLayout = (VerticalLayout) getUI().getContent();
 		contentLayout.setSpacing(false);
 		contentLayout.setMargin(false);
 		contentLayout.addComponent(currentComponent);
@@ -89,7 +89,7 @@ public class Header extends HorizontalLayout implements ClickListener, JNICompon
 			current = event.getButton(); 
 			current.addStyleName(ApplicationTheme.SELECTED);
 
-			VerticalLayout layout = (VerticalLayout) getRoot().getContent();
+			VerticalLayout layout = (VerticalLayout) getUI().getContent();
 
 			if(currentComponent != null)
 				layout.removeComponent(currentComponent);

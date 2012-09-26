@@ -55,8 +55,8 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 
 		if(component instanceof ComponentContainer) {
 			ComponentContainer container = (ComponentContainer) component;
-			container.addListener((ComponentAttachListener)this);
-			container.addListener((ComponentDetachListener)this);
+			container.addComponentAttachListener(this);
+			container.addComponentDetachListener(this);
 
 			for (Component containerComponent : container) {
 				initializeNAddRemoveListner(containerComponent, remove);
@@ -71,8 +71,8 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 		if(remove) {
 			components.remove(component);
 			if(listener == null) {
-				if (component.getRoot() != null)
-					I18NHelper.deRegistor(component.getRoot(), component);
+				if (component.getUI() != null)
+					I18NHelper.deRegistor(component.getUI(), component);
 				else 
 					System.out.println("Component root is null :: " + component);
 			} else
@@ -82,7 +82,7 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 			components.add(component);
 
 			if(listener == null)
-				I18NHelper.register(component.getRoot(), component);
+				I18NHelper.register(component.getUI(), component);
 			else
 				listener.registor(component);
 			EventHandler.instance().register(component);

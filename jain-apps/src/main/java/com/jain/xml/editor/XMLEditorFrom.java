@@ -3,7 +3,7 @@ package com.jain.xml.editor;
 import com.jain.addon.web.JNIComponent;
 import com.jain.common.VaadinLayoutHelper;
 import com.jain.theme.ApplicationTheme;
-import com.vaadin.terminal.gwt.client.ui.label.ContentMode;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -35,20 +35,20 @@ public class XMLEditorFrom extends VerticalLayout implements JNIComponent {
 
 	private VerticalLayout createDescription() {
 		Label description = new Label("xml.editor.applications.description");
-		description.setContentMode(ContentMode.XHTML);
+		description.setContentMode(ContentMode.HTML);
 		VerticalLayout descriptionLayout = VaadinLayoutHelper.createVerticalLayout(ApplicationTheme.ALTERNATE_VIEW, description);
 		return descriptionLayout;
 	}
 
 	private VerticalLayout createActionDescription() {
 		Label rootTagDesc = new Label("xml.editor.file.root.tag.description");
-		rootTagDesc.setContentMode(ContentMode.XHTML);
+		rootTagDesc.setContentMode(ContentMode.HTML);
 
 		Label uploadFileDesc = new Label("xml.editor.upload.file.description");
-		uploadFileDesc.setContentMode(ContentMode.XHTML);
+		uploadFileDesc.setContentMode(ContentMode.HTML);
 
 		Label xlsContentDesc = new Label("xml.editor.file.content.description");
-		xlsContentDesc.setContentMode(ContentMode.XHTML);
+		xlsContentDesc.setContentMode(ContentMode.HTML);
 
 		VerticalLayout actionLayout = VaadinLayoutHelper.createVerticalLayout(ApplicationTheme.ALTERNATE_VIEW, rootTagDesc, uploadFileDesc, xlsContentDesc);
 		return actionLayout;
@@ -56,17 +56,17 @@ public class XMLEditorFrom extends VerticalLayout implements JNIComponent {
 
 	private VerticalLayout createSourceCodeDescription() {
 		Label mavenUrl = new Label("application.binary.maven.url.name:com.jain.apps.application.binary.maven.url");
-		mavenUrl.setContentMode(ContentMode.XHTML);
+		mavenUrl.setContentMode(ContentMode.HTML);
 
 		Label sourceUrl = new Label("application.binary.source.url.name:com.jain.apps.application.binary.source.url");
-		sourceUrl.setContentMode(ContentMode.XHTML);
+		sourceUrl.setContentMode(ContentMode.HTML);
 
 		HorizontalLayout layout = VaadinLayoutHelper.createHorizontalLayout(mavenUrl, sourceUrl);
 		layout.setSpacing(false);
 		layout.setMargin(false);
 
 		Label mavenArchType = new Label("application.binary.maven.archtype.name:com.jain.apps.xml.editor.binary.maven.archtype");
-		mavenArchType.setContentMode(ContentMode.XHTML);
+		mavenArchType.setContentMode(ContentMode.HTML);
 
 		VerticalLayout sourceLayout = VaadinLayoutHelper.createVerticalLayout(ApplicationTheme.ALTERNATE_VIEW, layout, mavenArchType);
 		return sourceLayout;

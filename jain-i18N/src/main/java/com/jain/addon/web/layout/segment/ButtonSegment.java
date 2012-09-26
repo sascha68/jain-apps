@@ -115,6 +115,6 @@ public class ButtonSegment extends HorizontalLayout implements JNILoginListner {
 				}
 			}
 		}
-		requestRepaint();
+		markAsDirty();
 	}
 }

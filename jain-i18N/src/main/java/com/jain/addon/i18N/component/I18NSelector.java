@@ -31,7 +31,7 @@ import com.vaadin.ui.ComboBox;
 @SuppressWarnings("serial")
 public class I18NSelector extends ComboBox implements JNIComponent {
 	public void init () {
-		I18NHelper.addListener(getRoot(), this);
+		I18NHelper.addListener(getUI(), this);
 		setImmediate(true);
 	}
 

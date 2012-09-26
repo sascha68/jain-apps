@@ -16,12 +16,12 @@
 package com.jain.addon.i18N.component;
 
 import com.jain.addon.web.listners.JAttachDetachListner;
-import com.vaadin.terminal.WrappedRequest;
-import com.vaadin.ui.Root;
+import com.vaadin.server.WrappedRequest;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 
 /**
- * <code>I18NRoot<code> is an abstract root component with some basic 18n configuration.<br/>
+ * <code>I18NUI<code> is an abstract root component with some basic 18n configuration.<br/>
  * Every application should implement this class to create there root instance 
  * because this include some configuration related to window attachment, 
  * detachment and listeners required for the i18N support.    
@@ -30,12 +30,12 @@ import com.vaadin.ui.Window;
  * @version 1.0.0
  */
 @SuppressWarnings("serial")
-public abstract class I18NRoot extends Root {
+public abstract class I18NUI extends UI {
 
 	protected void init(WrappedRequest request) {
 		JAttachDetachListner attachListener = new JAttachDetachListner();
-		addListener((ComponentAttachListener)attachListener);
-		addListener((ComponentDetachListener)attachListener);
+		addComponentAttachListener(attachListener);
+		addComponentDetachListener(attachListener);
 
 		initialize (request);
 	}

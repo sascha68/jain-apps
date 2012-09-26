@@ -32,6 +32,7 @@ import java.util.Set;
 import com.vaadin.data.Container;
 import com.vaadin.data.Container.Filterable;
 import com.vaadin.data.Container.Indexed;
+import com.vaadin.data.Container.ItemSetChangeListener;
 import com.vaadin.data.Container.ItemSetChangeNotifier;
 import com.vaadin.data.Container.Sortable;
 import com.vaadin.data.Property;
@@ -233,15 +234,15 @@ public abstract class AbstractJainBeanItemContainer<BT> implements Indexed, Sort
 		if (property instanceof ValueChangeNotifier) {
 			// Avoid multiple notifications for the same property if multiple filters are in use
 			ValueChangeNotifier notifier = (ValueChangeNotifier) property;
-			notifier.removeListener(this);
-			notifier.addListener(this);
+			notifier.removeValueChangeListener(this);
+			notifier.addValueChangeListener(this);
 		}
 	}
 
 	protected void removeValueChangeListener(BeanItem<BT> item, Object propertyId) {
 		Property<?> property = item.getItemProperty(propertyId);
 		if (property instanceof ValueChangeNotifier) {
-			((ValueChangeNotifier) property).removeListener(this);
+			((ValueChangeNotifier) property).removeValueChangeListener(this);
 		}
 	}
 
@@ -379,6 +380,22 @@ public abstract class AbstractJainBeanItemContainer<BT> implements Indexed, Sort
 
 	public void setItemSorter(ItemSorter itemSorter) {
 		this.itemSorter = itemSorter;
+	}
+	
+	@Override
+	public List<?> getItemIds(int startIndex, int numberOfItems) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addItemSetChangeListener(ItemSetChangeListener listener) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void removeItemSetChangeListener(ItemSetChangeListener listener) {
+		// TODO Auto-generated method stub
 	}
 
 	//Abstract Methods

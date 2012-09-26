@@ -31,6 +31,7 @@ import com.jain.common.JLocale;
 import com.jain.common.authenticate.AuthenticatedUser;
 import com.jain.common.authenticate.LoginAction;
 import com.jain.theme.ApplicationTheme;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -46,7 +47,7 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, Cli
 
 	public void init () {
 		setWidth("100%");
-		setMargin(false, true, false, true);
+		setMargin(new MarginInfo(false, true, false, true));
 		setStyleName(ApplicationTheme.ALTERNATE_VIEW);
 
 		createWelcomeMessage();
@@ -63,7 +64,7 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, Cli
 	private void createRightActions() {
 		HorizontalLayout layout = new HorizontalLayout();
 		layout.setSpacing(true);
-		layout.setMargin(false, true, false, true);
+		layout.setMargin(new MarginInfo(false, true, false, true));
 		I18NSelector localSelection = new I18NSelector();
 		localSelection.setInputPrompt("module.locale.name");
 
@@ -89,7 +90,7 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, Cli
 	public void localeChanged(I18NChangeEvent event) {
 		currentUser.setLocale(event.getLocale());
 		I18NProvider provider = I18NResourceProvider.instance(); 
-		getRoot().getPage().setTitle(provider.getText(getLocale(), "application.title.name"));
+		getUI().getPage().setTitle(provider.getText(getLocale(), "application.title.name"));
 		welcomeMessage.setValue(currentUser.getDisplayIdentity());
 	}
 
@@ -100,11 +101,11 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, Cli
 			case LOGIN :
 				LoginAction loginAction = CDIComponent.getInstance(LoginAction.class);
 				loginAction.setCaption(JAction.LOGIN.getDisplayName());
-				getRoot().addWindow(loginAction);
+				getUI().addWindow(loginAction);
 				break;
 			case LOGOUT :
 				currentUser.setLoggedInUser(null);
-				Events.instance().raiseLogoutEvent(getRoot());
+				Events.instance().raiseLogoutEvent(getUI());
 				break;
 			case HELP :
 				System.out.println("not implemented yet");
