@@ -32,7 +32,6 @@ import com.vaadin.data.util.ListSet;
 /**
  * <code>JainBeanItemContainer<code> is an extension of {@link BeanItemContainer} to support POJO association.
  * @see {@link JainBeanItem}
- * @author Lokesh Jain
  * @since Aug 27, 2012
  * @version 1.0.0
  * @param <BT>
