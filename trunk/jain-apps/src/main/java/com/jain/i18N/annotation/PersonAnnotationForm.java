@@ -28,6 +28,7 @@ import com.jain.i18N.domain.ZIP;
 import com.jain.theme.ApplicationTheme;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
@@ -48,7 +49,7 @@ public class PersonAnnotationForm extends I18NWindow implements JNIEditLocal, JN
 
 		VerticalLayout layout = new VerticalLayout();
 		layout.setWidth("100%");
-		layout.setMargin(false, false, true, false);
+		layout.setMargin(new MarginInfo(false, false, true, false));
 		layout.setStyleName(ApplicationTheme.ALTERNATE_VIEW);
 
 		setContent(layout);
@@ -88,7 +89,7 @@ public class PersonAnnotationForm extends I18NWindow implements JNIEditLocal, JN
 		try {
 			fieldGroup.commit();
 			Events.instance().raiseEvent(PersonAnnotationGrid.PERSON_CREATED_OR_UPDATED, person);
-			getRoot().removeWindow(this);
+			getUI().removeWindow(this);
 		} catch (CommitException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +97,7 @@ public class PersonAnnotationForm extends I18NWindow implements JNIEditLocal, JN
 
 	public void cancel() {
 		fieldGroup.discard();
-		getRoot().removeWindow(this);
+		getUI().removeWindow(this);
 	}
 
 	private Person getPerson() {

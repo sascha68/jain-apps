@@ -118,11 +118,11 @@ public class LoginAction extends I18NWindow  implements ClickListener, JNICompon
 				System.out.println(password.getValue());
 				System.out.println(this);
 				currentUser.setLoggedInUser(userName.getValue());
-				Events.instance().raiseLoginEvent(getRoot());
-				getRoot().removeWindow(this);
+				Events.instance().raiseLoginEvent(getUI());
+				getUI().removeWindow(this);
 				break;
 			case CANCEL :
-				getRoot().removeWindow(this);
+				getUI().removeWindow(this);
 				break;
 			default:
 				break;

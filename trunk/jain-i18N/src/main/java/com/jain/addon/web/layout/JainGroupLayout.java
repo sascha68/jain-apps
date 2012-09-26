@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jain.addon.StringHelper;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 

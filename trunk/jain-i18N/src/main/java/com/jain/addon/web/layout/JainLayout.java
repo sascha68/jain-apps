@@ -16,6 +16,7 @@
 package com.jain.addon.web.layout;
 
 import com.jain.addon.StringHelper;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
@@ -81,7 +82,7 @@ public class JainLayout extends VerticalLayout {
 
 			if(StringHelper.isNotEmptyWithTrim(alternateStyleName)) {
 				currentLayout.setStyleName(alternateStyleName);
-				currentLayout.setMargin(margins);
+				currentLayout.setMargin(getMargin());
 			}
 
 			super.addComponent(currentLayout);

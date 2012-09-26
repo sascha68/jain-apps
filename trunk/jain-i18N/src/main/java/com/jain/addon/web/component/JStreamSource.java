@@ -21,8 +21,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import com.vaadin.terminal.StreamResource;
-import com.vaadin.terminal.StreamResource.StreamSource;
+import com.vaadin.server.StreamResource;
+import com.vaadin.server.StreamResource.StreamSource;
 
 /**
  * <code>JStreamSource<code> is a default implementation for {@link StreamResource}.

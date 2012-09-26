@@ -39,7 +39,7 @@ public class PersonDefinitionGrid  extends VerticalLayout implements ValueChange
 
 	public void init () {
 		table = new JTable(getContainer(), getProperties());
-		table.addListener(this);
+		table.addValueChangeListener(this);
 		table.setPageLength(15);
 		addComponent(table);
 	}

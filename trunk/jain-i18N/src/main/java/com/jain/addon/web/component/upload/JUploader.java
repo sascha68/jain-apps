@@ -19,7 +19,10 @@ import java.io.OutputStream;
 
 import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.I18NResourceProvider;
+import com.vaadin.shared.Position;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Upload;
 import com.vaadin.ui.Upload.StartedEvent;
 import com.vaadin.ui.Upload.StartedListener;
@@ -43,7 +46,7 @@ public class JUploader extends VerticalLayout implements SucceededListener, Star
 
 	public JUploader() {
 		setWidth("100%");
-		setMargin(true, false, true, false);
+		setMargin(new MarginInfo(true, false, true, false));
 		setStyleName("j-upload");
 
 		upload = new Upload();
@@ -52,15 +55,15 @@ public class JUploader extends VerticalLayout implements SucceededListener, Star
 		addComponent(upload);
 
 		pi = new JProgressIndicator();
-		upload.addListener(pi);
+		upload.addProgressListener(pi);
 		addComponent(pi);
 		pi.setVisible(false);
 
 		receiver = new JFileReceiver();
 		upload.setReceiver(receiver);
 
-		upload.addListener((SucceededListener) this);
-		upload.addListener((StartedListener) this);
+		upload.addSucceededListener(this);
+		upload.addStartedListener(this);
 	}
 
 	public OutputStream getStream() {
@@ -74,10 +77,10 @@ public class JUploader extends VerticalLayout implements SucceededListener, Star
 	protected void interruptUpload() {
 		upload.interruptUpload();
 		I18NProvider provider = I18NResourceProvider.instance();
-		Notification n = new Notification(provider.getTitle(getLocale(), interruptionMessage), Notification.TYPE_TRAY_NOTIFICATION);
-		n.setPosition(Notification.POSITION_CENTERED);
+		Notification n = new Notification(provider.getTitle(getLocale(), interruptionMessage), Type.TRAY_NOTIFICATION);
+		n.setPosition(Position.MIDDLE_CENTER);
 		n.setDescription(provider.getMessage(getLocale(), interruptionMessage));
-		n.show(getRoot().getPage());
+		n.show(getUI().getPage());
 		pi.setVisible(false);
 		upload.setVisible(true);
 	}

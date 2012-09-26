@@ -20,8 +20,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import com.jain.addon.web.component.JStreamSource;
-import com.vaadin.terminal.StreamResource;
-import com.vaadin.ui.Root;
+import com.vaadin.server.StreamResource;
+import com.vaadin.ui.UI;
 
 /**
  * <code>JDownloader<code> is a helper class to download files
@@ -32,54 +32,55 @@ import com.vaadin.ui.Root;
 @SuppressWarnings("serial")
 public class JDownloader implements Serializable {
 	private String fileName;
-	private Root root;
+	private UI ui;
 	private JStreamSource source;
 	
 	/**
-	 * Create a downloader instance using filePath, fileName and {@link Root}
+	 * Create a downloader instance using filePath, fileName and {@link UI}
 	 * @param filePath
 	 * @param fileName
-	 * @param root
+	 * @param ui
 	 * @throws FileNotFoundException 
 	 */
-	public JDownloader(String filePath, String fileName, Root root) throws FileNotFoundException {
+	public JDownloader(String filePath, String fileName, UI ui) throws FileNotFoundException {
 		this.source = new JStreamSource(filePath);
 		this.fileName = fileName;
-		this.root = root;
+		this.ui = ui;
 	}
 
 	/**
-	 * Create a downloader instance using fileContent, fileName and {@link Root}
+	 * Create a downloader instance using fileContent, fileName and {@link UI}
 	 * @param fileContent
 	 * @param fileName
-	 * @param root
+	 * @param ui
 	 */
-	public JDownloader(byte [] fileContent, String fileName, Root root) {
+	public JDownloader(byte [] fileContent, String fileName, UI ui) {
 		this.source = new JStreamSource(fileContent);
 		this.fileName = fileName;
-		this.root = root;
+		this.ui = ui;
 	}
 	
 	/**
-	 * Create a downloader instance using stream, fileName and {@link Root}
+	 * Create a downloader instance using stream, fileName and {@link UI}
 	 * @param fileContent
 	 * @param fileName
-	 * @param root
+	 * @param ui
 	 */
-	public JDownloader(InputStream stream, String fileName, Root root) {
+	public JDownloader(InputStream stream, String fileName, UI ui) {
 		this.source = new JStreamSource(stream);
 		this.fileName = fileName;
-		this.root = root;
+		this.ui = ui;
 	}
 
 	/**
 	 * Download actual file
 	 */
 	public void download() {
-		StreamResource resource = new StreamResource(source, fileName, root.getApplication());
+		StreamResource resource = new StreamResource(source, fileName);
 		resource.getStream().setParameter("Content-Disposition", "attachment;filename=\"" + fileName + "\"");
 		resource.setMIMEType ("application/octet-stream");
 		resource.setCacheTime (0);
-		root.getPage().open(resource);
+		//TODO: Check this again 
+		//ui.getPage().open(resource);
 	}
 }

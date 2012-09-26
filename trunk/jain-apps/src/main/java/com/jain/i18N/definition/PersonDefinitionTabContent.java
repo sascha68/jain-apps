@@ -52,20 +52,20 @@ public class PersonDefinitionTabContent extends VerticalLayout implements JNICru
 		form.setViewOnly(true);
 		form.setPerson(grid.getSelected());
 		form.setCaption(JAction.VIEW.getDisplayName(getLocale(), grid.getSelected().getDisplayName()));
-		getRoot().addWindow(form);
+		getUI().addWindow(form);
 	}
 
 	public void create() {
 		PersonDefinitionForm form = CDIComponent.getInstance(PersonDefinitionForm.class);
 		form.setCaption(JAction.ADD.getDisplayName(getLocale(), "person.name"));
-		getRoot().addWindow(form);
+		getUI().addWindow(form);
 	}
 
 	public void update() {
 		PersonDefinitionForm form = CDIComponent.getInstance(PersonDefinitionForm.class);
 		form.setPerson(grid.getSelected());
 		form.setCaption(JAction.EDIT.getDisplayName(getLocale(), grid.getSelected().getDisplayName()));
-		getRoot().addWindow(form);
+		getUI().addWindow(form);
 	}
 
 	public void delete() {

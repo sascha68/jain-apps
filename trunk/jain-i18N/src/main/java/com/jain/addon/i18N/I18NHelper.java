@@ -21,7 +21,7 @@ import java.util.Collection;
 import com.jain.addon.web.listners.JAttachDetachListner;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
-import com.vaadin.ui.Root;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.ComponentContainer.ComponentAttachEvent;
 
 /**
@@ -50,36 +50,36 @@ public final class I18NHelper implements Serializable {
 	/**
 	 * Register component for i18N handling.
 	 * @param {@link Component}
-	 * @param {@link Root}
+	 * @param {@link UI}
 	 */
-	public static void register(Root root, Component component) {
-		I18NChangeListener listener =  findListener(root, true);
+	public static void register(UI ui, Component component) {
+		I18NChangeListener listener =  findListener(ui, true);
 		listener.registor(component);
 	}
 
 	/**
 	 * Remove registered component for i18N handling.
 	 * @param {@link Component}
-	 * @param {@link Root}
+	 * @param {@link UI}
 	 */
-	public static void deRegistor(Root root, Component component) {
-		I18NChangeListener listener =  findListener(root, true);
+	public static void deRegistor(UI ui, Component component) {
+		I18NChangeListener listener =  findListener(ui, true);
 		listener.deRegistor(component);
 	}
 
 	/**
 	 * Method to add Value change listener for a locale drop down 
 	 * because complete i18N works with this listener.  
-	 * @param {@link Root}
+	 * @param {@link UI}
 	 * @param {@link Field}
 	 */
-	public static void addListener (Root root, Field<?> field) {
-		I18NChangeListener listener =  findListener(root, true);
-		field.addListener(listener);
+	public static void addListener (UI ui, Field<?> field) {
+		I18NChangeListener listener =  findListener(ui, true);
+		field.addValueChangeListener(listener);
 	}
 
 	private static I18NChangeListener findListener (Component component, boolean create) {
-		Collection<?> collection = component.getRoot().getListeners(ComponentAttachEvent.class);
+		Collection<?> collection = component.getUI().getListeners(ComponentAttachEvent.class);
 		for (Object object : collection) {
 			if (object instanceof JAttachDetachListner) {
 				I18NChangeListener listener =  ((JAttachDetachListner) object).getListener();

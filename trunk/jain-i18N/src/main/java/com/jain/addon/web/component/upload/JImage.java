@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.jain.addon.web.component.JStreamSource;
-import com.vaadin.terminal.StreamResource;
+import com.vaadin.server.StreamResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomField;
@@ -63,8 +63,8 @@ public class JImage extends CustomField<Object> {
 
 	public void updateImage(final byte [] imageData, String fileName) {
 		JStreamSource source = new JStreamSource(new ByteArrayInputStream(imageData));
-		image.setSource(new StreamResource(source, fileName, getApplication()));
-		image.requestRepaint();
+		image.setSource(new StreamResource(source, fileName));
+		image.markAsDirty();
 	}
 
 	@Override

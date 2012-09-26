@@ -15,10 +15,6 @@
  */
 package com.jain.addon;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import com.vaadin.external.org.apache.commons.codec.binary.Hex;
 
 public final class StringHelper {
 	private StringHelper() {}
@@ -102,18 +98,5 @@ public final class StringHelper {
 	public static String methodToPropertyName(String s) {
 		s = removeMethodAccessor(s);
 		return firstCharLowerCase(s);
-	}
-
-	public static String string2HexMD5(String string) {
-		if (string == null)
-			throw new NullPointerException("String being encoded was null.");
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			if (md == null)
-				throw new NullPointerException("Could not encode string: MessageDigest object was null, MD5 might not be implemented.");
-			return new String(Hex.encodeHex(md.digest(string.getBytes())));
-		} catch (NoSuchAlgorithmException ex) {
-			throw new RuntimeException("Could not encode string.", ex);
-		}
 	}
 }
