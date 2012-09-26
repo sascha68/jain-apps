@@ -1,6 +1,4 @@
 /* 
- * Copyright 2012
- * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
@@ -382,20 +380,57 @@ public abstract class AbstractJainBeanItemContainer<BT> implements Indexed, Sort
 		this.itemSorter = itemSorter;
 	}
 	
+	//Method is taken from Vaadin implementation
 	@Override
-	public List<?> getItemIds(int startIndex, int numberOfItems) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BT> getItemIds(int startIndex, int numberOfIds) {
+		if (startIndex < 0) {
+			throw new IndexOutOfBoundsException(
+					"Start index cannot be negative! startIndex=" + startIndex);
+		}
+
+		if (startIndex > getVisibleItemIds().size()) {
+			throw new IndexOutOfBoundsException(
+					"Start index exceeds container size! startIndex="
+							+ startIndex + " containerLastItemIndex="
+							+ (getVisibleItemIds().size() - 1));
+		}
+
+		if (numberOfIds < 1) {
+			if (numberOfIds == 0) {
+				return Collections.emptyList();
+			}
+
+			throw new IllegalArgumentException(
+					"Cannot get negative amount of items! numberOfItems="
+							+ numberOfIds);
+		}
+
+		int endIndex = startIndex + numberOfIds;
+
+		if (endIndex > getVisibleItemIds().size()) {
+			endIndex = getVisibleItemIds().size();
+		}
+
+		return Collections.unmodifiableList(getVisibleItemIds().subList(
+				startIndex, endIndex));
 	}
+	
+	protected List<BT> getVisibleItemIds() {
+        if (filteredItems != null) {
+            return filteredItems;
+        } else {
+            return allItems;
+        }
+    }
 
 	@Override
 	public void addItemSetChangeListener(ItemSetChangeListener listener) {
-		// TODO Auto-generated method stub
+		throw new IllegalArgumentException("UNIMPLEMENTED METHOD");
 	}
 
 	@Override
 	public void removeItemSetChangeListener(ItemSetChangeListener listener) {
-		// TODO Auto-generated method stub
+		throw new IllegalArgumentException("UNIMPLEMENTED METHOD");
 	}
 
 	//Abstract Methods

@@ -181,7 +181,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>org.vaadin.addons</groupId>
 			<artifactId>jain-i18N</artifactId>
 			<version>${project.version}</version>
 		</dependency>
