@@ -64,6 +64,7 @@
               			</manifest>
               			<manifestEntries>
               				<License-Title>Apache License 2.0</License-Title>
+              				<Vaadin-Package-Version>1</Vaadin-Package-Version>
 						</manifestEntries>
 					</archive>
 				</configuration>
