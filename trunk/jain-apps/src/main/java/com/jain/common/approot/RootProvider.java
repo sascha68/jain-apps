@@ -15,20 +15,23 @@ package com.jain.common.approot;
 
 import javax.inject.Inject;
 
-import com.vaadin.server.AbstractUIProvider;
-import com.vaadin.server.WrappedRequest;
+import com.vaadin.server.UIClassSelectionEvent;
+import com.vaadin.server.UICreateEvent;
+import com.vaadin.server.UIProvider;
 import com.vaadin.ui.UI;
 
-public class RootProvider extends AbstractUIProvider {
+@SuppressWarnings("serial")
+public class RootProvider extends UIProvider {
 	@Inject
 	private ApplicationUI rootProvider;
 
 	@Override
-	public UI createInstance(WrappedRequest request, Class<? extends UI> type) {
+	public UI createInstance(UICreateEvent event) {
 		return rootProvider;
 	}
-	
-	public Class<? extends UI> getUIClass(WrappedRequest request) {
+
+	@Override
+	public Class<? extends UI> getUIClass(UIClassSelectionEvent event) {
 		return ApplicationUI.class;
 	}
 }

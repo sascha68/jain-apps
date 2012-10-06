@@ -27,7 +27,7 @@ import com.jain.common.header.Header;
 import com.jain.common.header.WelcomeBar;
 import com.jain.theme.ApplicationTheme;
 import com.vaadin.annotations.Theme;
-import com.vaadin.server.WrappedRequest;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
@@ -36,7 +36,7 @@ import com.vaadin.ui.VerticalLayout;
 public class ApplicationUI extends I18NUI {
 	@Inject AuthenticatedUser user;
 	
-	protected void initialize (WrappedRequest request) {
+	protected void initialize (VaadinRequest request) {
 		initialize (Locale.getDefault());
 	}
 

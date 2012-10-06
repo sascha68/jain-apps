@@ -16,7 +16,7 @@
 package com.jain.addon.i18N.component;
 
 import com.jain.addon.web.listners.JAttachDetachListner;
-import com.vaadin.server.WrappedRequest;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 
@@ -32,7 +32,7 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 public abstract class I18NUI extends UI {
 
-	protected void init(WrappedRequest request) {
+	protected void init(VaadinRequest request) {
 		JAttachDetachListner attachListener = new JAttachDetachListner();
 		addComponentAttachListener(attachListener);
 		addComponentDetachListener(attachListener);
@@ -51,5 +51,5 @@ public abstract class I18NUI extends UI {
 		return removed;
 	}
 
-	protected abstract void initialize (WrappedRequest request);
+	protected abstract void initialize (VaadinRequest request);
 }
