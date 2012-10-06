@@ -15,12 +15,15 @@ package com.jain.common.approot;
 
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
+import com.vaadin.server.ServiceException;
+import com.vaadin.server.SessionInitEvent;
+import com.vaadin.server.SessionInitListener;
+import com.vaadin.server.VaadinServiceSession;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinServletSession;
-import com.vaadin.server.WrappedHttpServletRequest;
 
 @WebServlet(urlPatterns = "/*")
 public class Servlet extends VaadinServlet {
@@ -29,9 +32,17 @@ public class Servlet extends VaadinServlet {
 	@Inject
     private Instance <RootProvider> applicationProvider;
 
-	@Override
-	protected void onVaadinSessionStarted(WrappedHttpServletRequest request, VaadinServletSession session) throws ServletException {
-		session.addUIProvider(applicationProvider.get());
-		super.onVaadinSessionStarted(request, session);
-	}
+	@SuppressWarnings("serial")
+	private final SessionInitListener sessionInitListener = new SessionInitListener() {
+        public void sessionInit(SessionInitEvent event) throws ServiceException {
+            event.getService();
+            final VaadinServiceSession session = event.getSession();
+            session.addUIProvider(applicationProvider.get());
+        }
+    };
+
+    public void init(ServletConfig servletConfig) throws ServletException {
+        super.init(servletConfig);
+        getService().addSessionInitListener(sessionInitListener);
+    }
 }
