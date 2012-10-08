@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.jain.addon.web.component.upload;
+package com.jain.addon.component.upload;
 
 import java.io.OutputStream;
 

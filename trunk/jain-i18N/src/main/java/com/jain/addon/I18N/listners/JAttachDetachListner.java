@@ -13,16 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.jain.addon.web.listners;
+package com.jain.addon.I18N.listners;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.event.EventHandler;
 import com.jain.addon.i18N.I18NChangeListener;
 import com.jain.addon.i18N.I18NHelper;
-import com.jain.addon.web.JNIComponent;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;

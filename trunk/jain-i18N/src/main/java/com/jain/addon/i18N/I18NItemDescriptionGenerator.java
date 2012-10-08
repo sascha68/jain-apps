@@ -13,21 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.jain.addon.web.layout;
+package com.jain.addon.i18N;
 
-import com.jain.addon.JNINamed;
+import java.util.Locale;
+
+import com.vaadin.ui.AbstractSelect.ItemDescriptionGenerator;
 
 /**
- * <code>JNIGroup<code> is a generic interface for the group definition <br/>
- * Every Group used for the layouting should implement this interface.
+ * 
+ * <code>I18NItemDescriptionGenerator<code>
  * @author Lokesh Jain
- * @since Aug 28, 2012
- * @version 1.0.0
+ * @since Oct 7, 2012
+ * @version 1.0.2
  */
-public interface JNIGroup extends JNINamed  {
-	public JNIGroup getParent();
-	public int getColumns();
-	public int getColSpan();
-	public void setColumns(int columns);
-	public void setColSpan(int columnSpan);
+public interface I18NItemDescriptionGenerator extends ItemDescriptionGenerator {
+	Locale getLocale();
+	void setLocale(Locale locale);
 }

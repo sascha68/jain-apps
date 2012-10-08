@@ -13,13 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.jain.addon.web.component.upload;
+package com.jain.addon.component.upload;
 
 import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.jain.addon.web.component.JStreamSource;
+import com.jain.addon.component.JStreamSource;
 import com.vaadin.server.StreamResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;

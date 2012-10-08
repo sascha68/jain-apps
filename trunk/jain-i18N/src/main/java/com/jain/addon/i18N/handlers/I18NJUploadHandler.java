@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import com.jain.addon.StringHelper;
-import com.jain.addon.web.component.upload.JUploader;
+import com.jain.addon.component.upload.JUploader;
 import com.vaadin.ui.Component;
 
 /**

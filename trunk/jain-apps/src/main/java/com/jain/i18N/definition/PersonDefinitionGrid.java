@@ -17,8 +17,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.event.JNIObserver;
-import com.jain.addon.web.JNIComponent;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.container.JainBeanItemContainer;
 import com.jain.addon.web.table.JTable;

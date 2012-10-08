@@ -15,6 +15,7 @@
  */
 package com.jain.addon.i18N.handlers.factory;
 
+import com.jain.addon.component.upload.JUploader;
 import com.jain.addon.i18N.handlers.I18NAbstractComponentHandler;
 import com.jain.addon.i18N.handlers.I18NAbstractSelectHandler;
 import com.jain.addon.i18N.handlers.I18NComponentHandler;
@@ -23,7 +24,6 @@ import com.jain.addon.i18N.handlers.I18NJUploadHandler;
 import com.jain.addon.i18N.handlers.I18NLableHandler;
 import com.jain.addon.i18N.handlers.I18NTabSheetHandler;
 import com.jain.addon.i18N.handlers.I18NTableHandler;
-import com.jain.addon.web.component.upload.JUploader;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.AbstractTextField;

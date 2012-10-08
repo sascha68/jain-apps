@@ -1,6 +1,6 @@
 package com.jain.xml.editor;
 
-import com.jain.addon.web.JNIComponent;
+import com.jain.addon.JNIComponent;
 import com.jain.common.VaadinLayoutHelper;
 import com.jain.theme.ApplicationTheme;
 import com.vaadin.shared.ui.label.ContentMode;

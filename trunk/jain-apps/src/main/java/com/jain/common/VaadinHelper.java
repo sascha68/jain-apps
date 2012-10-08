@@ -13,10 +13,10 @@
  */
 package com.jain.common;
 
+import com.jain.addon.JNINamedResourceVisible;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.I18NResourceProvider;
-import com.jain.addon.web.JNINamedResourceVisible;
 import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.common.authenticate.AuthenticatedUser;
 import com.jain.theme.ApplicationTheme;

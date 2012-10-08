@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jain</groupId>
 	<artifactId>jain-apps</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>war</packaging>
 	<name>Jain Apps</name>
 	<description>Jain Applications demo</description>
@@ -116,10 +116,10 @@
 											message="Deploy applications: app=[${project.artifactId}], dir=[${com.vishudha.deployment.directory}]" />
 										<copy
 											file="${project.build.directory}/${project.build.finalName}.war"
-											tofile="${com.vishudha.deployment.directory}/${project.build.finalName}.war">
+											tofile="${com.vishudha.deployment.directory}/${project.artifactId}.war">
 										</copy>
 										<echo message="${project.build.finalName}.war"
-											file="${com.vishudha.deployment.directory}/${project.build.finalName}.war.dodeploy" />
+											file="${com.vishudha.deployment.directory}/${project.artifactId}.war.dodeploy" />
 										<echo
 											message="Deployed applications: app=[${project.artifactId}], dir=[${com.vishudha.deployment.directory}]" />
 									</tasks>
@@ -187,6 +187,11 @@
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
 			<artifactId>jain-i18N</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>jain-util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
