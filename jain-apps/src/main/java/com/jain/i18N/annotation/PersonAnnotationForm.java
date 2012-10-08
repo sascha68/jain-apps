@@ -13,9 +13,9 @@
  */
 package com.jain.i18N.annotation;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.component.I18NWindow;
-import com.jain.addon.web.JNIComponent;
 import com.jain.addon.web.bean.container.JainBeanItem;
 import com.jain.addon.web.field.JFieldGroup;
 import com.jain.addon.web.marker.JNIEditLocal;

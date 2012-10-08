@@ -13,20 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.jain.addon.web.bean;
+package com.jain.addon;
 
-import com.jain.addon.JNINamed;
+import com.vaadin.ui.Component;
 
 /**
- * <code>JNIProperty<code> is an interface for property handling.
- * These properties are used by the framework for the UI generation.
+ * <code>JNIComponent<code> is an interface to indicate framework that you need to call 
+ * init method just after component registration is done. 
  * @author Lokesh Jain
  * @since Aug 27, 2012
  * @version 1.0.0
  */
-public interface JNIProperty extends JNINamed {
-	JPropertyType getType(); 
-	JVisibilityType getVisibility();
-	int getOrder ();
+public interface JNIComponent extends Component {
+	public void init ();
 }
- 

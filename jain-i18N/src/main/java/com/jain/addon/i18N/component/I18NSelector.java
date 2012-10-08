@@ -17,8 +17,8 @@ package com.jain.addon.i18N.component;
 
 import java.util.Locale;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.i18N.I18NHelper;
-import com.jain.addon.web.JNIComponent;
 import com.vaadin.data.Item;
 import com.vaadin.ui.ComboBox;
 

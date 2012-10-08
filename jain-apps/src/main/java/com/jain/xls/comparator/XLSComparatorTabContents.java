@@ -13,7 +13,7 @@
  */
 package com.jain.xls.comparator;
 
-import com.jain.addon.web.JNIComponent;
+import com.jain.addon.JNIComponent;
 import com.vaadin.ui.TabSheet;
 
 @SuppressWarnings("serial")

@@ -13,7 +13,7 @@
  */
 package com.jain.common.header;
 
-import com.jain.addon.web.JNINamedResourceVisible;
+import com.jain.addon.JNINamedResourceVisible;
 import com.jain.i18N.I18NComponentTabContent;
 import com.vaadin.ui.Component;
 

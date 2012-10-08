@@ -13,9 +13,9 @@
  */
 package com.jain.i18N.definition;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.JNINamed;
 import com.jain.addon.cdi.CDIComponent;
-import com.jain.addon.web.JNIComponent;
 import com.jain.common.JAction;
 import com.jain.common.VaadinHelper;
 import com.jain.common.listeners.JNICrudLocal;

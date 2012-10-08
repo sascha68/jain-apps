@@ -1,7 +1,7 @@
 package com.jain.xml.editor;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.cdi.CDIComponent;
-import com.jain.addon.web.JNIComponent;
 import com.vaadin.ui.TabSheet;
 
 @SuppressWarnings("serial")

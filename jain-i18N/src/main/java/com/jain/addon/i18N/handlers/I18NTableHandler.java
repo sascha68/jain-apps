@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import com.jain.addon.StringHelper;
-import com.jain.addon.web.table.JainItemDescriptionGenerator;
+import com.jain.addon.i18N.I18NItemDescriptionGenerator;
 import com.vaadin.ui.AbstractSelect.ItemDescriptionGenerator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Table;
@@ -35,7 +35,7 @@ import com.vaadin.ui.Table;
 public class I18NTableHandler extends I18NAbstractComponentHandler implements Serializable {
 	private final String [] i18NHeaders;
 	private final HashMap<Object, String> i18NcolumnFooters;
-	 
+
 	public I18NTableHandler(final Table component) {
 		super(component);
 		this.i18NHeaders = component.getColumnHeaders();
@@ -62,14 +62,17 @@ public class I18NTableHandler extends I18NAbstractComponentHandler implements Se
 		for (Object propertyId : visibleColumns) {
 			table.setColumnFooter(propertyId, getColumnFooter(locale, propertyId));
 		}
-		
+
 		ItemDescriptionGenerator descriptionGenerator = table.getItemDescriptionGenerator();
 
-		if (descriptionGenerator != null && descriptionGenerator instanceof JainItemDescriptionGenerator) {
-			JainItemDescriptionGenerator generator = ((JainItemDescriptionGenerator) descriptionGenerator);
-			
-			if (generator.getLocale() != locale) 
-				table.setItemDescriptionGenerator(new JainItemDescriptionGenerator(locale, generator.getProperties()));
+		if (descriptionGenerator != null && descriptionGenerator instanceof I18NItemDescriptionGenerator) {
+			I18NItemDescriptionGenerator generator = (I18NItemDescriptionGenerator) descriptionGenerator;
+
+			if (generator.getLocale() != locale) {
+				table.setItemDescriptionGenerator(null);
+				generator.setLocale(locale);
+				table.setItemDescriptionGenerator(generator);
+			}
 		}
 	}
 
@@ -83,7 +86,7 @@ public class I18NTableHandler extends I18NAbstractComponentHandler implements Se
 		}
 		return convertedHeaders;
 	}
-	
+
 	public String getColumnFooter(Locale locale, Object propertyId) {
 		String i18NColumnFooter = getI18NColumnFooter (propertyId); 
 		if (StringHelper.isNotEmptyWithTrim(i18NColumnFooter)) {
@@ -96,8 +99,8 @@ public class I18NTableHandler extends I18NAbstractComponentHandler implements Se
 	public String [] getI18NHeaders() {
 		return i18NHeaders;
 	}
-	
+
 	public String getI18NColumnFooter(Object propertyId) {
-        return i18NcolumnFooters.get(propertyId);
-    }
+		return i18NcolumnFooters.get(propertyId);
+	}
 }

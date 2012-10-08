@@ -15,10 +15,10 @@ package com.jain.common;
 
 import java.util.Locale;
 
+import com.jain.addon.JNINamedResourceVisible;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.I18NResourceProvider;
-import com.jain.addon.web.JNINamedResourceVisible;
 import com.jain.common.authenticate.AuthenticatedUser;
 
 public enum JAction implements JNINamedResourceVisible {

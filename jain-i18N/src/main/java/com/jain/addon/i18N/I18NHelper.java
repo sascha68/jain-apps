@@ -18,7 +18,7 @@ package com.jain.addon.i18N;
 import java.io.Serializable;
 import java.util.Collection;
 
-import com.jain.addon.web.listners.JAttachDetachListner;
+import com.jain.addon.I18N.listners.JAttachDetachListner;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.UI;

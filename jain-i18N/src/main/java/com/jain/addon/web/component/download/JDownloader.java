@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
 
-import com.jain.addon.web.component.JStreamSource;
+import com.jain.addon.component.JStreamSource;
 import com.vaadin.server.StreamResource;
 import com.vaadin.ui.UI;
 

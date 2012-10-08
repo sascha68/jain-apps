@@ -15,12 +15,12 @@ package com.jain.common.authenticate;
 
 import javax.inject.Inject;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.component.I18NWindow;
 import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.I18NResourceProvider;
-import com.jain.addon.web.JNIComponent;
 import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.common.JAction;
 import com.jain.theme.ApplicationTheme;

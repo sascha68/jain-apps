@@ -13,9 +13,9 @@
  */
 package com.jain.common.header;
 
+import com.jain.addon.JNIComponent;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.i18N.I18NHelper;
-import com.jain.addon.web.JNIComponent;
 import com.jain.theme.ApplicationTheme;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;

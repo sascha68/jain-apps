@@ -15,7 +15,7 @@
  */
 package com.jain.addon.i18N.component;
 
-import com.jain.addon.web.listners.JAttachDetachListner;
+import com.jain.addon.I18N.listners.JAttachDetachListner;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
