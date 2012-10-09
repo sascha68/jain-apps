@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Locale;
 
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.JNIPropertyConstraint;
 import com.vaadin.data.Container;
@@ -48,7 +48,7 @@ public class JTableFieldFactory extends AbstractFieldFactory implements FormFiel
 	public JTableFieldFactory(Locale locale, Collection<JNIPropertyConstraint> fieldProperties) {
 		this.propertyConstraints = fieldProperties;
 		this.locale = locale;
-		this.provider = I18NResourceProvider.instance(); 
+		this.provider = DefaultI18NResourceProvider.instance(); 
 	}
 
 	public JTableFieldFactory(Locale locale, JNIPropertyConstraint [] fieldProperties) {

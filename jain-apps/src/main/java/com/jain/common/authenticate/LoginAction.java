@@ -20,7 +20,7 @@ import com.jain.addon.event.Events;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.component.I18NWindow;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.common.JAction;
 import com.jain.theme.ApplicationTheme;
@@ -73,7 +73,7 @@ public class LoginAction extends I18NWindow  implements ClickListener, JNICompon
 	}
 
 	private void createFieldGroup(VerticalLayout layout) {
-		I18NProvider provider = I18NResourceProvider.instance();
+		I18NProvider provider = DefaultI18NResourceProvider.instance();
 		
 		userName = new TextField("user.name");
 		userName.setCursorPosition(0);

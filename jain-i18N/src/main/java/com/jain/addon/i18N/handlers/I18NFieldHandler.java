@@ -35,10 +35,12 @@ import com.vaadin.ui.PopupDateField;
 @SuppressWarnings("serial")
 public class I18NFieldHandler extends I18NAbstractComponentHandler implements Serializable {
 	private final String i18NInputPrompt;
+	private final String i18NRequiredError;
 
 	public I18NFieldHandler(final AbstractTextField component) {
 		super(component);
 		this.i18NInputPrompt = component.getInputPrompt(); 
+		this.i18NRequiredError = component.getRequiredError();
 	}
 
 	public I18NFieldHandler(final AbstractSelect component) {
@@ -47,22 +49,28 @@ public class I18NFieldHandler extends I18NAbstractComponentHandler implements Se
 			this.i18NInputPrompt = ((ComboBox) component).getInputPrompt();
 		else
 			this.i18NInputPrompt = null;
+		this.i18NRequiredError = component.getRequiredError();
 	}
 
 	public I18NFieldHandler(PopupDateField component) {
 		super(component);
 		this.i18NInputPrompt = component.getInputPrompt();
+		this.i18NRequiredError = component.getRequiredError();
 	}
 
 	public void applyI18N(Component component, Locale locale) {
 		super.applyI18N(component, locale);
 
-		if (component instanceof AbstractTextField)
+		if (component instanceof AbstractTextField) {
 			((AbstractTextField) component).setInputPrompt(getInputPrompt(locale));
-		else if (component instanceof ComboBox)
+			((AbstractTextField) component).setRequiredError(getRequiredError(locale));
+		} else if (component instanceof ComboBox) {
 			((ComboBox) component).setInputPrompt(getInputPrompt(locale));
-		else if (component instanceof PopupDateField)
+			((ComboBox) component).setRequiredError(getRequiredError(locale));
+		} else if (component instanceof PopupDateField) {
 			((PopupDateField) component).setInputPrompt(getInputPrompt(locale));
+			((PopupDateField) component).setRequiredError(getRequiredError(locale));
+		}
 	}
 
 	public String getInputPrompt(Locale locale) {
@@ -72,9 +80,20 @@ public class I18NFieldHandler extends I18NAbstractComponentHandler implements Se
 		}
 		return "";
 	}
-
+	
+	public String getRequiredError(Locale locale) {
+		if (StringHelper.isNotEmptyWithTrim(i18NRequiredError)) {
+			String value = provider.getTitle(locale, i18NRequiredError, getCaption(locale));
+			return value;
+		}
+		return "";
+	}
+	
 	public String getI18NInputPrompt() {
 		return i18NInputPrompt;
 	}
-
+	
+	public String getI18NRequiredError() {
+		return i18NRequiredError;
+	}
 }

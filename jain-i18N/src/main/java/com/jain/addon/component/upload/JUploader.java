@@ -17,8 +17,8 @@ package com.jain.addon.component.upload;
 
 import java.io.OutputStream;
 
+import com.jain.addon.i18N.component.I18NUI;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
 import com.vaadin.shared.Position;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Notification;
@@ -76,7 +76,7 @@ public class JUploader extends VerticalLayout implements SucceededListener, Star
 
 	protected void interruptUpload() {
 		upload.interruptUpload();
-		I18NProvider provider = I18NResourceProvider.instance();
+		I18NProvider provider = ((I18NUI)getUI()).getI18nProvider();
 		Notification n = new Notification(provider.getTitle(getLocale(), interruptionMessage), Type.TRAY_NOTIFICATION);
 		n.setPosition(Position.MIDDLE_CENTER);
 		n.setDescription(provider.getMessage(getLocale(), interruptionMessage));

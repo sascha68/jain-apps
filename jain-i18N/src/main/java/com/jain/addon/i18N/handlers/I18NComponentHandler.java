@@ -19,8 +19,8 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import com.jain.addon.StringHelper;
+import com.jain.addon.i18N.component.I18NUI;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 
@@ -37,10 +37,10 @@ public class I18NComponentHandler implements Serializable {
 
 	public I18NComponentHandler(final Component component) {
 		this(component.getCaption());
+		provider = ((I18NUI)component.getUI()).getI18nProvider();
 	}
 
 	public I18NComponentHandler(final String i18NCaption) {
-		this.provider = I18NResourceProvider.instance();
 		this.i18NCaption = i18NCaption;
 	}
 
@@ -53,6 +53,9 @@ public class I18NComponentHandler implements Serializable {
 	}
 
 	public void applyI18N(Component component, Locale locale) {
+		if (provider == null)
+			provider = ((I18NUI)component.getUI()).getI18nProvider();
+
 		if(component instanceof Label) {
 			((Label) component).setValue(getCaption(locale));
 		} else { 

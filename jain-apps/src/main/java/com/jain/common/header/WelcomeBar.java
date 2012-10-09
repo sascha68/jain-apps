@@ -23,7 +23,7 @@ import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.I18NListener;
 import com.jain.addon.i18N.component.I18NSelector;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.addon.web.marker.authentication.JNILoginListner;
 import com.jain.common.JAction;
@@ -89,7 +89,7 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, Cli
 
 	public void localeChanged(I18NChangeEvent event) {
 		currentUser.setLocale(event.getLocale());
-		I18NProvider provider = I18NResourceProvider.instance(); 
+		I18NProvider provider = DefaultI18NResourceProvider.instance(); 
 		getUI().getPage().setTitle(provider.getText(getLocale(), "application.title.name"));
 		welcomeMessage.setValue(currentUser.getDisplayIdentity());
 	}

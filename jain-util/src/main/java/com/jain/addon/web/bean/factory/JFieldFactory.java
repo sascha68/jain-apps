@@ -18,7 +18,7 @@ package com.jain.addon.web.bean.factory;
 import java.util.Locale;
 
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.JNIPropertyConstraint;
 import com.vaadin.ui.Field;
@@ -39,7 +39,7 @@ public class JFieldFactory extends AbstractFieldFactory {
 	
 	public JFieldFactory(Locale locale) {
 		this.locale = locale;
-		this.provider = I18NResourceProvider.instance(); 
+		this.provider = DefaultI18NResourceProvider.instance(); 
 	}
 	
 	protected String getCaption(JNIProperty property) {
@@ -47,7 +47,7 @@ public class JFieldFactory extends AbstractFieldFactory {
 	}
 
 	protected String getRequiredError(JNIProperty property) {
-		return provider.getTitle(locale, "common.something.required", provider.getTitle(locale, property.getDisplayName()));
+		return "common.something.required";
 	}
 
 	protected String getDescription(JNIProperty property) {
