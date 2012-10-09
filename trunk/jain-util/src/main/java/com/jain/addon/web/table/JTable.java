@@ -20,7 +20,7 @@ import java.util.Date;
 
 import com.jain.addon.JNINamed;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.helper.JainHelper;
 import com.vaadin.data.Container;
@@ -121,7 +121,7 @@ public class JTable extends Table {
 			if (item instanceof JNINamed) {
 				String caption = ((JNINamed) item).getDisplayName();
 				if (item.getClass().isEnum()) {
-					I18NProvider provider = I18NResourceProvider.instance();
+					I18NProvider provider = DefaultI18NResourceProvider.instance();
 					String value = provider.getText(getLocale(), caption);
 					if(caption.equals(value))
 						value = provider.getTitle(getLocale(), caption);

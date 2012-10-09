@@ -19,7 +19,7 @@ import java.util.Locale;
 import javax.enterprise.context.SessionScoped;
 
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 
 @SuppressWarnings("serial")
 @SessionScoped
@@ -48,7 +48,7 @@ public class AuthenticatedUser implements Serializable {
 	}
 
 	public String getDisplayIdentity () {
-		I18NProvider provider = I18NResourceProvider.instance(); 
+		I18NProvider provider = DefaultI18NResourceProvider.instance(); 
 		if (isGuestSession())
 			return provider.getTitle(locale, "user.guest.welcome");
 		else {

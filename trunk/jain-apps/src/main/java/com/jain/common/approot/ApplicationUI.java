@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.i18N.component.I18NUI;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.common.authenticate.AuthenticatedUser;
 import com.jain.common.header.Header;
 import com.jain.common.header.WelcomeBar;
@@ -62,7 +62,7 @@ public class ApplicationUI extends I18NUI {
 	}
 
 	private void addApplicationTitle() {
-		I18NProvider provider = I18NResourceProvider.instance();
+		I18NProvider provider = DefaultI18NResourceProvider.instance();
 		getPage().setTitle(provider.getText(getLocale(), "application.title.name"));
 	}
 
@@ -70,5 +70,4 @@ public class ApplicationUI extends I18NUI {
 		WelcomeBar welcomebar = CDIComponent.getInstance(WelcomeBar.class);
 		view.addComponent(welcomebar);
 	}
-	
 }

@@ -18,6 +18,7 @@ package com.jain.addon.i18N.handlers;
 import java.io.Serializable;
 import java.util.Locale;
 
+import com.jain.addon.i18N.component.I18NUI;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 
@@ -31,6 +32,7 @@ import com.vaadin.ui.Label;
 public class I18NLableHandler extends I18NComponentHandler implements Serializable {
 	public I18NLableHandler(final Label component) {
 		super (component.getValue());
+		provider = ((I18NUI)component.getUI()).getI18nProvider();
 	}
 
 	public void applyI18N(Component component, Locale locale) {

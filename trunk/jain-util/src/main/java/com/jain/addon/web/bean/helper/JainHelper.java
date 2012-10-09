@@ -24,7 +24,7 @@ import java.util.Locale;
 
 import com.jain.addon.JNINamed;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.JPropertyType;
 import com.jain.addon.web.bean.JVisibilityType;
@@ -227,7 +227,7 @@ public final class JainHelper {
 	 */
 	public static String getPojoState(Locale locale, Object bean, JNIProperty[] values) {
 		StringBuilder builder = new StringBuilder();
-		I18NProvider provider = I18NResourceProvider.instance();
+		I18NProvider provider = DefaultI18NResourceProvider.instance();
 		for (JNIProperty property : values) {
 			builder.append(provider.getTitle(locale, property.getDisplayName()));
 			builder.append(": ");

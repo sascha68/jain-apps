@@ -24,15 +24,16 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.jain.addon.JNINamed;
+import com.jain.addon.resource.I18NProvider;
 
 /**
- * <code>I18NResourceProvider<code> is a default i18N provider.
+ * <code>DefaultI18NResourceProvider<code> is a default i18N provider.
  * @author Lokesh Jain
  * @since Aug 27, 2012
  * @version 1.0.0
  */
 @SuppressWarnings("serial")
-public class I18NResourceProvider implements I18NProvider {
+public class DefaultI18NResourceProvider implements I18NProvider {
 	private Map<String, Properties> propsForLocale;
 	private static I18NProvider instance;
 
@@ -42,15 +43,15 @@ public class I18NResourceProvider implements I18NProvider {
 	 */
 	public static I18NProvider instance () {
 		if (instance == null)
-			synchronized (I18NResourceProvider.class) {
+			synchronized (DefaultI18NResourceProvider.class) {
 				if (instance == null) {
-					instance = new I18NResourceProvider();
+					instance = new DefaultI18NResourceProvider();
 				}
 			}
 		return instance;
 	}
 
-	private I18NResourceProvider() {
+	private DefaultI18NResourceProvider() {
 		propsForLocale = new HashMap<String, Properties> ();
 		getProperties(null);
 	}
@@ -61,7 +62,7 @@ public class I18NResourceProvider implements I18NProvider {
 			String file = "/messages" + (locale == null ? BLANK : ("_" + locale)) + ".properties";
 			properties = new Properties();
 			try {
-				InputStream stream = I18NResourceProvider.class.getResourceAsStream(file);
+				InputStream stream = DefaultI18NResourceProvider.class.getResourceAsStream(file);
 				if(stream != null) {
 					properties.load(stream);
 					propsForLocale.put(locale, properties);

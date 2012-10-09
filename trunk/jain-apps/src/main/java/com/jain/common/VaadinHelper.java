@@ -16,7 +16,7 @@ package com.jain.common;
 import com.jain.addon.JNINamedResourceVisible;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.common.authenticate.AuthenticatedUser;
 import com.jain.theme.ApplicationTheme;
@@ -31,7 +31,7 @@ public final class VaadinHelper {
 	}
 
 	public static Notification createNotificationMessage(String title, String message, Object ... params) {
-		I18NProvider provider = I18NResourceProvider.instance();
+		I18NProvider provider = DefaultI18NResourceProvider.instance();
 		AuthenticatedUser currentUser = CDIComponent.getInstance(AuthenticatedUser.class); 
 		Notification n = new Notification(provider.getText(currentUser.getLocale(), title, params), Notification.Type.TRAY_NOTIFICATION);
 		n.setPosition(Position.MIDDLE_CENTER);

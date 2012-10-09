@@ -18,7 +18,7 @@ import java.util.Locale;
 import com.jain.addon.JNINamedResourceVisible;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.resource.I18NResourceProvider;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.common.authenticate.AuthenticatedUser;
 
 public enum JAction implements JNINamedResourceVisible {
@@ -49,7 +49,7 @@ public enum JAction implements JNINamedResourceVisible {
 	}
 	
 	public String getDisplayName(Locale locale, Object ... params) {
-		I18NProvider provider = I18NResourceProvider.instance();
+		I18NProvider provider = DefaultI18NResourceProvider.instance();
 		return provider.getText(locale, displayNamePlusKey, params);
 	}
 

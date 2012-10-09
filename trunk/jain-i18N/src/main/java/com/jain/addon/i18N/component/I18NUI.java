@@ -16,6 +16,8 @@
 package com.jain.addon.i18N.component;
 
 import com.jain.addon.I18N.listners.JAttachDetachListner;
+import com.jain.addon.resource.DefaultI18NResourceProvider;
+import com.jain.addon.resource.I18NProvider;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
@@ -50,6 +52,24 @@ public abstract class I18NUI extends UI {
 		fireComponentDetachEvent(window);
 		return removed;
 	}
+	
+	/**
+	 * Override this method in UI implementation to provide your own I18NProvider.
+	 * @see {@link I18NProvider}, {@link DefaultI18NResourceProvider}
+	 * @return I18NProvider
+	 */
+	public I18NProvider getI18nProvider() {
+		return DefaultI18NResourceProvider.instance();
+	}
 
+	/**
+	 * Initializes this UI. This method is intended to be overridden by subclasses to build the view 
+	 * and configure non-component functionality. Performing the initialization in a 
+	 * constructor is not suggested as the state of the UI is not properly 
+	 * set up when the constructor is invoked.
+	 * This method is invoked from the Vaadin init method.
+	 * @see {@link UI#init}
+	 * @param request the Vaadin request that caused this UI to be created
+	 */
 	protected abstract void initialize (VaadinRequest request);
 }
