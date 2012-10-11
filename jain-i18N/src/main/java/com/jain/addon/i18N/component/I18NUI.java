@@ -15,6 +15,8 @@
  */
 package com.jain.addon.i18N.component;
 
+import java.util.Locale;
+
 import com.jain.addon.I18N.listners.JAttachDetachListner;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.resource.I18NProvider;
@@ -33,9 +35,13 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 public abstract class I18NUI extends UI {
-
+	private final JAttachDetachListner attachListener;
+	
+	public I18NUI() {
+		this.attachListener = new JAttachDetachListner();
+	}
+	
 	protected void init(VaadinRequest request) {
-		JAttachDetachListner attachListener = new JAttachDetachListner();
 		addComponentAttachListener(attachListener);
 		addComponentDetachListener(attachListener);
 
@@ -60,6 +66,12 @@ public abstract class I18NUI extends UI {
 	 */
 	public I18NProvider getI18nProvider() {
 		return DefaultI18NResourceProvider.instance();
+	}
+	
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+		if (attachListener.getListener() != null)
+			attachListener.getListener().localeChanged(this);
 	}
 
 	/**
