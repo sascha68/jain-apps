@@ -47,11 +47,19 @@ public class I18NChangeListener implements ValueChangeListener {
 	}
 
 	public void localeChanged (Component component) {
+		if (currentLocale != component.getUI().getLocale()) {
+			currentLocale = component.getUI().getLocale();
+
+			updateComponents(component);
+		}
+	}
+
+	private void updateComponents(Component component) {
 		if(component instanceof ComponentContainer) {
 			ComponentContainer container = (ComponentContainer) component;
 
 			for (Component containerComponent : container) {
-				localeChanged(containerComponent);
+				updateComponents(containerComponent);
 			}
 		}
 
@@ -96,8 +104,7 @@ public class I18NChangeListener implements ValueChangeListener {
 	public void valueChange(ValueChangeEvent valueChangeEvent) {
 		Event event = (Event) valueChangeEvent;
 		Locale selected = ((Locale) valueChangeEvent.getProperty().getValue());
-		currentLocale = selected == null ? Locale.getDefault() : selected;
-		event.getComponent().getUI().setLocale(currentLocale);
-		localeChanged(event.getComponent().getUI());
+		selected = selected == null ? Locale.getDefault() : selected;
+		event.getComponent().getUI().setLocale(selected);
 	}
 }
