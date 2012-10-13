@@ -198,7 +198,7 @@
 
 	<properties>
 		<version.java.app>1.6</version.java.app>
-		<vaadin.version>7.0.0.beta3</vaadin.version>
+		<vaadin.version>7.0.0.beta4</vaadin.version>
 		<gwt.version>2.4.0</gwt.version>
 		<gwt.plugin.version>2.2.0</gwt.plugin.version>
 		<com.vishudha.deployment.directory>${com.vishudha.jboss.home}/standalone/deployments</com.vishudha.deployment.directory>
