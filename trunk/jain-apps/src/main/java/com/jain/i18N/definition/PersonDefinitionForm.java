@@ -91,7 +91,7 @@ public class PersonDefinitionForm extends I18NWindow implements JNIEditLocal, JN
 	public void save() {
 		try {
 			fieldGroup.commit();
-			Events.instance().raiseEvent(PersonAnnotationGrid.PERSON_CREATED_OR_UPDATED, person);
+			Events.instance().raiseEvent(getUI(), PersonAnnotationGrid.PERSON_CREATED_OR_UPDATED, person);
 			getUI().removeWindow(this);
 		} catch (CommitException e) {
 			e.printStackTrace();

@@ -35,26 +35,10 @@ import java.util.Map;
  */
 @SuppressWarnings("serial")
 public final class EventHandler implements Serializable {
-	private static EventHandler instance;
 	private Map<String, Collection<MethodExpression>> events;
 	
-	private EventHandler() {
+	public EventHandler() {
 		this.events = new HashMap <String, Collection<MethodExpression>> ();
-	}
-	
-	/**
-	 * Returns instance of the event handler as this class is singleton service.  
-	 * @return {@link EventHandler}
-	 */
-	public static EventHandler instance() {
-		if (instance == null) {
-			synchronized (EventHandler.class) {
-				if (instance == null) {
-					instance = new EventHandler();
-				}
-			}
-		}
-		return instance;
 	}
 	
 	/**

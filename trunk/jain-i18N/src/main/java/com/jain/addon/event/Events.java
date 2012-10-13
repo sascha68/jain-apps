@@ -18,6 +18,7 @@ package com.jain.addon.event;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.jain.addon.i18N.component.I18NUI;
 import com.jain.addon.web.marker.authentication.JLoginHandler;
 import com.vaadin.ui.UI;
 /**
@@ -56,11 +57,15 @@ public final class Events implements Serializable {
 	 * @param EventName
 	 * @param parameters needs to passed in observer method
 	 */
-	public void raiseEvent(String event, Object ... parameters) {
-		Collection<MethodExpression> expressions = EventHandler.instance().getMethodExpressions(event);
-		
-		for (MethodExpression expression : expressions) {
-			expression.invoke(parameters);
+	public void raiseEvent(UI ui, String event, Object ... parameters) {
+		if (ui instanceof I18NUI) {
+			Collection<MethodExpression> expressions = ((I18NUI)ui).getEventHandler().getMethodExpressions(event);
+
+			for (MethodExpression expression : expressions) {
+				expression.invoke(parameters);
+			}
+		} else {
+
 		}
 	}
 	
