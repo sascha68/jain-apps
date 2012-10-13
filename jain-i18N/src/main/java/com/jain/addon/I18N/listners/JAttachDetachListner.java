@@ -20,8 +20,8 @@ import java.util.Collection;
 import java.util.List;
 
 import com.jain.addon.JNIComponent;
-import com.jain.addon.event.EventHandler;
 import com.jain.addon.i18N.I18NHelper;
+import com.jain.addon.i18N.component.I18NUI;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
@@ -68,15 +68,21 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 	private void handleAddRemoveComponent(Component component, boolean remove) {
 		if(remove) {
 			components.remove(component);
-			if (component.getUI() != null)
+			if (component.getUI() != null) {
 				I18NHelper.deRegistor(component.getUI(), component);
-			else 
+
+				if (component.getUI() instanceof I18NUI) {
+					((I18NUI)component.getUI()).getEventHandler().deRegistor(component);
+				}
+			} else 
 				System.out.println("Component root is null :: " + component);
-			EventHandler.instance().deRegistor(component);
 		} else {
 			components.add(component);
 			I18NHelper.register(component.getUI(), component);
-			EventHandler.instance().register(component);
+
+			if (component.getUI() instanceof I18NUI) {
+				((I18NUI)component.getUI()).getEventHandler().register(component);
+			}
 		}
 	}
 

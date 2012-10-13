@@ -18,6 +18,7 @@ package com.jain.addon.i18N.component;
 import java.util.Locale;
 
 import com.jain.addon.I18N.listners.JAttachDetachListner;
+import com.jain.addon.event.EventHandler;
 import com.jain.addon.i18N.I18NChangeListener;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
@@ -38,9 +39,11 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 public abstract class I18NUI extends UI {
 	private final I18NChangeListener localChangeListener;
+	private final EventHandler eventHandler;
 	
 	public I18NUI() {
 		this.localChangeListener = I18NHelper.findListener(this, true);
+		this.eventHandler = new EventHandler();
 	}
 	
 	protected void init(VaadinRequest request) {
@@ -80,6 +83,10 @@ public abstract class I18NUI extends UI {
 		return localChangeListener;
 	}
 
+	public EventHandler getEventHandler() {
+		return eventHandler;
+	}
+	
 	/**
 	 * Initializes this UI. This method is intended to be overridden by subclasses to build the view 
 	 * and configure non-component functionality. Performing the initialization in a 
