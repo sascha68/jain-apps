@@ -191,7 +191,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
-			<artifactId>jain-util</artifactId>
+			<artifactId>jain-assoc</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

@@ -10,7 +10,7 @@
 
 	<modules>
 		<module>../jain-i18N</module>
-		<module>../jain-util</module>
+		<module>../jain-assoc</module>
 		<module>../jain-apps</module>
 	</modules>
 

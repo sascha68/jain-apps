@@ -3,10 +3,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.vaadin.addons</groupId>
-	<artifactId>jain-util</artifactId>
+	<artifactId>jain-assoc</artifactId>
 	<version>1.0.2</version>
-	<name>Jain Utility</name>
-	<description>A addon API for additional utilities</description>
+	<name>Jain Association</name>
+	<description>A addon API for association / HAS-A relation objects</description>
 
 	<repositories>
 		<repository>
