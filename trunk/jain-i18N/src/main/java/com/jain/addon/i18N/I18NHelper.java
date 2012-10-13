@@ -16,13 +16,11 @@
 package com.jain.addon.i18N;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-import com.jain.addon.I18N.listners.JAttachDetachListner;
+import com.jain.addon.i18N.component.I18NUI;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.ComponentContainer.ComponentAttachEvent;
 
 /**
  * <code>I18NHelper<code> is a helper class for the i18N component handling.
@@ -78,22 +76,32 @@ public final class I18NHelper implements Serializable {
 		field.addValueChangeListener(listener);
 	}
 
-	private static I18NChangeListener findListener (Component component, boolean create) {
-		Collection<?> collection = component.getUI().getListeners(ComponentAttachEvent.class);
-		for (Object object : collection) {
-			if (object instanceof JAttachDetachListner) {
-				I18NChangeListener listener =  ((JAttachDetachListner) object).getListener();
-				if (listener != null) {
-					return listener;
-				} 
-
-				if (create) {
-					listener = new I18NChangeListener();
-					((JAttachDetachListner) object).setListener(listener);
-					return listener;
-				}
-			}
+	/**
+	 * Method to find I18NChangeListener or create an instance if this is not available
+	 * @param component
+	 * @param create
+	 * @return {@link I18NChangeListener}
+	 */
+	public static I18NChangeListener findListener (Component component, boolean create) {
+		I18NChangeListener listener = null;
+		
+		if (component instanceof I18NUI) {
+			listener = ((I18NUI) component).getLocalChangeListener();
+			if (listener != null)
+				return listener;
 		}
-		return null;
+		
+		if (component.getUI() instanceof I18NUI) {
+			listener = ((I18NUI) component.getUI()).getLocalChangeListener();
+			if (listener != null)
+				return listener;
+		}
+		
+		if (create) {
+			listener = new I18NChangeListener();
+			return listener;
+		}
+
+		return listener;
 	}
 }

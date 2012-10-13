@@ -21,7 +21,6 @@ import java.util.List;
 
 import com.jain.addon.JNIComponent;
 import com.jain.addon.event.EventHandler;
-import com.jain.addon.i18N.I18NChangeListener;
 import com.jain.addon.i18N.I18NHelper;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
@@ -40,7 +39,6 @@ import com.vaadin.ui.ComponentContainer.ComponentDetachListener;
 @SuppressWarnings("serial")
 public class JAttachDetachListner implements ComponentDetachListener, ComponentAttachListener {
 	private List<Component> components = new ArrayList<Component>();
-	private I18NChangeListener listener;
 
 	public void componentAttachedToContainer(ComponentAttachEvent event) {
 		Component component = event.getAttachedComponent();
@@ -70,21 +68,14 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 	private void handleAddRemoveComponent(Component component, boolean remove) {
 		if(remove) {
 			components.remove(component);
-			if(listener == null) {
-				if (component.getUI() != null)
-					I18NHelper.deRegistor(component.getUI(), component);
-				else 
-					System.out.println("Component root is null :: " + component);
-			} else
-				listener.deRegistor(component);
+			if (component.getUI() != null)
+				I18NHelper.deRegistor(component.getUI(), component);
+			else 
+				System.out.println("Component root is null :: " + component);
 			EventHandler.instance().deRegistor(component);
 		} else {
 			components.add(component);
-
-			if(listener == null)
-				I18NHelper.register(component.getUI(), component);
-			else
-				listener.registor(component);
+			I18NHelper.register(component.getUI(), component);
 			EventHandler.instance().register(component);
 		}
 	}
@@ -122,13 +113,5 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 		}
 
 		System.out.println(collection);
-	}
-
-	public I18NChangeListener getListener() {
-		return listener;
-	}
-
-	public void setListener(I18NChangeListener listener) {
-		this.listener = listener;
 	}
 }
