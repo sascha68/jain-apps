@@ -65,7 +65,7 @@ public final class Events implements Serializable {
 				expression.invoke(parameters);
 			}
 		} else {
-
+			throw new IllegalArgumentException ("UI should be instance of I18NUI");
 		}
 	}
 	
