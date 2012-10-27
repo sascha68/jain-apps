@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.vaadin.addons</groupId>
 	<artifactId>jain-assoc</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<name>Jain Association</name>
 	<description>A addon API for association / HAS-A relation objects</description>
 
@@ -117,7 +117,7 @@
 	</dependencies>
 	<properties>
 		<version.java.app>1.6</version.java.app>
-		<vaadin.version>7.0.0.beta4</vaadin.version>
+		<vaadin.version>7.0.0.beta6</vaadin.version>
 		<gwt.version>2.4.0</gwt.version>
 	</properties>
 </project>
