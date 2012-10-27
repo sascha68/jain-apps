@@ -13,7 +13,7 @@
  */
 package com.jain.common.header;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.theme.ApplicationTheme;
@@ -28,11 +28,12 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class Header extends HorizontalLayout implements ClickListener, JNIComponent {
+public class Header extends HorizontalLayout implements ClickListener {
 	private static final String IMAGES_LOGO_PNG = "images/logo.png";
 	private Button current = null;
 	private Component currentComponent = null;
 
+	@JNIComponentInit
 	public void init() {
 		setMargin(true);
 		setSpacing(true);

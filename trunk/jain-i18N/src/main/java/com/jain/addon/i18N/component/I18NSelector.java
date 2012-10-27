@@ -17,7 +17,7 @@ package com.jain.addon.i18N.component;
 
 import java.util.Locale;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.i18N.I18NHelper;
 import com.vaadin.data.Item;
 import com.vaadin.ui.ComboBox;
@@ -29,7 +29,9 @@ import com.vaadin.ui.ComboBox;
  * @version 1.0.0
  */
 @SuppressWarnings("serial")
-public class I18NSelector extends ComboBox implements JNIComponent {
+public class I18NSelector extends ComboBox {
+	
+	@JNIComponentInit
 	public void init () {
 		I18NHelper.addListener(getUI(), this);
 		setImmediate(true);

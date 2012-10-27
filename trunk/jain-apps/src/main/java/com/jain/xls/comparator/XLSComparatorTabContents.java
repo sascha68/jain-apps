@@ -13,11 +13,13 @@
  */
 package com.jain.xls.comparator;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.vaadin.ui.TabSheet;
 
 @SuppressWarnings("serial")
-public class XLSComparatorTabContents extends TabSheet implements JNIComponent {
+public class XLSComparatorTabContents extends TabSheet {
+	
+	@JNIComponentInit
 	public void init() {
 	}
 }

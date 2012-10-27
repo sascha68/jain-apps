@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.event.JNIObserver;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.annotation.processor.JAnnotationProcessor;
@@ -31,13 +31,14 @@ import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class PersonAnnotationGrid  extends VerticalLayout implements ValueChangeListener, JNIComponent {
+public class PersonAnnotationGrid  extends VerticalLayout implements ValueChangeListener {
 	public static final String PERSON_CREATED_OR_UPDATED = "personCreatedOrUpdated";
 	private JTable table;
 	private Person selected;
 	
 	@Inject PersonDataHandler dataHandler; 
 
+	@JNIComponentInit
 	public void init () {
 		table = new JTable(getContainer(), getProperties());
 		table.addValueChangeListener(this);

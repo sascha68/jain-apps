@@ -15,12 +15,12 @@ package com.jain.common.authenticate;
 
 import javax.inject.Inject;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.component.I18NWindow;
-import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
+import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.common.JAction;
 import com.jain.theme.ApplicationTheme;
@@ -33,13 +33,14 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class LoginAction extends I18NWindow  implements ClickListener, JNIComponent {
+public class LoginAction extends I18NWindow  implements ClickListener {
 	@Inject
 	private AuthenticatedUser currentUser;
 	
 	private TextField userName;
 	private PasswordField password;
 	
+	@JNIComponentInit
 	public void init () {
 		setModal(true);
 		setWidth("30%");

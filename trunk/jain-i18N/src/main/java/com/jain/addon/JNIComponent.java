@@ -23,7 +23,9 @@ import com.vaadin.ui.Component;
  * @author Lokesh Jain
  * @since Aug 27, 2012
  * @version 1.0.0
+ * @deprecated since 1.0.3
  */
+@Deprecated
 public interface JNIComponent extends Component {
 	public void init ();
 }

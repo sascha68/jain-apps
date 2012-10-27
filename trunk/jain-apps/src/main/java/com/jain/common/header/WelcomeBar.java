@@ -15,15 +15,15 @@ package com.jain.common.header;
 
 import javax.inject.Inject;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.I18NChangeEvent;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.I18NListener;
 import com.jain.addon.i18N.component.I18NSelector;
-import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
+import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.addon.web.marker.authentication.JNILoginListner;
 import com.jain.common.JAction;
@@ -40,11 +40,12 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.themes.Runo;
 
 @SuppressWarnings("serial")
-public class WelcomeBar extends HorizontalLayout implements JNILoginListner, ClickListener, JNIComponent, I18NListener {
+public class WelcomeBar extends HorizontalLayout implements JNILoginListner, ClickListener, I18NListener {
 	@Inject
 	private AuthenticatedUser currentUser;
 	private Label welcomeMessage;
 
+	@JNIComponentInit
 	public void init () {
 		setWidth("100%");
 		setMargin(new MarginInfo(false, true, false, true));
