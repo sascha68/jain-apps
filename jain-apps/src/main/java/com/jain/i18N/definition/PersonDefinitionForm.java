@@ -15,7 +15,7 @@ package com.jain.i18N.definition;
 
 import java.util.Arrays;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.component.I18NWindow;
 import com.jain.addon.web.bean.container.JainBeanItem;
@@ -37,7 +37,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class PersonDefinitionForm extends I18NWindow implements JNIEditLocal, JNIComponent {
+public class PersonDefinitionForm extends I18NWindow implements JNIEditLocal {
 	private Person person;
 	private FieldGroup fieldGroup;
 	private boolean viewOnly;
@@ -46,6 +46,7 @@ public class PersonDefinitionForm extends I18NWindow implements JNIEditLocal, JN
 		this.viewOnly = false;
 	}
 
+	@JNIComponentInit
 	public void init () {
 		setModal(true);
 		setWidth("70%");

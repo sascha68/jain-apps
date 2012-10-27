@@ -15,11 +15,13 @@
  */
 package com.jain.addon.I18N.listners;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.component.I18NUI;
 import com.vaadin.ui.AbstractComponent;
@@ -36,7 +38,7 @@ import com.vaadin.ui.ComponentContainer.ComponentDetachListener;
  * @since Aug 28, 2012
  * @version 1.0.0
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "deprecation" })
 public class JAttachDetachListner implements ComponentDetachListener, ComponentAttachListener {
 	private List<Component> components = new ArrayList<Component>();
 
@@ -58,6 +60,22 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 
 			for (Component containerComponent : container) {
 				initializeNAddRemoveListner(containerComponent, remove);
+			}
+		}
+
+		initializeComponent(component);
+	}
+
+	private void initializeComponent(Component component) {
+		Method[]  methods = component.getClass().getMethods();
+		for (Method method : methods) {
+			JNIComponentInit componentInit = method.getAnnotation(JNIComponentInit.class);
+			if(componentInit != null) {
+				try {		
+					method.invoke(component);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 

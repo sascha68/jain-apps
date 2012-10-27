@@ -13,7 +13,7 @@
  */
 package com.jain.i18N.annotation;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.JNINamed;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.common.JAction;
@@ -26,9 +26,10 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class PersonAnnotationTabContent extends VerticalLayout implements JNICrudLocal, JNIComponent {
+public class PersonAnnotationTabContent extends VerticalLayout implements JNICrudLocal {
 	private PersonAnnotationGrid grid;
 
+	@JNIComponentInit
 	public void init () {
 		setSpacing(false);
 		setMargin(false);

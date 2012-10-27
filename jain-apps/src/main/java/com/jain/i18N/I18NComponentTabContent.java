@@ -13,14 +13,16 @@
  */
 package com.jain.i18N;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.i18N.annotation.PersonAnnotationTabContent;
 import com.jain.i18N.definition.PersonDefinitionTabContent;
 import com.vaadin.ui.TabSheet;
 
 @SuppressWarnings("serial")
-public class I18NComponentTabContent extends TabSheet implements JNIComponent {
+public class I18NComponentTabContent extends TabSheet {
+	
+	@JNIComponentInit
 	public void init() {
 		PersonAnnotationTabContent personAnnotationTabContent = CDIComponent.getInstance(PersonAnnotationTabContent.class);
 		addTab(personAnnotationTabContent, "annotaion.approach.name");

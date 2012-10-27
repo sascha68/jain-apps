@@ -1,6 +1,6 @@
 package com.jain.xml.editor;
 
-import com.jain.addon.JNIComponent;
+import com.jain.addon.JNIComponentInit;
 import com.jain.common.VaadinLayoutHelper;
 import com.jain.theme.ApplicationTheme;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -9,8 +9,9 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class XMLEditorFrom extends VerticalLayout implements JNIComponent {
+public class XMLEditorFrom extends VerticalLayout {
 	
+	@JNIComponentInit
 	public void init() {
 		setSpacing(true);
 		setMargin(true);
