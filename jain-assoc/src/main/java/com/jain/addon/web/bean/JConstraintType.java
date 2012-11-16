@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.jain.addon.web.bean.constraint.JNIEnumeration;
-import com.vaadin.ui.PasswordField;
 
 /**
  * <code>JConstraintType<code> is used for UI generation constraints <br/>
@@ -27,7 +26,6 @@ import com.vaadin.ui.PasswordField;
  * NONE - No constraint for the property
  * REQUIRED - Property value is required
  * READ_ONLY - Property is read only
- * SECRETE - property value is secrete (i.e. {@link PasswordField})
  * DISABLED - Property is disabled 
  * BEAN_VALIDATION - bean validation is required
  * CLASS_CONSTRAINT - Class level enumeration is provided 
@@ -43,7 +41,6 @@ public enum JConstraintType {
 	NONE,
 	REQUIRED,
 	READ_ONLY,
-	SECRETE,
 	DISABLED,
 	BEAN_VALIDATION,
 	CLASS_CONSTRAINT,

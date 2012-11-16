@@ -20,6 +20,8 @@ import java.util.Date;
 import com.jain.addon.component.upload.JImage;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.ListSelect;
+import com.vaadin.ui.OptionGroup;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextArea;
@@ -36,6 +38,9 @@ import com.vaadin.ui.TextField;
  * MULTI_SELECT - Generated component is {@link ListSelect}.
  * IMAGE - Generated component is {@link JImage}.
  * DATE - Generated component is {@link PopupDateField}.
+ * SECRATE - Generated component is {@link PasswordField}.
+ * OPTION_GROUP - Generated component is {@link OptionGroup}.
+ * CHECK_BOX - Generated component is {@link OptionGroup} with Multi-select options.
  * </pre> 
  * @author Lokesh Jain
  * @since Aug 27, 2012
@@ -48,5 +53,8 @@ public enum JPropertyType {
 	MULTI_SELECT,
 	IMAGE,
 	DATE,
-	FILE;
+	FILE,
+	SECRATE,
+	OPTION_GROUP,
+	CHECK_BOX;
 }
