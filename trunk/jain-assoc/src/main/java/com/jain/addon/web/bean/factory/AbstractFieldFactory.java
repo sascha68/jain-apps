@@ -18,15 +18,29 @@ package com.jain.addon.web.bean.factory;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import com.jain.addon.JNINamed;
 import com.jain.addon.StringHelper;
 import com.jain.addon.component.upload.JImage;
+import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.web.bean.JConstraintType;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.JNIPropertyConstraint;
 import com.jain.addon.web.bean.JPropertyType;
 import com.jain.addon.web.bean.annotation.processor.EnumerationHandler;
+import com.jain.addon.web.bean.factory.generator.FieldGenerator;
+import com.jain.addon.web.bean.factory.generator.ImageFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.date.DateFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.select.BooleanFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.select.CheckBoxFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.select.MultiSelectFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.select.OptionGroupFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.select.RestrictionFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.text.RichTextFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.text.SecrateFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.text.TextAreaFieldGenerator;
+import com.jain.addon.web.bean.factory.generator.text.TextFieldGenerator;
 import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ComboBox;
@@ -50,13 +64,114 @@ public abstract class AbstractFieldFactory  implements Serializable {
 	/**
 	 * Generate {@link Field} based on bean type and {@link JNIPropertyConstraint}
 	 * @param type
+	 * @param restriction
+	 * @return {@link Field}
+	 */
+	public Field<?> createField(Class<?> type, JNIPropertyConstraint restriction) {
+		FieldGenerator generator = createFieldGenerator(type, restriction.getProperty().getType(), restriction.getEnumarationName());
+		return generator.createField(type, restriction);
+	}
+
+	/**
+	 * Generate {@link FieldGenerator} based on bean type and {@link JPropertyType}
+	 * @param type
+	 * @param propertyType
+	 * @param enumarationName
+	 * @return {@link FieldGenerator}
+	 */
+	public FieldGenerator createFieldGenerator(final Class<?> type, final JPropertyType propertyType, final String enumarationName) {
+		FieldGenerator generator = null;
+
+		switch (propertyType) {
+		case DATE:
+			generator = new DateFieldGenerator (getLocale(), getProvider());
+			break;
+		case TEXT_AREA:
+			generator = new TextAreaFieldGenerator(getLocale(), getProvider());
+			break;
+		case MULTI_SELECT:
+			generator = new MultiSelectFieldGenerator(getLocale(), getProvider());
+			break;
+		case IMAGE:
+			generator = new ImageFieldGenerator (getLocale(), getProvider());
+			break;
+		case RICH_TEXT_AREA:
+			generator = new RichTextFieldGenerator(getLocale(), getProvider());
+			break;
+
+		case SECRATE:
+			generator = new SecrateFieldGenerator(getLocale(), getProvider());
+			break;
+
+		case OPTION_GROUP :
+			generator = new OptionGroupFieldGenerator(getLocale(), getProvider());
+			break;
+		
+		case CHECK_BOX :
+			generator = new CheckBoxFieldGenerator(getLocale(), getProvider());
+			break;
+			
+		case FILE:
+			break;
+
+		case UN_SPECIFIED:
+			generator = createFieldGenerator (type, enumarationName);
+			break;
+
+		default:
+			generator = createFieldGenerator (type, enumarationName);
+			break;
+		}
+
+		if(generator == null) {
+			generator = new TextFieldGenerator (getLocale(), getProvider());
+		}
+
+		return generator;
+	}
+
+	/**
+	 * Generate {@link FieldGenerator} based on bean type and enumarationName
+	 * @param type
+	 * @param enumarationName
+	 * @return {@link FieldGenerator}
+	 */
+	private FieldGenerator createFieldGenerator(final Class<?> type, final String enumarationName) {
+		FieldGenerator generator = null;
+		if (type != null) {
+			if (Date.class.isAssignableFrom (type)) {
+				generator = new DateFieldGenerator (getLocale(), getProvider());
+			} else if (Boolean.class.isAssignableFrom (type)) {
+				generator = new BooleanFieldGenerator (getLocale(), getProvider());
+			} else if(Enum.class.isAssignableFrom (type)) {
+				generator = new RestrictionFieldGenerator (getLocale(), getProvider());
+			}
+		}
+
+		if(generator == null && StringHelper.isNotEmptyWithTrim (enumarationName)) {
+			generator = new RestrictionFieldGenerator (getLocale(), getProvider());
+		}
+
+		return generator;
+	}
+
+	public abstract Locale getLocale();
+	public abstract I18NProvider getProvider();	
+
+
+
+	/***************************************************************************************************************************************************/
+
+	/**
+	 * Generate {@link Field} based on bean type and {@link JNIPropertyConstraint}
+	 * @param type
 	 * @param propertyConstraint
 	 * @return {@link Field}
 	 */
-	public Field<?> createField(Class<?> type, JNIPropertyConstraint propertyConstraint) {
+	public Field<?> createField1(Class<?> type, JNIPropertyConstraint propertyConstraint) {
 		Field<?> field = null;
 
-		if(propertyConstraint.getTypes() != null && propertyConstraint.getTypes().contains(JConstraintType.SECRETE)){
+		if(propertyConstraint.getTypes() != null && propertyConstraint.getProperty().getType() == JPropertyType.SECRATE){
 			return createPasswordField(propertyConstraint.getProperty());
 		}
 

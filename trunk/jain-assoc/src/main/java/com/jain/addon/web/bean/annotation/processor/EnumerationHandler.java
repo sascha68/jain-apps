@@ -33,22 +33,22 @@ import com.jain.addon.web.bean.constraint.JNIEnumeration;
 public final class EnumerationHandler {
 	private EnumerationHandler () {}
 	
-	public static Collection<?> getValue(JNIPropertyConstraint propertyConstraint) {
+	public static Collection<?> getValue(final JNIPropertyConstraint constraint) {
 		Collection<?> values = null;
-		if (propertyConstraint.getTypes() != null) {
-			for (JConstraintType type : propertyConstraint.getTypes()) {
+		if (constraint.getTypes() != null) {
+			for (JConstraintType type : constraint.getTypes()) {
 				JNIEnumeration enumaration = null;
 				switch (type) {
 				case CLASS_CONSTRAINT:
 					try {
 						@SuppressWarnings("unchecked")
-						Class <JNIEnumeration> clazz = (Class <JNIEnumeration>) Class.forName(propertyConstraint.getEnumarationName());
+						Class <JNIEnumeration> clazz = (Class <JNIEnumeration>) Class.forName(constraint.getEnumarationName());
 						enumaration = clazz.newInstance();
 					} catch (Exception e) {
 					}
 					break;
 				case CDI_COMPONENT:
-					enumaration = CDIComponent.getInstance(propertyConstraint.getEnumarationName()); 
+					enumaration = CDIComponent.getInstance(constraint.getEnumarationName()); 
 					break;
 				default:
 					break;

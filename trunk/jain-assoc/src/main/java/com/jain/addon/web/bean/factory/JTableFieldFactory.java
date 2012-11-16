@@ -91,4 +91,14 @@ public class JTableFieldFactory extends AbstractFieldFactory implements FormFiel
 	protected String getDescription(JNIProperty property) {
 		return provider.getMessage(locale, property.getDisplayName());
 	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public I18NProvider getProvider() {
+		return provider;
+	}
+	
+	
 }

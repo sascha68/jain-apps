@@ -42,6 +42,14 @@ public class JFieldFactory extends AbstractFieldFactory {
 		this.provider = DefaultI18NResourceProvider.instance(); 
 	}
 	
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public I18NProvider getProvider() {
+		return provider;
+	}
+
 	protected String getCaption(JNIProperty property) {
 		return property.getDisplayName();
 	}
