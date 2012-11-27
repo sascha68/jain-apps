@@ -27,6 +27,8 @@ public class Address implements Serializable {
 	private String city;
 	private ZIP zip;
 
+	public Address() {}
+	
 	public Address(ZIP zip) {
 		this.zip = zip;
 	}
