@@ -60,7 +60,10 @@ public final class Events implements Serializable {
 	public void raiseEvent(UI ui, String event, Object ... parameters) {
 		if (ui instanceof I18NUI) {
 			Collection<MethodExpression> expressions = ((I18NUI)ui).getEventHandler().getMethodExpressions(event);
-
+			
+			if (expressions == null)
+				throw new IllegalArgumentException ("No observer method available for event " + event);
+			
 			for (MethodExpression expression : expressions) {
 				expression.invoke(parameters);
 			}

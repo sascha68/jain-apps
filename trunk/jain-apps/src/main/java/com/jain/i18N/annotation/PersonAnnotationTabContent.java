@@ -13,67 +13,62 @@
  */
 package com.jain.i18N.annotation;
 
+import javax.inject.Inject;
+
+import com.jain.addon.JNEventConstants;
 import com.jain.addon.JNIComponentInit;
-import com.jain.addon.JNINamed;
 import com.jain.addon.cdi.CDIComponent;
-import com.jain.common.JAction;
+import com.jain.addon.component.crud.JCrud;
+import com.jain.addon.component.crud.JCrudObject;
+import com.jain.addon.event.JNIObserver;
 import com.jain.common.VaadinHelper;
-import com.jain.common.listeners.JNICrudLocal;
-import com.jain.common.listeners.JainCrudClickListener;
+import com.jain.common.authenticate.AuthenticatedUser;
+import com.jain.i18N.PersonDataHandler;
+import com.jain.i18N.domain.Address;
+import com.jain.i18N.domain.Person;
+import com.jain.i18N.domain.ZIP;
 import com.jain.theme.ApplicationTheme;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class PersonAnnotationTabContent extends VerticalLayout implements JNICrudLocal {
-	private PersonAnnotationGrid grid;
+public class PersonAnnotationTabContent extends VerticalLayout {
+	private static final String PERSON_CREATED_OR_UPDATED = "com.jain.i18N.domain.Person" + JNEventConstants.CREATED_OR_UPDATED;
+	private static final String PERSON_DELETED = "com.jain.i18N.domain.Person" + JNEventConstants.DELETED;
 
+	private JCrud<Person> personCrud;
+	
+	@Inject private PersonDataHandler dataHandler; 
+	
 	@JNIComponentInit
 	public void init () {
 		setSpacing(false);
 		setMargin(false);
 		setStyleName(ApplicationTheme.ALTERNATE_VIEW);
 
-		JainCrudClickListener clickListner = new JainCrudClickListener(this);
+		personCrud = new JCrud<Person>();
+		personCrud.setValues(dataHandler.getPersons());
 		
-		HorizontalLayout hLayout = VaadinHelper.createButtonSegment (clickListner, JAction.VIEW, JAction.ADD, JAction.EDIT, JAction.DELETE);
-		
-		addComponent(hLayout);
-		setComponentAlignment(hLayout, Alignment.TOP_RIGHT);
-		setExpandRatio(hLayout, 1);
-
-		grid = CDIComponent.getInstance(PersonAnnotationGrid.class);
-		addComponent(grid);
-		setExpandRatio(grid, 3);
+		JCrudObject<Person> type = new JCrudObject<Person>(Person.class, "");
+		JCrudObject<Address> subType  = type.addSubObject(Address.class, "setAddress");
+		subType.addSubObject(ZIP.class, "setZip");
+		personCrud.setType(type);
+		personCrud.setPageLength(15);
+		personCrud.setColumns(2);
+		personCrud.setDisplayName("person.name");
+		personCrud.setSecured(CDIComponent.getInstance(AuthenticatedUser.class));
+		addComponent(personCrud);
 	}
-
-	public void view() {
-		PersonAnnotationForm form = CDIComponent.getInstance(PersonAnnotationForm.class);
-		form.setViewOnly(true);
-		form.setPerson(grid.getSelected());
-		form.setCaption(JAction.VIEW.getDisplayName(getLocale(), grid.getSelected().getDisplayName()));
-		getUI().addWindow(form);
+	
+	@JNIObserver(PERSON_CREATED_OR_UPDATED)
+	public void createUpdateObserver(Person person) {
+		Notification notification = VaadinHelper.createNotificationMessage("person.object.created.updated", "person.object.created.updated", person.getDisplayName());
+		notification.show(getUI().getPage());
 	}
-
-	public void create() {
-		PersonAnnotationForm form = CDIComponent.getInstance(PersonAnnotationForm.class);
-		form.setCaption(JAction.ADD.getDisplayName(getLocale(), "person.name"));
-		getUI().addWindow(form);
-	}
-
-	public void update() {
-		PersonAnnotationForm form = CDIComponent.getInstance(PersonAnnotationForm.class);
-		form.setPerson(grid.getSelected());
-		form.setCaption(JAction.EDIT.getDisplayName(getLocale(), grid.getSelected().getDisplayName()));
-		getUI().addWindow(form);
-	}
-
-	public void delete() {
-		grid.delete();
-	}
-
-	public JNINamed getSelected() {
-		return grid.getSelected();
+	
+	@JNIObserver(PERSON_DELETED)
+	public void deletedObserver(Person person) {
+		Notification notification = VaadinHelper.createNotificationMessage("person.object.deleted", "person.object.deleted", person.getDisplayName());
+		notification.show(getUI().getPage());
 	}
 }

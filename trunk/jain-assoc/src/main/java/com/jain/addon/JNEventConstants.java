@@ -13,16 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.jain.addon.web.marker.authentication;
-
-import java.io.Serializable;
+package com.jain.addon;
 
 /**
- * <code>JNILoginListner<code> is a marker interface for all the onLogin methods.
+ * <code>JNEventConstants<code> contains all the events raised by this add-on
  * @author Lokesh Jain
- * @since Aug 28, 2012
- * @version 1.0.0
+ * @since Nov 27, 2012
+ * @version 1.0.3
  */
-public interface JNILoginListner extends Serializable {
-	public void onLogin ();
+public interface JNEventConstants {
+	public static final String CREATED_OR_UPDATED = ".CreatedOrUpdated";
+	public static final String DELETED = ".Deleted";
 }

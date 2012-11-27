@@ -75,13 +75,15 @@ public abstract class AbstractFieldFactory  implements Serializable {
 	/**
 	 * Generate {@link FieldGenerator} based on bean type and {@link JPropertyType}
 	 * @param type
-	 * @param propertyType
+	 * @param propertyType -- default value will be UN_SPECIFIED 
 	 * @param enumarationName
 	 * @return {@link FieldGenerator}
 	 */
-	public FieldGenerator createFieldGenerator(final Class<?> type, final JPropertyType propertyType, final String enumarationName) {
+	public FieldGenerator createFieldGenerator(final Class<?> type, JPropertyType propertyType, final String enumarationName) {
 		FieldGenerator generator = null;
-
+		
+		propertyType = propertyType == null ? JPropertyType.UN_SPECIFIED : propertyType;
+		
 		switch (propertyType) {
 		case DATE:
 			generator = new DateFieldGenerator (getLocale(), getProvider());

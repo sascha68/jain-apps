@@ -13,17 +13,17 @@
  */
 package com.jain.common.authenticate;
 
-import java.io.Serializable;
 import java.util.Locale;
 
 import javax.enterprise.context.SessionScoped;
 
-import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
+import com.jain.addon.resource.I18NProvider;
+import com.jain.addon.security.JNISecured;
 
 @SuppressWarnings("serial")
 @SessionScoped
-public class AuthenticatedUser implements Serializable {
+public class AuthenticatedUser implements JNISecured {
 	private String loggedInUser;
 	private Locale locale;
 
@@ -57,7 +57,9 @@ public class AuthenticatedUser implements Serializable {
 	}
 
 	public boolean hasPermission(String permission) {
-		if (isGuestSession() && (permission == null || permission.equalsIgnoreCase("view") || permission.equalsIgnoreCase("login")))
+		if (isGuestSession() && (permission == null 
+				|| permission.equalsIgnoreCase("view") || permission.equalsIgnoreCase("login") 
+				|| permission.equalsIgnoreCase(VIEW_ACTION_PERMISSION)))
 			return true;
 		if (isGuestSession()) 
 			return false;

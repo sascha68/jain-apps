@@ -33,15 +33,10 @@ public final class VaadinHelper {
 	public static Notification createNotificationMessage(String title, String message, Object ... params) {
 		I18NProvider provider = DefaultI18NResourceProvider.instance();
 		AuthenticatedUser currentUser = CDIComponent.getInstance(AuthenticatedUser.class); 
-		Notification n = new Notification(provider.getText(currentUser.getLocale(), title, params), Notification.Type.TRAY_NOTIFICATION);
+		Notification n = new Notification(provider.getTitle(currentUser.getLocale(), title, params), Notification.Type.TRAY_NOTIFICATION);
 		n.setPosition(Position.MIDDLE_CENTER);
-		n.setDescription(provider.getText(currentUser.getLocale(), message, params));
+		n.setDescription(provider.getMessage(currentUser.getLocale(), message, params));
 		return n;
-	}
-	
-	public static Notification createNotification(String title, Object ... params) {
-		return createNotificationMessage(title + I18NProvider.TITLE_KEY, 
-				title +  I18NProvider.MESSAGE_KEY, params);
 	}
 	
 	public static HorizontalLayout createButtonSegment (ClickListener listener, JNINamedResourceVisible ... namedResources) {
