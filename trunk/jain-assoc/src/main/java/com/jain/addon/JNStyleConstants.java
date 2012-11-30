@@ -24,12 +24,13 @@ package com.jain.addon;
 public interface JNStyleConstants {
 	//Styles
 	//Action Bar Styles
-	public static final String J_ACTION_BAR = "j-action-bar";
-	public static final String J_ACTION_BAR_FIRST = "j-action-bar-first";
-	public static final String J_ACTION_BAR_LAST = "j-action-bar-last";
-	public static final String J_ACTION_BAR_ACTION = "j-action-bar-action";
+	String J_ACTION_BAR = "j-action-bar";
+	String J_FIRST_ACTION = "j-first-action";
+	String J_LAST_ACTION = "j-last-action";
+	String J_SELECTED_ACTION="j-selected-action";
+	String J_ACTION="j-action";
 	
-	public static final String J_CRUD = "j-crud";
-	public static final String J_VIEW = "j-view";
-	public static final String J_ALTERNATE_VIEW = "j-alternate-view";
+	String J_CRUD = "j-crud";
+	String J_VIEW = "j-view";
+	String J_ALTERNATE_VIEW = "j-alternate-view";
 }

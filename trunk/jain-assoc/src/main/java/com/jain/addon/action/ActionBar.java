@@ -57,7 +57,7 @@ public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
 	 * @param actionHandler
 	 */
 	public ActionBar(JNISecured secured, T actionHandler) {
-		this(secured, actionHandler, JNStyleConstants.J_ACTION_BAR_FIRST, JNStyleConstants.J_ACTION_BAR_LAST, JNStyleConstants.J_ACTION_BAR_ACTION);
+		this(secured, actionHandler, JNStyleConstants.J_FIRST_ACTION, JNStyleConstants.J_LAST_ACTION, JNStyleConstants.J_ACTION);
 	}
 	
 	/**
@@ -182,5 +182,13 @@ public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
 			return secured.hasPermission(action.permission());
 		}
 		return true;
+	}
+
+	public boolean isShowSelectedAction() {
+		return listener.isShowSelectedAction();
+	}
+
+	public void setShowSelectedAction(boolean showSelectedAction) {
+		this.listener.setShowSelectedAction(showSelectedAction);
 	}
 }

@@ -15,10 +15,12 @@ package com.jain.theme;
 
 import java.io.Serializable;
 
+import com.jain.addon.JNStyleConstants;
+
 public interface ApplicationTheme extends Serializable {
 	String THEME_NAME = "apptheme";
-	String VIEW = "view";
-	String ALTERNATE_VIEW = "view-outer";
+	String VIEW = JNStyleConstants.J_VIEW;
+	String ALTERNATE_VIEW = JNStyleConstants.J_ALTERNATE_VIEW;
 	String HEADER = "header";
 	String HEADER_SEGMENT = "header-segment";
 	String HEADER_SEGMENT_SMALL = "header-segment-small";

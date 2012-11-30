@@ -19,10 +19,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.jain.addon.JNStyleConstants;
 import com.jain.addon.StringHelper;
 import com.jain.addon.action.JNAction;
 import com.jain.addon.event.MethodExpression;
 import com.jain.addon.i18N.I18NHelper;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
@@ -37,8 +39,10 @@ import com.vaadin.ui.Button.ClickListener;
 @SuppressWarnings("serial")
 public final class JNButtonClickListener <T> implements ClickListener {
 	private final T actionHandler;
+	private Button currentAction;
 	private Map<String, MethodExpression> actions;
 	private Map<String, Object []> actionParams;
+	private boolean showSelectedAction = false;
 
 	/**
 	 * @param actionHandler
@@ -113,7 +117,13 @@ public final class JNButtonClickListener <T> implements ClickListener {
 	}
 
 	public void buttonClick(ClickEvent event) {
-		String actionName = I18NHelper.getKey(event.getButton());
+		if (this.currentAction != null)
+			this.currentAction.removeStyleName(JNStyleConstants.J_SELECTED_ACTION);
+		
+		this.currentAction = event.getButton();
+		this.currentAction.addStyleName(JNStyleConstants.J_SELECTED_ACTION);
+		
+		String actionName = I18NHelper.getKey(currentAction);
 		MethodExpression action = actions.get(actionName);
 		if (action != null) {
 			action.invoke(this.actionParams.get(actionName));
@@ -139,5 +149,13 @@ public final class JNButtonClickListener <T> implements ClickListener {
 
 	public T getActionHandler() {
 		return actionHandler;
+	}
+
+	public boolean isShowSelectedAction() {
+		return showSelectedAction;
+	}
+
+	public void setShowSelectedAction(boolean showSelectedAction) {
+		this.showSelectedAction = showSelectedAction;
 	}
 }
