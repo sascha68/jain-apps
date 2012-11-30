@@ -29,6 +29,7 @@ import com.jain.addon.action.listener.JNButtonClickListener;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.security.JNISecured;
 import com.jain.addon.web.marker.authentication.JNILoginListner;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -119,8 +120,10 @@ public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
 
 				actionButton.setVisible(validatePermission (action));
 
+				findNAddIcon(action, actionButton);
+				
 				if (StringHelper.isNotEmptyWithTrim(buttonStyle))
-					actionButton.setStyleName(firstButtonStyle);
+					actionButton.setStyleName(buttonStyle);
 
 				if(i == 0)
 					actionButton.addStyleName(firstButtonStyle);
@@ -137,6 +140,15 @@ public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
 		}
 	}
 
+
+	private void findNAddIcon(JNAction action, Button actionButton) {
+		String iconPath = System.getProperty(action.icon());
+		
+		if (StringHelper.isNotEmptyWithTrim(iconPath)) {
+			ThemeResource icon = new ThemeResource(iconPath);
+			actionButton.setIcon(icon);
+		}
+	}
 
 	private void findActions() {
 		if (listener.getActionHandler() != null) {
