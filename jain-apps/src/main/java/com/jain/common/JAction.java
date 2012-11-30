@@ -39,8 +39,8 @@ public enum JAction implements JNINamedResourceVisible {
 
 	private JAction(String permission, String displayName, String resource) {
 		this.permission = permission;
-		this.displayNameKey = displayName + ".name";
-		this.displayNamePlusKey = displayName + ".plus";
+		this.displayNameKey = displayName + ".action.name";
+		this.displayNamePlusKey = displayName + ".action.plus";
 		this.resource = resource;
 	}
 

@@ -1,11 +1,11 @@
-.view {
+.j-view {
 	background: url(../images/bg-body.gif) repeat center;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
 
-.view-outer {
+.j-alternate-view {
 	background: url(../images/bg-headliner.gif) repeat center;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
