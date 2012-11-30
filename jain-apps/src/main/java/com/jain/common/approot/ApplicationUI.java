@@ -37,6 +37,10 @@ public class ApplicationUI extends I18NUI {
 	@Inject AuthenticatedUser user;
 	
 	protected void initialize (VaadinRequest request) {
+		System.setProperty("view.action.icon", "images/icons/view.png");
+		System.setProperty("add.action.icon", "images/icons/add.png");
+		System.setProperty("edit.action.icon", "images/icons/edit.png");
+		System.setProperty("delete.action.icon", "images/icons/delete.png");
 		initialize (Locale.getDefault());
 	}
 
