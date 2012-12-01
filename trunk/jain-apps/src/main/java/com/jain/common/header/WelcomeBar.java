@@ -16,6 +16,7 @@ package com.jain.common.header;
 import javax.inject.Inject;
 
 import com.jain.addon.JNIComponentInit;
+import com.jain.addon.authentication.JNILoginListner;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.I18NChangeEvent;
@@ -25,7 +26,6 @@ import com.jain.addon.i18N.component.I18NSelector;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.web.layout.segment.ButtonSegment;
-import com.jain.addon.web.marker.authentication.JNILoginListner;
 import com.jain.common.JAction;
 import com.jain.common.JLocale;
 import com.jain.common.authenticate.AuthenticatedUser;
