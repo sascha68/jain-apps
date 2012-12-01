@@ -142,11 +142,13 @@ public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
 
 
 	private void findNAddIcon(JNAction action, Button actionButton) {
-		String iconPath = System.getProperty(action.icon());
-		
-		if (StringHelper.isNotEmptyWithTrim(iconPath)) {
-			ThemeResource icon = new ThemeResource(iconPath);
-			actionButton.setIcon(icon);
+		if (StringHelper.isNotEmptyWithTrim(action.icon())) {
+			String iconPath = System.getProperty(action.icon());
+
+			if (StringHelper.isNotEmptyWithTrim(iconPath)) {
+				ThemeResource icon = new ThemeResource(iconPath);
+				actionButton.setIcon(icon);
+			}
 		}
 	}
 
