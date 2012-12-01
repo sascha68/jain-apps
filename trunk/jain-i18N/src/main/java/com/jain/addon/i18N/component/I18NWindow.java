@@ -26,7 +26,6 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 public class I18NWindow extends Window {
-
 	public void setContent(ComponentContainer newContent) {
 		super.setContent(newContent);
 		fireComponentAttachEvent(newContent);
