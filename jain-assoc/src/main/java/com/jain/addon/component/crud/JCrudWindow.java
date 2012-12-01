@@ -42,6 +42,7 @@ public class JCrudWindow <T> extends I18NWindow {
 	private JCrudGrid <T> grid;
 	private FieldGroup fieldGroup;
 	private int columns = 2;
+	private boolean viewOnly = false;
 
 	@JNIComponentInit
 	public void init () {
@@ -61,7 +62,7 @@ public class JCrudWindow <T> extends I18NWindow {
 	}
 
 	private void createActions(VerticalLayout layout) {
-		if(!isReadOnly()) {
+		if(!isViewOnly()) {
 			ActionBar<JCrudWindow <T>> hLayout = new ActionBar<JCrudWindow <T>> (null, this);
 
 			VerticalLayout vLayout = new VerticalLayout();
@@ -78,7 +79,7 @@ public class JCrudWindow <T> extends I18NWindow {
 	private void createFieldGroup(VerticalLayout layout) {
 		JainBeanItem<T> item = new JainBeanItem<T>(getValue ());
 		JFieldGroup<T> jainFieldGroup = new JFieldGroup<T>(getType(), columns);
-		jainFieldGroup.setViewOnly (isReadOnly());
+		jainFieldGroup.setViewOnly (isViewOnly());
 		jainFieldGroup.setStyleName(JNStyleConstants.J_VIEW);
 		jainFieldGroup.setAlternateStyleName(JNStyleConstants.J_ALTERNATE_VIEW);
 		layout.addComponent(jainFieldGroup);
@@ -130,5 +131,13 @@ public class JCrudWindow <T> extends I18NWindow {
 
 	public void setColumns(int columns) {
 		this.columns = columns > 0 ? columns : 2;
+	}
+
+	public boolean isViewOnly () {
+		return this.viewOnly;
+	}
+
+	public void setViewOnly(boolean viewOnly) {
+		this.viewOnly = viewOnly;
 	}
 }

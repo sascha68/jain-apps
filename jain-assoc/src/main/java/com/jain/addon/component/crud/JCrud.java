@@ -96,7 +96,7 @@ public class JCrud <T> extends VerticalLayout implements JNISecured {
 	public void view() {
 		if (grid.getSelected() != null) {
 			JCrudWindow<T> form = new JCrudWindow<T>();
-			form.setReadOnly(true);
+			form.setViewOnly(true);
 			form.setColumns(columns);
 			form.setGrid(grid);
 			form.setValue(grid.getSelected());
