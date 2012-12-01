@@ -18,8 +18,8 @@ package com.jain.addon.event;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.jain.addon.authentication.JLoginHandler;
 import com.jain.addon.i18N.component.I18NUI;
-import com.jain.addon.web.marker.authentication.JLoginHandler;
 import com.vaadin.ui.UI;
 /**
  * <pre> 
