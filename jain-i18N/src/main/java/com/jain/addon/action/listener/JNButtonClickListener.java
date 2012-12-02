@@ -87,8 +87,8 @@ public final class JNButtonClickListener <T> implements ClickListener {
 	 */
 	public String addAction(JNAction action, Method method, Object... params) {
 		String actionName = null;
-		if (StringHelper.isNotEmptyWithTrim(action.value())) {
-			actionName = action.value();
+		if (StringHelper.isNotEmptyWithTrim(action.name())) {
+			actionName = action.name();
 		} else {
 			actionName = StringHelper.methodToPropertyName(method.getName());
 		}

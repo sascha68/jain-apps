@@ -41,6 +41,11 @@ public class ApplicationUI extends I18NUI {
 		System.setProperty("add.action.icon", "images/icons/add.png");
 		System.setProperty("edit.action.icon", "images/icons/edit.png");
 		System.setProperty("delete.action.icon", "images/icons/delete.png");
+		System.setProperty("help.action.icon", "images/icons/help.png");
+		System.setProperty("login.action.icon", "images/icons/login.png");
+		System.setProperty("logout.action.icon", "images/icons/logout.png");
+		System.setProperty("save.action.icon", "images/icons/save.png");
+		System.setProperty("cancel.action.icon", "images/icons/cancel.png");
 		initialize (Locale.getDefault());
 	}
 

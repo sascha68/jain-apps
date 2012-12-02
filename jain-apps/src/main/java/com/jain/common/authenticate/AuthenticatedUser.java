@@ -58,12 +58,12 @@ public class AuthenticatedUser implements JNISecured {
 
 	public boolean hasPermission(String permission) {
 		if (isGuestSession() && (permission == null 
-				|| permission.equalsIgnoreCase("view") || permission.equalsIgnoreCase("login") 
-				|| permission.equalsIgnoreCase(VIEW_ACTION_PERMISSION)))
+				|| permission.equalsIgnoreCase("view") || permission.equalsIgnoreCase("login.action.permission") || permission.equalsIgnoreCase("login") 
+				|| permission.equalsIgnoreCase(VIEW_ACTION_PERMISSION) || permission.equalsIgnoreCase("help.action.permission")))
 			return true;
 		if (isGuestSession()) 
 			return false;
-		if (!isGuestSession() && (permission != null && permission.equalsIgnoreCase("login")))
+		if (!isGuestSession() && (permission != null && permission.equalsIgnoreCase("login.action.permission")))
 			return false;
 		return true;
 	}

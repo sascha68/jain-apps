@@ -22,40 +22,65 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <code>JNAction<code> Every action should be annotated with this annotation.
- * Once you annotate your action with this annotation, ActionBar shows all these actions.
+ * <code>JNActionGroup<code> Every groupped action should be annotated with this annotation.
+ * Once you annotate your action with this annotation, ActionBar shows all these actions in same group.
  * @author Lokesh Jain
- * @since Nov 27, 2012
+ * @since December 2, 2012
  * @version 1.0.3
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface JNAction {
+public @interface JNActionGroup {
 	/**
-	 * This name is the action name, on which the given method is needs to be invoked.
-	 * default action name will be your method name
+	 * This name is the action group name
 	 */
 	String name() default "";
-	
+
 	/**
-	 * This icon is the action icon.
+	 * Action Type fro this action Group 
 	 */
-	String icon() default "";
+	JNActionGroupType type () default JNActionGroupType.BUTTON;
 	
 	/**
-	 * This visibility permission for the action icon.
-	 */
-	String permission() default "";
-	
-	/**
-	 * This value is the action description.
-	 * Default value is Value
-	 */
-	String description() default "";
-	
-	/**
-	 * This value is the action tab index or Order.
+	 * This value is the action group tab index or Order.
 	 */
 	int tabIndex() default -1;
+
+	/**
+	 * This icon is the action group icon.
+	 */
+	String icon() default "";
+
+	/**
+	 * This visibility permission for the action group.
+	 */
+	String permission() default "";
+
+	/**
+	 * This value is the action group description.
+	 * Default value is name
+	 */
+	String description() default "";
+
+
+	/**
+	 * Override first action style for this action Group 
+	 */
+	String firstActionStyle() default "";
+
+	/**
+	 * Override last action style for this action Group 
+	 */
+	String lastActionStyle() default "";
+
+	/**
+	 * Override action style for this action Group 
+	 */
+	String actionStyle() default "";
+	
+	/**
+	 * Override action style for this action Group 
+	 */
+	String style() default "";
 }

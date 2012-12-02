@@ -18,7 +18,6 @@ package com.jain.addon.action;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +25,9 @@ import com.jain.addon.JNIComponentInit;
 import com.jain.addon.JNStyleConstants;
 import com.jain.addon.StringHelper;
 import com.jain.addon.action.listener.JNButtonClickListener;
-import com.jain.addon.authentication.JNILoginListner;
-import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.security.JNISecured;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
@@ -42,12 +37,13 @@ import com.vaadin.ui.HorizontalLayout;
  * @version 1.0.3
  */
 @SuppressWarnings("serial")
-public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
-	private List<JNAction> actions;
-	private Map<JNAction, String> actionsToName;
-	private final String firstButtonStyle;
-	private final String lastButtonStyle;
-	private final String buttonStyle;
+public class ActionBar <T> extends HorizontalLayout {
+	private static final String DEFAULT_ACTION_GROUP = "default-action-group";
+	private Map<String, ActionGroup<T>> actionGroupByName;
+	private List<ActionGroup<T>> actionGroups;
+	private final String firstActionStyle;
+	private final String lastActionStyle;
+	private final String actionStyle;
 	private final JNISecured secured; 
 	private final JNButtonClickListener<T> listener;
 	private boolean initialized = false;
@@ -65,38 +61,38 @@ public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
 	 * Create a segment instance having {@link Button} style for all the buttons
 	 * @param secured -- {@link JNISecured}
 	 * @param actionHandler
-	 * @param buttonStyle
+	 * @param actionStyle
 	 */
-	public ActionBar(JNISecured secured, T actionHandler, String buttonStyle) {
-		this(secured, actionHandler, buttonStyle, buttonStyle, buttonStyle);
+	public ActionBar(JNISecured secured, T actionHandler, String actionStyle) {
+		this(secured, actionHandler, actionStyle, actionStyle, actionStyle);
 	}
 
 	/**
 	 * Create a segment instance having first {@link Button} and last {@link Button} styles
 	 * @param secured -- {@link JNISecured}
 	 * @param actionHandler
-	 * @param firstButtonStyle
-	 * @param lastButtonStyle
+	 * @param firstActionStyle
+	 * @param lastActionStyle
 	 */
-	public ActionBar(JNISecured secured, T actionHandler, String firstButtonStyle, String lastButtonStyle) {
-		this(secured, actionHandler, firstButtonStyle, lastButtonStyle, null);
+	public ActionBar(JNISecured secured, T actionHandler, String firstActionStyle, String lastActionStyle) {
+		this(secured, actionHandler, firstActionStyle, lastActionStyle, null);
 	}
 
 	/**
 	 * Create a segment instance having first {@link Button}, last {@link Button} and {@link Button} styles
 	 * @param secured -- {@link JNISecured}
 	 * @param actionHandler
-	 * @param firstButtonStyle
-	 * @param lastButtonStyle
+	 * @param firstActionStyle
+	 * @param lastActionStyle
 	 */
-	public ActionBar(JNISecured secured, T actionHandler, String firstButtonStyle, String lastButtonStyle, String buttonStyle) {
-		this.firstButtonStyle = firstButtonStyle;
-		this.lastButtonStyle = lastButtonStyle;
-		this.buttonStyle = buttonStyle;
+	public ActionBar(JNISecured secured, T actionHandler, String firstActionStyle, String lastActionStyle, String actionStyle) {
+		this.firstActionStyle = firstActionStyle;
+		this.lastActionStyle = lastActionStyle;
+		this.actionStyle = actionStyle;
 		this.secured = secured;
 		this.listener = new JNButtonClickListener<T>(false, actionHandler); 
-		this.actions = new ArrayList<JNAction>();
-		this.actionsToName = new HashMap<JNAction, String> (); 
+		this.actionGroupByName = new HashMap<String, ActionGroup<T>>();
+		this.actionGroups = new ArrayList<ActionGroup<T>>();
 		setStyleName(JNStyleConstants.J_ACTION_BAR);
 	}
 
@@ -104,98 +100,89 @@ public class ActionBar <T> extends HorizontalLayout implements JNILoginListner {
 	 * Method to initialize component
 	 */
 	@JNIComponentInit
-	public void initActions() {
+	public void initActionBar() {
 		if (!initialized) {
-			findActions ();
-
-			int i = 0;
-			Button actionButton = null;
-			for (JNAction action : actions) {
-				actionButton = new Button(actionsToName.get(action), listener);
-
-				if (StringHelper.isNotEmptyWithTrim(action.description()))
-					actionButton.setDescription(action.description());
-				else
-					actionButton.setDescription(actionsToName.get(action));
-
-				actionButton.setVisible(validatePermission (action));
-
-				findNAddIcon(action, actionButton);
-				
-				if (StringHelper.isNotEmptyWithTrim(buttonStyle))
-					actionButton.setStyleName(buttonStyle);
-
-				if(i == 0)
-					actionButton.addStyleName(firstButtonStyle);
-
-				i ++;
-				addComponent(actionButton);
-				setComponentAlignment(actionButton, Alignment.TOP_RIGHT);
+			findActionGroups ();
+			
+			for (ActionGroup<T> actionGroup : this.actionGroups) {
+				addComponent(actionGroup);
+				setComponentAlignment(actionGroup, Alignment.TOP_RIGHT);
 			}
-			if (actionButton != null)
-				actionButton.addStyleName(lastButtonStyle);
 			initialized = true;
 		} else {
 			throw new IllegalArgumentException ("Please add action before adding component into container");
 		}
 	}
 
-
-	private void findNAddIcon(JNAction action, Button actionButton) {
-		if (StringHelper.isNotEmptyWithTrim(action.icon())) {
-			String iconPath = System.getProperty(action.icon());
-
-			if (StringHelper.isNotEmptyWithTrim(iconPath)) {
-				ThemeResource icon = new ThemeResource(iconPath);
-				actionButton.setIcon(icon);
-			}
-		}
-	}
-
-	private void findActions() {
+	private void findActionGroups() {
 		if (listener.getActionHandler() != null) {
 			Method[]  methods = listener.getActionHandler().getClass().getMethods();
 			for (Method method : methods) {
 				JNAction action = method.getAnnotation(JNAction.class);
 				if(action != null) {
+					ActionGroup<T> actionGroup = findOrCreateActionGroup (method);
 					String actionName = listener.addAction(action, method);
-					actionsToName.put(action, actionName);
-					int position = findPosition(action);
-					actions.add(position, action);
+					actionGroup.addAction(action, actionName);
 				}
 			}
 		}
 	}
 
-	private int findPosition(JNAction action) {
+	private ActionGroup<T> findOrCreateActionGroup(Method method) {
+		JNActionGroup group = method.getAnnotation(JNActionGroup.class);
+		String actionGroupName = DEFAULT_ACTION_GROUP;
+
+		if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
+			actionGroupName = group.name();
+		}
+		
+		ActionGroup<T> actionGroup = actionGroupByName.get(actionGroupName);
+		
+		if (actionGroup == null) {
+			actionGroup = createActionGroup(group);
+			int position = findPosition(group);
+			actionGroupByName.put(actionGroupName, actionGroup);
+			actionGroups.add(position, actionGroup);
+		}
+		return actionGroup;
+	}
+
+	private ActionGroup<T> createActionGroup(JNActionGroup group) {
+		ActionGroup<T> actionGroup = null;
+		if (group != null) {
+			String first = StringHelper.isNotEmptyWithTrim(group.firstActionStyle()) ? group.firstActionStyle() : firstActionStyle;
+			String last = StringHelper.isNotEmptyWithTrim(group.lastActionStyle()) ? group.lastActionStyle() : lastActionStyle;
+			String style = StringHelper.isNotEmptyWithTrim(group.actionStyle()) ? group.actionStyle() : actionStyle;
+			switch (group.type()) {
+			case BUTTON:
+				actionGroup = new ActionButtonGroup<T>(secured, listener, first, last, style);
+				break;
+
+			case LINK:
+				actionGroup = new ActionButtonGroup<T>(secured, listener, first, last, style);
+				actionGroup.setStyleName(group.type().getStyle());
+				break;
+			case MENU:
+				actionGroup = new ActionButtonGroup<T>(secured, listener, first, last, style);
+				actionGroup.setStyleName(group.type().getStyle());
+				break;
+			}
+		}
+		if (actionGroup == null) 
+			actionGroup = new ActionButtonGroup<T>(secured, listener, firstActionStyle, lastActionStyle, actionStyle);
+
+		actionGroup.setActionGroup(group);
+		actionGroup.setSpacing(isSpacing());
+		return actionGroup;
+	}
+
+	private int findPosition(JNActionGroup actionGroup) {
 		int i = 0;
-		for (JNAction act : this.actions) {
-			if (act.tabIndex() < action.tabIndex())
+		for (ActionGroup<T> group : this.actionGroups) {
+			if (group.getActionGroup() == null || actionGroup == null || group.getActionGroup().tabIndex() < actionGroup.tabIndex())
 				i ++;
 		}
 		return i;
-	}
-
-	/**
-	 * Reinitialize a Action Bar by updating resources {@link JNAction} visibility after login.<br/> 
-	 */
-	public void onLogin() {
-		for (JNAction action : actions) {
-			for (Iterator<Component> iterator = getComponentIterator(); iterator.hasNext();) {
-				Component component = iterator.next();
-				if (actionsToName.get(action).equalsIgnoreCase(I18NHelper.getKey(component))) {
-					component.setVisible(validatePermission (action));
-				}
-			}
-		}
-		markAsDirty();
-	}
-
-	private boolean validatePermission(JNAction action) {
-		if (secured != null) {
-			return secured.hasPermission(action.permission());
-		}
-		return true;
 	}
 
 	public boolean isShowSelectedAction() {

@@ -87,7 +87,7 @@ public class JCrudWindow <T> extends I18NWindow {
 		fieldGroup = jainFieldGroup.createFieldGroup(getType(), item); 
 	}
 
-	@JNAction (value = "save.action.name", tabIndex = 1)
+	@JNAction (name = "save.action.name", tabIndex = 1, description = "save.action.description", icon="save.action.icon")
 	public void save() {
 		try {
 			fieldGroup.commit();
@@ -98,7 +98,7 @@ public class JCrudWindow <T> extends I18NWindow {
 		}
 	}
 
-	@JNAction (value = "cancel.action.name", tabIndex = 2)
+	@JNAction (name = "cancel.action.name", tabIndex = 2, icon="cancel.action.icon", description = "cancel.action.description")
 	public void cancel() {
 		fieldGroup.discard();
 		getUI().removeWindow(this);
