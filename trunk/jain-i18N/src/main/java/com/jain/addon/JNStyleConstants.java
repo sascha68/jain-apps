@@ -25,6 +25,9 @@ public interface JNStyleConstants {
 	//Styles
 	//Action Bar Styles
 	String J_ACTION_BAR = "j-action-bar";
+	String J_ACTION_BUTTON_GROUP = "j-action-button-group";
+	String J_ACTION_LINK_GROUP = "j-action-link-group";
+	String J_ACTION_MENU_GROUP = "j-action-menu-group";
 	String J_FIRST_ACTION = "j-first-action";
 	String J_LAST_ACTION = "j-last-action";
 	String J_SELECTED_ACTION="j-selected-action";

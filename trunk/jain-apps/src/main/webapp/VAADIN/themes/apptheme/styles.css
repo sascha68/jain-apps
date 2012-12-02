@@ -25,25 +25,9 @@
 .welcome-message {
 	padding-left : 5px;
 	color: #7C673C;
+	vertical-align : middle;
 	text-decoration: none;
 	text-shadow: 2px 1px 0 #EFD9C4;
-}
-
-.v-button-link .v-button-caption,.v-nativebutton-link .v-nativebutton-caption
-	{
-	text-decoration: underline;
-	color: #7C673C;
-	text-align: left;
-	text-shadow: 2px 1px 0 #EFD9C4;
-}
-
-.v-button-link .v-button-caption:hover,.v-nativebutton-link .v-nativebutton-caption:hover
-	{
-	color: #2e5306;
-	text-decoration: underline;
-	text-align: left;
-	text-shadow: 2px 1px 0 #f2fcd9;
-	text-align: left;
 }
 
 .v-tooltip {

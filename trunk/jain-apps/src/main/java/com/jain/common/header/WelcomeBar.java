@@ -16,16 +16,18 @@ package com.jain.common.header;
 import javax.inject.Inject;
 
 import com.jain.addon.JNIComponentInit;
+import com.jain.addon.action.ActionBar;
+import com.jain.addon.action.JNAction;
+import com.jain.addon.action.JNActionGroup;
+import com.jain.addon.action.JNActionGroupType;
 import com.jain.addon.authentication.JNILoginListner;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.I18NChangeEvent;
-import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.I18NListener;
 import com.jain.addon.i18N.component.I18NSelector;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
 import com.jain.addon.resource.I18NProvider;
-import com.jain.addon.web.layout.segment.ButtonSegment;
 import com.jain.common.JAction;
 import com.jain.common.JLocale;
 import com.jain.common.authenticate.AuthenticatedUser;
@@ -33,14 +35,12 @@ import com.jain.common.authenticate.LoginAction;
 import com.jain.theme.ApplicationTheme;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.themes.Runo;
 
 @SuppressWarnings("serial")
-public class WelcomeBar extends HorizontalLayout implements JNILoginListner, ClickListener, I18NListener {
+public class WelcomeBar extends HorizontalLayout implements JNILoginListner, I18NListener {
 	@Inject
 	private AuthenticatedUser currentUser;
 	private Label welcomeMessage;
@@ -75,10 +75,8 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, Cli
 
 		layout.addComponent(localSelection);
 
-		ButtonSegment segment = new ButtonSegment (Runo.BUTTON_LINK);
-		segment.setSpacing(true);
-		segment.createSegment(this, JAction.HELP, JAction.LOGIN, JAction.LOGOUT);
-		layout.addComponent(segment);
+		ActionBar <WelcomeBar> hLayout = new ActionBar <WelcomeBar> (currentUser, this);
+		layout.addComponent(hLayout);
 
 		addComponent(layout);
 		setComponentAlignment(layout, Alignment.TOP_RIGHT);
@@ -95,25 +93,29 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, Cli
 		welcomeMessage.setValue(currentUser.getDisplayIdentity());
 	}
 
-	public void buttonClick(ClickEvent event) {
-		JAction action = JAction.getDisplayNameEquivlent(I18NHelper.getKey(event.getButton()));
-		if(action != null) {
-			switch (action) {
-			case LOGIN :
-				LoginAction loginAction = CDIComponent.getInstance(LoginAction.class);
-				loginAction.setCaption(JAction.LOGIN.getDisplayName());
-				getUI().addWindow(loginAction);
-				break;
-			case LOGOUT :
-				currentUser.setLoggedInUser(null);
-				Events.instance().raiseLogoutEvent(getUI());
-				break;
-			case HELP :
-				System.out.println("not implemented yet");
-				break;
-			default:
-				break;
-			}
-		}
+
+	//Actions
+	@JNAction (name = "help.action.name", tabIndex = 1,  permission = "help.action.permission", 
+			description = "help.action.description",  icon="help.action.icon")
+	@JNActionGroup (name = "welcome.bar.action", type = JNActionGroupType.LINK, actionStyle=Runo.BUTTON_LINK, firstActionStyle = Runo.BUTTON_LINK, lastActionStyle = Runo.BUTTON_LINK)
+	public void help() {
+		System.out.println("not implemented yet");
+	}
+
+	@JNAction (name = "login.action.name", tabIndex = 2, permission = "login.action.permission", 
+			description = "login.action.description", icon="login.action.icon")
+	@JNActionGroup (name = "welcome.bar.action", type = JNActionGroupType.LINK, actionStyle=Runo.BUTTON_LINK, firstActionStyle = Runo.BUTTON_LINK, lastActionStyle = Runo.BUTTON_LINK)
+	public void login() {
+		LoginAction loginAction = CDIComponent.getInstance(LoginAction.class);
+		loginAction.setCaption(JAction.LOGIN.getDisplayName());
+		getUI().addWindow(loginAction);
+	}
+
+	@JNAction (name = "logout.action.name", tabIndex = 3, permission = "logout.action.permission", 
+			description = "logout.action.description",  icon="logout.action.icon")
+	@JNActionGroup (name = "welcome.bar.action", type = JNActionGroupType.LINK, actionStyle=Runo.BUTTON_LINK, firstActionStyle = Runo.BUTTON_LINK, lastActionStyle = Runo.BUTTON_LINK)
+	public void logout() {
+		currentUser.setLoggedInUser(null);
+		Events.instance().raiseLogoutEvent(getUI());
 	}
 }

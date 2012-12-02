@@ -91,7 +91,7 @@ public class JCrud <T> extends VerticalLayout implements JNISecured {
 	}
 
 	//Actions
-	@JNAction (value = "view.action.name", tabIndex = 1, permission = VIEW_ACTION_PERMISSION, 
+	@JNAction (name = "view.action.name", tabIndex = 1, permission = VIEW_ACTION_PERMISSION, 
 			description = "view.action.description", icon="view.action.icon")
 	public void view() {
 		if (grid.getSelected() != null) {
@@ -107,7 +107,7 @@ public class JCrud <T> extends VerticalLayout implements JNISecured {
 		}
 	}
 
-	@JNAction (value = "add.action.name", tabIndex = 2, permission = ADD_ACTION_PERMISSION, 
+	@JNAction (name = "add.action.name", tabIndex = 2, permission = ADD_ACTION_PERMISSION, 
 			description = "add.action.description",  icon="add.action.icon")
 	public void create() {
 		JCrudWindow<T> form = new JCrudWindow<T>();
@@ -119,7 +119,7 @@ public class JCrud <T> extends VerticalLayout implements JNISecured {
 		getUI().addWindow(form);
 	}
 
-	@JNAction (value = "edit.action.name", tabIndex = 3,  permission = EDIT_ACTION_PERMISSION, 
+	@JNAction (name = "edit.action.name", tabIndex = 3,  permission = EDIT_ACTION_PERMISSION, 
 			description = "edit.action.description",  icon="edit.action.icon")
 	public void update() {
 		if (grid.getSelected() != null) {
@@ -134,7 +134,7 @@ public class JCrud <T> extends VerticalLayout implements JNISecured {
 		}
 	}
 
-	@JNAction (value = "delete.action.name", tabIndex = 4, permission = DELETE_ACTION_PERMISSION, 
+	@JNAction (name = "delete.action.name", tabIndex = 4, permission = DELETE_ACTION_PERMISSION, 
 			description = "delete.action.description",  icon="delete.action.icon")
 	public void delete() {
 		if (grid.getSelected() != null) {
