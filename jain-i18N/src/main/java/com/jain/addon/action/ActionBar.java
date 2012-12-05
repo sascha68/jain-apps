@@ -163,9 +163,7 @@ public class ActionBar <T> extends HorizontalLayout {
 				actionGroup.setStyleName(group.type().getStyle());
 				break;
 			case MENU:
-				actionGroup = new ActionButtonGroup<T>(secured, listener, first, last, style);
-				actionGroup.setStyleName(group.type().getStyle());
-				break;
+				throw new IllegalArgumentException("Use Manubar instead of Action bar to create menu components");
 			}
 		}
 		if (actionGroup == null) 
