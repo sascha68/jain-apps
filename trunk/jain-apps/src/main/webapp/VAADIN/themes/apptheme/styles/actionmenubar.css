@@ -1,0 +1,22 @@
+.j-action-bar .v-menubar {
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		border-radius: 7px;
+        height: 23px;
+        background: #323336 repeat-x;
+        background-image: url(../images/bg-navigation.gif);
+        color: #B99B5F;
+		text-shadow: 2px 2px 0 #EFD9C4;
+		font-size: 11px;
+        padding: 0px;
+}
+.j-action-bar .v-menubar .v-menubar-menuitem {
+        padding: 3px 8px;
+        height: 17px;
+        line-height: 14px;
+        cursor: pointer;
+}
+.j-action-bar .v-menubar .v-menubar-menuitem:hover {
+        color: #2E5306;
+		text-shadow: 2px 2px 0 #F2FCD9;
+}
