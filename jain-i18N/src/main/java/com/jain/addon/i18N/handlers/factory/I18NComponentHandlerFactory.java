@@ -22,6 +22,7 @@ import com.jain.addon.i18N.handlers.I18NComponentHandler;
 import com.jain.addon.i18N.handlers.I18NFieldHandler;
 import com.jain.addon.i18N.handlers.I18NJUploadHandler;
 import com.jain.addon.i18N.handlers.I18NLableHandler;
+import com.jain.addon.i18N.handlers.I18NMenuBarHandler;
 import com.jain.addon.i18N.handlers.I18NTabSheetHandler;
 import com.jain.addon.i18N.handlers.I18NTableHandler;
 import com.vaadin.ui.AbstractComponent;
@@ -29,6 +30,7 @@ import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.Table;
@@ -56,6 +58,8 @@ public final class I18NComponentHandlerFactory {
 			return new I18NTabSheetHandler(component);
 		if  (component instanceof JUploader) 
 			return new I18NJUploadHandler((JUploader) component);
+		if (component instanceof MenuBar) 
+			return new I18NMenuBarHandler((MenuBar) component);
 		if (component instanceof AbstractComponent)
 			return new I18NAbstractComponentHandler ((AbstractComponent)component);
 		return  new I18NComponentHandler(component);

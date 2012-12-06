@@ -44,6 +44,18 @@ public final class I18NHelper implements Serializable {
 			return listener.getI18NCaption(component);
 		return component.getCaption();
 	}
+	
+	/**
+	 * Method to get i18N caption for given component 
+	 * @param {@link Component}
+	 * @return i18NCaption
+	 */
+	public static String getKey (Component component, Serializable serializable) {
+		I18NChangeListener listener =  findListener(component, false);
+		if (listener != null) 
+			return listener.getI18NCaption(component, serializable);
+		return component.getCaption();
+	}
 
 	/**
 	 * Register component for i18N handling.

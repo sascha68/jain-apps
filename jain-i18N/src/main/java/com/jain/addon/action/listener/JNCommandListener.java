@@ -18,28 +18,29 @@ package com.jain.addon.action.listener;
 import com.jain.addon.JNStyleConstants;
 import com.jain.addon.action.JNAction;
 import com.jain.addon.i18N.I18NHelper;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.MenuBar.Command;
+import com.vaadin.ui.MenuBar.MenuItem;
 
 /**
- * <code>JNButtonClickListener<code> Default click listener for all the actions
+ * <code>JNCommandListener<code> Default command listener for all the actions
  * @author Lokesh Jain
- * @since Nov 27, 2012
+ * @since December 5, 2012
  * @version 1.0.3
  * @param <T>
  *
  */
 @SuppressWarnings("serial")
-public final class JNButtonClickListener <T> extends JNActionListener<T> implements ClickListener {
-	private Button currentAction;
+public final class JNCommandListener <T> extends JNActionListener<T> implements Command {
+	private MenuItem currentAction;
+	private MenuBar menuBar;
 
 	/**
 	 * @param actionHandler
 	 * @param params
 	 */
-	public JNButtonClickListener(T actionHandler, Object ... params) {
-		this(true, actionHandler, params);
+	public JNCommandListener(MenuBar menuBar, T actionHandler, Object ... params) {
+		this(menuBar, true, actionHandler, params);
 	}
 
 	/**
@@ -47,18 +48,19 @@ public final class JNButtonClickListener <T> extends JNActionListener<T> impleme
 	 * @param actionHandler - Object should have some methods annotated with {@link JNAction}
 	 * @param params 
 	 */
-	public JNButtonClickListener(boolean populate, T actionHandler, Object ... params) {
+	public JNCommandListener(MenuBar menuBar, boolean populate, T actionHandler, Object ... params) {
 		super(populate, actionHandler, params);
+		this.menuBar = menuBar;
 	}
 
-	public void buttonClick(ClickEvent event) {
+	public void menuSelected(MenuItem selectedItem) {
 		if (this.currentAction != null)
-			this.currentAction.removeStyleName(JNStyleConstants.J_SELECTED_ACTION);
+			this.currentAction.setStyleName(JNStyleConstants.J_ACTION);
 		
-		this.currentAction = event.getButton();
-		this.currentAction.addStyleName(JNStyleConstants.J_SELECTED_ACTION);
+		this.currentAction = selectedItem;
+		this.currentAction.setStyleName(JNStyleConstants.J_SELECTED_ACTION);
 		
-		String actionName = I18NHelper.getKey(currentAction);
+		String actionName = I18NHelper.getKey(menuBar, currentAction);
 		invokeAction(actionName);
 	}
 }
