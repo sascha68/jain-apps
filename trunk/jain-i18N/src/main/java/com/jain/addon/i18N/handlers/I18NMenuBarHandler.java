@@ -66,7 +66,7 @@ public class I18NMenuBarHandler extends I18NAbstractComponentHandler implements 
 		for (Entry<MenuItem, String> entry : i18NItemDescriptions.entrySet()) {
 			if (StringHelper.isNotEmptyWithTrim(entry.getValue())) {
 				String value = provider.getTitle(locale, entry.getValue());
-				entry.getKey().setText(value);
+				entry.getKey().setDescription(value);
 			}
 		}
 	}
