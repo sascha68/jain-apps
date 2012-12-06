@@ -38,11 +38,6 @@ public @interface JNActionGroup {
 	String name() default "";
 
 	/**
-	 * Action Type fro this action Group 
-	 */
-	JNActionGroupType type () default JNActionGroupType.BUTTON;
-	
-	/**
 	 * This value is the action group tab index or Order.
 	 */
 	int tabIndex() default -1;

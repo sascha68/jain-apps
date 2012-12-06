@@ -66,4 +66,8 @@ public class I18NComponentHandler implements Serializable {
 	public String getI18NCaption() {
 		return i18NCaption;
 	}
+	
+	public String getI18NCaption(Serializable serializable) {
+		return getI18NCaption ();
+	}
 }

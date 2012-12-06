@@ -15,6 +15,7 @@
  */
 package com.jain.addon.i18N;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -92,6 +93,13 @@ public class I18NChangeListener implements ValueChangeListener {
 		I18NComponentHandler handler = componentMap.get(component);
 		if (handler != null) 
 			return handler.getI18NCaption();
+		return "";
+	}
+	
+	public String getI18NCaption(Component component, Serializable serializable) {
+		I18NComponentHandler handler = componentMap.get(component);
+		if (handler != null) 
+			return handler.getI18NCaption(serializable);
 		return "";
 	}
 

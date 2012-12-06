@@ -153,19 +153,12 @@ public class ActionBar <T> extends HorizontalLayout {
 			String first = StringHelper.isNotEmptyWithTrim(group.firstActionStyle()) ? group.firstActionStyle() : firstActionStyle;
 			String last = StringHelper.isNotEmptyWithTrim(group.lastActionStyle()) ? group.lastActionStyle() : lastActionStyle;
 			String style = StringHelper.isNotEmptyWithTrim(group.actionStyle()) ? group.actionStyle() : actionStyle;
-			switch (group.type()) {
-			case BUTTON:
-				actionGroup = new ActionButtonGroup<T>(secured, listener, first, last, style);
-				break;
-
-			case LINK:
-				actionGroup = new ActionButtonGroup<T>(secured, listener, first, last, style);
-				actionGroup.setStyleName(group.type().getStyle());
-				break;
-			case MENU:
-				throw new IllegalArgumentException("Use Manubar instead of Action bar to create menu components");
-			}
+			actionGroup = new ActionButtonGroup<T>(secured, listener, first, last, style);
+		
+			if (StringHelper.isNotEmptyWithTrim(group.style()))
+				actionGroup.setStyleName(group.style());
 		}
+	
 		if (actionGroup == null) 
 			actionGroup = new ActionButtonGroup<T>(secured, listener, firstActionStyle, lastActionStyle, actionStyle);
 
