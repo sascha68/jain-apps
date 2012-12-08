@@ -19,7 +19,7 @@ package com.jain.addon;
  * <code>JNEventConstants<code> contains all the events raised by this add-on
  * @author Lokesh Jain
  * @since Nov 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 public interface JNEventConstants {
 	public static final String CREATED_OR_UPDATED = ".CreatedOrUpdated";

@@ -28,10 +28,13 @@ import com.jain.i18N.domain.Person;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.MenuBar.Command;
+import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class PersonAnnotationGrid  extends VerticalLayout implements ValueChangeListener {
+public class PersonAnnotationGrid  extends VerticalLayout implements ValueChangeListener, Command {
 	public static final String PERSON_CREATED_OR_UPDATED = "personCreatedOrUpdated";
 	private JTable table;
 	private Person selected;
@@ -44,6 +47,11 @@ public class PersonAnnotationGrid  extends VerticalLayout implements ValueChange
 		table.addValueChangeListener(this);
 		table.setPageLength(15);
 		addComponent(table);
+		MenuBar menubar = new MenuBar();
+		final MenuItem file = menubar.addItem("File", this);
+		
+		addComponent(menubar);
+		
 	}
 
 	private Container getContainer() {
@@ -85,5 +93,9 @@ public class PersonAnnotationGrid  extends VerticalLayout implements ValueChange
 
 	public Person getSelected() {
 		return selected;
+	}
+
+	public void menuSelected(MenuItem selectedItem) {
+		 getUI().showNotification("Action " + selectedItem.getText());
 	}
 }

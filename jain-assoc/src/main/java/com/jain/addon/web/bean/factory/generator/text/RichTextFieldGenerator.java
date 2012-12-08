@@ -27,7 +27,7 @@ import com.vaadin.ui.RichTextArea;
  * <code>RichTextFieldGenerator<code>
  * @author Lokesh Jain
  * @since Nov 16, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public class RichTextFieldGenerator extends AbstractFieldGenerator {

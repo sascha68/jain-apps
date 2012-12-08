@@ -30,7 +30,7 @@ import com.jain.addon.web.bean.factory.generator.AbstractFieldGenerator;
  * <code>SelectFieldGenerator<code>
  * @author Lokesh Jain
  * @since Nov 16, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public abstract class SelectFieldGenerator extends AbstractFieldGenerator {

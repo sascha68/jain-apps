@@ -30,7 +30,7 @@ import com.vaadin.ui.Field;
  * Each field generator should extend this class. 
  * @author Lokesh Jain
  * @since Nov 16, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public abstract class AbstractFieldGenerator implements FieldGenerator {
