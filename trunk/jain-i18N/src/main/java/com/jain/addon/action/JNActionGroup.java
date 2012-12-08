@@ -22,13 +22,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <code>JNActionGroup<code> Every groupped action should be annotated with this annotation.
- * Once you annotate your action with this annotation, ActionBar shows all these actions in same group.
+ * <code>JNActionGroup<code> Every Action provider having a Group should be annotated with this annotation.
+ * Once you annotate your action provider  with this annotation, {@link ActionBar} or {@link ActionMenuBar} shows all these actions in same group.
  * @author Lokesh Jain
  * @since December 2, 2012
  * @version 1.1.0
  */
-@Target({ElementType.METHOD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface JNActionGroup {
@@ -36,11 +36,6 @@ public @interface JNActionGroup {
 	 * This name is the action group name
 	 */
 	String name() default "";
-
-	/**
-	 * This value is the action group tab index or Order.
-	 */
-	int tabIndex() default -1;
 
 	/**
 	 * This icon is the action group icon.
@@ -57,8 +52,7 @@ public @interface JNActionGroup {
 	 * Default value is name
 	 */
 	String description() default "";
-
-
+	
 	/**
 	 * Override first action style for this action Group 
 	 */

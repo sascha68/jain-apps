@@ -40,6 +40,8 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.themes.Runo;
 
 @SuppressWarnings("serial")
+@JNActionGroup (name = "welcome.bar.action", style = JNStyleConstants.J_ACTION_LINK_GROUP, 
+	actionStyle=Runo.BUTTON_LINK, firstActionStyle = Runo.BUTTON_LINK, lastActionStyle = Runo.BUTTON_LINK)
 public class WelcomeBar extends HorizontalLayout implements JNILoginListner, I18NListener {
 	@Inject
 	private AuthenticatedUser currentUser;
@@ -97,14 +99,12 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, I18
 	//Actions
 	@JNAction (name = "help.action.name", tabIndex = 1,  permission = "help.action.permission", 
 			description = "help.action.description",  icon="help.action.icon")
-	@JNActionGroup (name = "welcome.bar.action", style = JNStyleConstants.J_ACTION_LINK_GROUP, actionStyle=Runo.BUTTON_LINK, firstActionStyle = Runo.BUTTON_LINK, lastActionStyle = Runo.BUTTON_LINK)
 	public void help() {
 		System.out.println("not implemented yet");
 	}
 
 	@JNAction (name = "login.action.name", tabIndex = 2, permission = "login.action.permission", 
 			description = "login.action.description", icon="login.action.icon")
-	@JNActionGroup (name = "welcome.bar.action", style = JNStyleConstants.J_ACTION_LINK_GROUP, actionStyle=Runo.BUTTON_LINK, firstActionStyle = Runo.BUTTON_LINK, lastActionStyle = Runo.BUTTON_LINK)
 	public void login() {
 		LoginAction loginAction = CDIComponent.getInstance(LoginAction.class);
 		loginAction.setCaption(JAction.LOGIN.getDisplayName());
@@ -113,7 +113,6 @@ public class WelcomeBar extends HorizontalLayout implements JNILoginListner, I18
 
 	@JNAction (name = "logout.action.name", tabIndex = 3, permission = "logout.action.permission", 
 			description = "logout.action.description",  icon="logout.action.icon")
-	@JNActionGroup (name = "welcome.bar.action", style = JNStyleConstants.J_ACTION_LINK_GROUP, actionStyle=Runo.BUTTON_LINK, firstActionStyle = Runo.BUTTON_LINK, lastActionStyle = Runo.BUTTON_LINK)
 	public void logout() {
 		currentUser.setLoggedInUser(null);
 		Events.instance().raiseLogoutEvent(getUI());
