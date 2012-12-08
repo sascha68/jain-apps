@@ -15,6 +15,9 @@
  */
 package com.jain.addon.i18N.handlers.factory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.jain.addon.component.upload.JUploader;
 import com.jain.addon.i18N.handlers.I18NAbstractComponentHandler;
 import com.jain.addon.i18N.handlers.I18NAbstractSelectHandler;
@@ -43,7 +46,19 @@ import com.vaadin.ui.Table;
  * @version 1.0.0
  */
 public final class I18NComponentHandlerFactory {
+	private static Map<Class <? extends Component>, I18NComponentHandler> componentHandler;
+
+	/**
+	 * Method to find I18NHandler for the component
+	 * @param component
+	 * @return {@link I18NComponentHandler}
+	 */
 	public static I18NComponentHandler getHandler (Component component) {
+		if (componentHandler != null && component != null) {
+			I18NComponentHandler handler = componentHandler.get(component.getClass());
+			if (handler != null)
+				return handler;
+		}
 		if (component instanceof Label)
 			return new I18NLableHandler((Label)component);
 		if (component instanceof AbstractTextField)
@@ -63,5 +78,35 @@ public final class I18NComponentHandlerFactory {
 		if (component instanceof AbstractComponent)
 			return new I18NAbstractComponentHandler ((AbstractComponent)component);
 		return  new I18NComponentHandler(component);
+	}
+
+	/**
+	 * Method to register user defined Handler for I18N
+	 * @param component
+	 * @param handler
+	 */
+	public static void register(Class <? extends Component> component, I18NComponentHandler handler) {
+		if (componentHandler == null) {
+			componentHandler = new HashMap<Class<? extends Component>, I18NComponentHandler> ();
+		}
+
+		if (handler != null) {
+			componentHandler.put(component, handler);
+		} else {
+			throw new IllegalArgumentException("Handler should be provided");
+		}
+	}
+
+	/**
+	 * Method to deRegister user defined Handler for I18N
+	 * @param component
+	 * @param handler
+	 */
+	public static void deRegister(Class <? extends Component> component) {
+		if (componentHandler == null) {
+			componentHandler = new HashMap<Class<? extends Component>, I18NComponentHandler> ();
+		}
+
+		componentHandler.remove(component);
 	}
 }
