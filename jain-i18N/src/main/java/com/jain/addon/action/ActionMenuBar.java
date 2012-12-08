@@ -190,17 +190,30 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 
 	private void findActionGroups() {
 		if (listener.getActionHandler() != null) {
+			JNActionGroups groups = listener.getActionHandler().getClass().getAnnotation(JNActionGroups.class);
+			if (groups != null) {
+				for (JNActionGroup group : groups.actionGroups()) {
+					if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
+						actionGroups.add(group);
+					}
+				}
+			}
+
+			JNActionGroup group = listener.getActionHandler().getClass().getAnnotation(JNActionGroup.class);
+			if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
+				actionGroups.add(group);
+			}
+
 			Method[]  methods = listener.getActionHandler().getClass().getMethods();
 			for (Method method : methods) {
 				JNAction action = method.getAnnotation(JNAction.class);
 				if(action != null) {
-					JNActionGroup group = method.getAnnotation(JNActionGroup.class);
 					String actionGroupName = DEFAULT_ACTION_GROUP;
 
 					if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
 						actionGroupName = group.name();
-						int position = findPosition(group);
-						actionGroups.add(position, group);
+					}else if(StringHelper.isNotEmptyWithTrim(action.actionGroup())) {
+						actionGroupName = action.actionGroup();
 					}
 
 					List<JNAction> actions =  actionByGroupName.get(actionGroupName);
@@ -208,24 +221,15 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 						actions = new ArrayList<JNAction>();
 						actionByGroupName.put(actionGroupName, actions);
 					}
-					
+
 					int position = findPosition(actions, action);
 					actions.add(position, action);
-					
+
 					String actionName = listener.addAction(action, method);
 					actionsToName.put(action, actionName);
 				}
 			}
 		}
-	}
-
-	private int findPosition(JNActionGroup actionGroup) {
-		int i = 0;
-		for (JNActionGroup group : this.actionGroups) {
-			if (actionGroup == null || group.tabIndex() < actionGroup.tabIndex())
-				i ++;
-		}
-		return i;
 	}
 
 	private int findPosition(List<JNAction> actions, JNAction action) {

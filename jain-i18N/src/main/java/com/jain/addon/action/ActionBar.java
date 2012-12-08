@@ -116,11 +116,25 @@ public class ActionBar <T> extends HorizontalLayout {
 
 	private void findActionGroups() {
 		if (listener.getActionHandler() != null) {
+			JNActionGroups groups = listener.getActionHandler().getClass().getAnnotation(JNActionGroups.class);
+			if (groups != null) {
+				for (JNActionGroup group : groups.actionGroups()) {
+					if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
+						findOrCreateActionGroup(null, group);
+					}
+				}
+			}
+
+			JNActionGroup group = listener.getActionHandler().getClass().getAnnotation(JNActionGroup.class);
+			if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
+				findOrCreateActionGroup(null, group);
+			}
+			
 			Method[]  methods = listener.getActionHandler().getClass().getMethods();
 			for (Method method : methods) {
 				JNAction action = method.getAnnotation(JNAction.class);
 				if(action != null) {
-					ActionGroup<T> actionGroup = findOrCreateActionGroup (method);
+					ActionGroup<T> actionGroup = findOrCreateActionGroup (action.actionGroup(), group);
 					String actionName = listener.addAction(action, method);
 					actionGroup.addAction(action, actionName);
 				}
@@ -128,21 +142,21 @@ public class ActionBar <T> extends HorizontalLayout {
 		}
 	}
 
-	private ActionGroup<T> findOrCreateActionGroup(Method method) {
-		JNActionGroup group = method.getAnnotation(JNActionGroup.class);
+	private ActionGroup<T> findOrCreateActionGroup(String actionGrp, JNActionGroup group) {
 		String actionGroupName = DEFAULT_ACTION_GROUP;
 
 		if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
 			actionGroupName = group.name();
+		} else if(StringHelper.isNotEmptyWithTrim(actionGrp)) {
+			actionGroupName = actionGrp;
 		}
 		
 		ActionGroup<T> actionGroup = actionGroupByName.get(actionGroupName);
 		
 		if (actionGroup == null) {
 			actionGroup = createActionGroup(group);
-			int position = findPosition(group);
 			actionGroupByName.put(actionGroupName, actionGroup);
-			actionGroups.add(position, actionGroup);
+			actionGroups.add(actionGroup);
 		}
 		return actionGroup;
 	}
@@ -165,15 +179,6 @@ public class ActionBar <T> extends HorizontalLayout {
 		actionGroup.setActionGroup(group);
 		actionGroup.setSpacing(isSpacing());
 		return actionGroup;
-	}
-
-	private int findPosition(JNActionGroup actionGroup) {
-		int i = 0;
-		for (ActionGroup<T> group : this.actionGroups) {
-			if (group.getActionGroup() == null || actionGroup == null || group.getActionGroup().tabIndex() < actionGroup.tabIndex())
-				i ++;
-		}
-		return i;
 	}
 
 	public boolean isShowSelectedAction() {
