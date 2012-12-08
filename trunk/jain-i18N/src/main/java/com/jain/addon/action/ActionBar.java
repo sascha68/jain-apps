@@ -34,7 +34,7 @@ import com.vaadin.ui.HorizontalLayout;
  * <code>ActionBar<code> is a horizontal segment component for actions.<br/>
  * @author Lokesh Jain
  * @since November 25, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public class ActionBar <T> extends HorizontalLayout {

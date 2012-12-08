@@ -22,7 +22,7 @@ import java.io.Serializable;
  * Your security provider should implement this interface
  * @author Lokesh Jain
  * @since Nov 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 public interface JNISecured extends Serializable {
 	//Common Action Permissions

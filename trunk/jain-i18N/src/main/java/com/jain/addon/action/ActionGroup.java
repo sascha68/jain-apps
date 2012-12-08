@@ -32,7 +32,7 @@ import com.vaadin.ui.HorizontalLayout;
  * <code>ActionGroup<code> is a horizontal segment component for action group.<br/>
  * @author Lokesh Jain
  * @since December 2, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public abstract class ActionGroup <T> extends HorizontalLayout implements JNILoginListner {

@@ -25,7 +25,7 @@ import com.vaadin.ui.Field;
  * <code>FieldGenerator<code> Every field generator should implement this interface.
  * @author Lokesh Jain
  * @since Nov 16, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 public interface FieldGenerator extends Serializable {
 

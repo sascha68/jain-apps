@@ -32,7 +32,7 @@ import com.vaadin.ui.VerticalLayout;
  * <code>JCrudWindow<code> is a form window for Crud component
  * @author Lokesh Jain
  * @since Nov 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  * @param <T>
  *
  */

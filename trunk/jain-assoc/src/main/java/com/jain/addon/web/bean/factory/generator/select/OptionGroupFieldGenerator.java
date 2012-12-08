@@ -28,7 +28,7 @@ import com.vaadin.ui.OptionGroup;
  * <code>OptionGroupFieldGenerator<code>
  * @author Lokesh Jain
  * @since Nov 16, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public class OptionGroupFieldGenerator extends SelectFieldGenerator {

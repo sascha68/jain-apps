@@ -26,7 +26,7 @@ import com.vaadin.ui.Button.ClickListener;
  * <code>JNButtonClickListener<code> Default click listener for all the actions
  * @author Lokesh Jain
  * @since Nov 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  * @param <T>
  *
  */

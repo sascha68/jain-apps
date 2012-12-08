@@ -21,7 +21,7 @@ import java.util.Collection;
 import com.jain.addon.JNIComponentInit;
 import com.jain.addon.JNINamed;
 import com.jain.addon.JNStyleConstants;
-import com.jain.addon.action.ActionBar;
+import com.jain.addon.action.ActionMenuBar;
 import com.jain.addon.action.JNAction;
 import com.jain.addon.helper.JNHelper;
 import com.jain.addon.security.JNISecured;
@@ -32,7 +32,7 @@ import com.vaadin.ui.VerticalLayout;
  * <code>JCrud<code> Is a crud component
  * @author Lokesh Jain
  * @since Nov 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  * @param <T>
  */
 @SuppressWarnings("serial")
@@ -56,7 +56,7 @@ public class JCrud <T> extends VerticalLayout implements JNISecured {
 			values = new ArrayList<T> ();
 		}
 
-		ActionBar <JCrud<T>> hLayout = new ActionBar <JCrud<T>> (this, this);
+		ActionMenuBar <JCrud<T>> hLayout = new ActionMenuBar <JCrud<T>> (this, this);
 		addComponent(hLayout);
 		setComponentAlignment(hLayout, Alignment.TOP_RIGHT);
 		setExpandRatio(hLayout, 1);

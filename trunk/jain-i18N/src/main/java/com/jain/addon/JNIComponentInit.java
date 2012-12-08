@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
  * </pre>
  * @author Lokesh Jain
  * @since Oct 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * Once you annotate your action with this annotation, ActionBar shows all these actions in same group.
  * @author Lokesh Jain
  * @since December 2, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

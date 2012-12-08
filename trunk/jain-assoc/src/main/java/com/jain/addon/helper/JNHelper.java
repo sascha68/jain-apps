@@ -24,7 +24,7 @@ import com.vaadin.ui.UI;
  * <code>JNHelper<code> is a Helper class containi8ng all the helper methods
  * @author Lokesh Jain
  * @since Nov 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 public final class JNHelper {
 	private JNHelper() {

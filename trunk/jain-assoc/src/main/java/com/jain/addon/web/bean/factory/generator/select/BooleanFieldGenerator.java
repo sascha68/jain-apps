@@ -27,7 +27,7 @@ import com.vaadin.ui.Field;
  * <code>BooleanFieldGenerator<code> used to boolean check box
  * @author Lokesh Jain
  * @since Nov 16, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public class BooleanFieldGenerator  extends AbstractFieldGenerator {

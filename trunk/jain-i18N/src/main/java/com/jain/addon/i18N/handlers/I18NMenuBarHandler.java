@@ -30,7 +30,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
  * <code>I18NMenuBarHandler<code> is a i18N values handler for {@link MenuBar}
  * @author Lokesh Jain
  * @since December 6, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public class I18NMenuBarHandler extends I18NAbstractComponentHandler implements Serializable {

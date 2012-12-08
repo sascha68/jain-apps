@@ -26,7 +26,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
  * <code>JNCommandListener<code> Default command listener for all the actions
  * @author Lokesh Jain
  * @since December 5, 2012
- * @version 1.0.3
+ * @version 1.1.0
  * @param <T>
  *
  */

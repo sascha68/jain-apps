@@ -24,7 +24,7 @@ import java.util.Collection;
  * <code>JCrudObject<code> is a object to provide object configuration to the crud component. 
  * @author Lokesh Jain
  * @since Nov 27, 2012
- * @version 1.0.3
+ * @version 1.1.0
  * @param <T>
  *
  */

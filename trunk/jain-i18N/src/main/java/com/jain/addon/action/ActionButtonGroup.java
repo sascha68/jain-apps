@@ -29,7 +29,7 @@ import com.vaadin.ui.Button;
  * <code>ActionButtonGroup<code> is a horizontal segment component for button action group.<br/>
  * @author Lokesh Jain
  * @since November 25, 2012
- * @version 1.0.3
+ * @version 1.1.0
  */
 @SuppressWarnings("serial")
 public class ActionButtonGroup <T> extends ActionGroup<T> implements JNILoginListner {
