@@ -23,7 +23,6 @@ import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.container.JainBeanItemContainer;
 import com.jain.addon.web.table.JTable;
 import com.jain.i18N.PersonDataHandler;
-import com.jain.i18N.annotation.PersonAnnotationGrid;
 import com.jain.i18N.domain.Person;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -32,6 +31,7 @@ import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class PersonDefinitionGrid  extends VerticalLayout implements ValueChangeListener {
+	public static final String PERSON_CREATED_OR_UPDATED = "personCreatedOrUpdated";
 	private JTable table;
 	private Person selected;
 	
@@ -62,7 +62,7 @@ public class PersonDefinitionGrid  extends VerticalLayout implements ValueChange
 	}
 
 	@SuppressWarnings("unchecked")
-	@JNIObserver(PersonAnnotationGrid.PERSON_CREATED_OR_UPDATED)
+	@JNIObserver(PERSON_CREATED_OR_UPDATED)
 	public void reload(Person person) {
 		JainBeanItemContainer<Person> container = (JainBeanItemContainer<Person>) table.getContainerDataSource();
 		container.removeItem(person);

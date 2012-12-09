@@ -113,10 +113,11 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 		if (!initialized) {
 			findActionGroups ();
 
-			createMenuItem (actionByGroupName.get(DEFAULT_ACTION_GROUP), null);
-			
+			createMenuItem (actionByGroupName.get(DEFAULT_ACTION_GROUP), null, null);
+			Map<String, MenuItem> menuItemByGroupName = new HashMap<String, MenuBar.MenuItem>();
 			for (JNActionGroup actionGroup : this.actionGroups) {
-				createMenuItem (actionByGroupName.get(actionGroup.name()), actionGroup);
+				MenuItem menuItem = createMenuItem (actionByGroupName.get(actionGroup.name()), actionGroup, menuItemByGroupName.get(actionGroup.parent()));
+				menuItemByGroupName.put(actionGroup.name(), menuItem);
 			}
 			initialized = true;
 			addComponent(menuBar);
@@ -125,7 +126,7 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 		}
 	}
 
-	private void createMenuItem(List<JNAction> list, JNActionGroup actionGroup) {
+	private MenuItem createMenuItem(List<JNAction> list, JNActionGroup actionGroup, MenuItem parent) {
 		MenuItem menuItem = null;
 		String first = firstActionStyle;
 		String last = lastActionStyle;
@@ -135,15 +136,16 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 			last = StringHelper.isNotEmptyWithTrim(actionGroup.lastActionStyle()) ? actionGroup.lastActionStyle() : lastActionStyle;
 			style = StringHelper.isNotEmptyWithTrim(actionGroup.actionStyle()) ? actionGroup.actionStyle() : actionStyle;
 
-			menuItem = menuBar.addItem(actionGroup.name(), null);
-			findNAddIcon(actionGroup.icon(), menuItem);
+			if (list != null && list.size() > 1) {
+				menuItem = parent == null ? menuBar.addItem(actionGroup.name(), null) : parent.addItem(actionGroup.name(), null);
+				findNAddIcon(actionGroup.icon(), menuItem);
 
-			if (StringHelper.isNotEmptyWithTrim(actionGroup.description()))
-				menuItem.setDescription(actionGroup.description());
-			else
-				menuItem.setDescription(actionGroup.name());
-			if (StringHelper.isNotEmptyWithTrim(actionGroup.style()))
-				menuItem.setStyleName(actionGroup.style());
+				if (StringHelper.isNotEmptyWithTrim(actionGroup.description()))
+					menuItem.setDescription(actionGroup.description());
+
+				if (StringHelper.isNotEmptyWithTrim(actionGroup.style()))
+					menuItem.setStyleName(actionGroup.style());
+			}
 		}
 
 		if (list != null) {
@@ -153,7 +155,7 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 				if (menuItem != null)
 					lastItem = menuItem.addItem(actionsToName.get(action), listener);
 				else 
-					lastItem = menuBar.addItem(actionsToName.get(action), listener);
+					lastItem = parent == null ? menuBar.addItem(actionsToName.get(action), listener) : parent.addItem(actionsToName.get(action), listener);
 
 				findNAddIcon(action.icon(), lastItem);
 				lastItem.setVisible(validatePermission (action));
@@ -175,6 +177,8 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 				lastItem.setStyleName(last);
 			}
 		}
+		
+		return menuItem;
 	}
 	
 	private void findNAddIcon(String actionIcon, MenuItem action) {

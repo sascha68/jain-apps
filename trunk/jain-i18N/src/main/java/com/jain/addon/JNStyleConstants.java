@@ -32,6 +32,7 @@ public interface JNStyleConstants {
 	String J_LAST_ACTION = "j-last-action";
 	String J_SELECTED_ACTION="j-selected-action";
 	String J_ACTION="j-action";
+	String J_ACTION_SUBMENU = "j-action-bar-submenu";
 	
 	String J_CRUD = "j-crud";
 	String J_VIEW = "j-view";
