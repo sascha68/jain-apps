@@ -63,4 +63,9 @@ public @interface JNAction {
 	 * Define action group name where this action belongs to. 
 	 */
 	String actionGroup () default "";
+	
+	/**
+	 * Adds a separator after just this action in Menu bar; {@link ActionMenuBar} 
+	 */
+	boolean separator () default false;
 }
