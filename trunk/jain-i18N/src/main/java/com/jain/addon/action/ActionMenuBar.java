@@ -43,10 +43,9 @@ import com.vaadin.ui.MenuBar.MenuItem;
  */
 @SuppressWarnings("serial")
 public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListner {
-	private static final String DEFAULT_ACTION_GROUP = "default-action-group";
-	private Map<String, List<JNAction>> actionByGroupName;
+	private List<JNAction> actions;
+	private Map<String, JNActionGroup> actionGroupByName;
 	private Map<JNAction, String> actionsToName;
-	private List<JNActionGroup> actionGroups;
 	private MenuBar menuBar;
 	private final String firstActionStyle;
 	private final String lastActionStyle;
@@ -99,9 +98,9 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 		this.secured = secured;
 		this.menuBar = new MenuBar();
 		this.listener = new JNCommandListener<T>(menuBar, false, actionHandler); 
-		this.actionByGroupName = new HashMap<String, List<JNAction>>();
-		this.actionGroups = new ArrayList<JNActionGroup>();
+		this.actions = new ArrayList<JNAction> ();
 		this.actionsToName = new HashMap<JNAction, String>(); 
+		this.actionGroupByName = new HashMap<String, JNActionGroup> ();
 		setStyleName(JNStyleConstants.J_ACTION_BAR);
 	}
 
@@ -111,14 +110,40 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 	@JNIComponentInit
 	public void initActionMenuBar() {
 		if (!initialized) {
-			findActionGroups ();
+			findActions ();
+			Map<String, MenuItem> menuItemByGroupName = new HashMap<String, MenuItem>();
+			
+			String first = firstActionStyle;
+			String last = lastActionStyle;
+			String style = actionStyle;
+			
+			int i = 0;
+			MenuItem lastItem = null;
+			for (JNAction action : actions) {
+				MenuItem parentItem = null;
+				if (StringHelper.isNotEmptyWithTrim(action.actionGroup())) {
+					parentItem = menuItemByGroupName.get(action.actionGroup());
 
-			createMenuItem (actionByGroupName.get(DEFAULT_ACTION_GROUP), null, null);
-			Map<String, MenuItem> menuItemByGroupName = new HashMap<String, MenuBar.MenuItem>();
-			for (JNActionGroup actionGroup : this.actionGroups) {
-				MenuItem menuItem = createMenuItem (actionByGroupName.get(actionGroup.name()), actionGroup, menuItemByGroupName.get(actionGroup.parent()));
-				menuItemByGroupName.put(actionGroup.name(), menuItem);
+					if (parentItem == null) {
+						JNActionGroup actionGroup = actionGroupByName.get(action.actionGroup());
+						if (actionGroup != null) {
+							first = StringHelper.isNotEmptyWithTrim(actionGroup.firstActionStyle()) ? actionGroup.firstActionStyle() : firstActionStyle;
+							last = StringHelper.isNotEmptyWithTrim(actionGroup.lastActionStyle()) ? actionGroup.lastActionStyle() : lastActionStyle;
+							style = StringHelper.isNotEmptyWithTrim(actionGroup.actionStyle()) ? actionGroup.actionStyle() : actionStyle;
+							parentItem = createMenuItem (actionGroup, menuItemByGroupName);
+							menuItemByGroupName.put(action.actionGroup(), parentItem);
+						}
+					}
+				}
+				
+				lastItem = processAction(parentItem, first, style, i, action);
+				i++;
 			}
+
+			if (lastItem != null) {
+				lastItem.setStyleName(last);
+			}
+
 			initialized = true;
 			addComponent(menuBar);
 		} else {
@@ -126,61 +151,69 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 		}
 	}
 
-	private MenuItem createMenuItem(List<JNAction> list, JNActionGroup actionGroup, MenuItem parent) {
+	/**
+	 * @param actionGroup
+	 * @param menuItemByGroupName
+	 * @return
+	 */
+	private MenuItem createMenuItem(JNActionGroup actionGroup, Map<String, MenuItem> menuItemByGroupName) {
 		MenuItem menuItem = null;
-		String first = firstActionStyle;
-		String last = lastActionStyle;
-		String style = actionStyle;
-		if (actionGroup != null) {
-			first = StringHelper.isNotEmptyWithTrim(actionGroup.firstActionStyle()) ? actionGroup.firstActionStyle() : firstActionStyle;
-			last = StringHelper.isNotEmptyWithTrim(actionGroup.lastActionStyle()) ? actionGroup.lastActionStyle() : lastActionStyle;
-			style = StringHelper.isNotEmptyWithTrim(actionGroup.actionStyle()) ? actionGroup.actionStyle() : actionStyle;
+		MenuItem parentItem = null;
+		if (StringHelper.isNotEmptyWithTrim(actionGroup.parent())) {
+			parentItem = menuItemByGroupName.get(actionGroup.parent());
 
-			if (list != null && list.size() > 1) {
-				menuItem = parent == null ? menuBar.addItem(actionGroup.name(), null) : parent.addItem(actionGroup.name(), null);
-				findNAddIcon(actionGroup.icon(), menuItem);
-
-				if (StringHelper.isNotEmptyWithTrim(actionGroup.description()))
-					menuItem.setDescription(actionGroup.description());
-
-				if (StringHelper.isNotEmptyWithTrim(actionGroup.style()))
-					menuItem.setStyleName(actionGroup.style());
+			if (parentItem == null) {
+				JNActionGroup parentActionGroup = actionGroupByName.get(actionGroup.parent());
+				if (parentActionGroup != null) {
+					parentItem = createMenuItem(parentActionGroup, menuItemByGroupName);
+					menuItemByGroupName.put(parentActionGroup.name(), parentItem);
+				}
 			}
 		}
 
-		if (list != null) {
-			int i = 0;
-			MenuItem lastItem = null;
-			for (JNAction action : list) {
-				if (menuItem != null)
-					lastItem = menuItem.addItem(actionsToName.get(action), listener);
-				else 
-					lastItem = parent == null ? menuBar.addItem(actionsToName.get(action), listener) : parent.addItem(actionsToName.get(action), listener);
+		menuItem = parentItem == null ? menuBar.addItem(actionGroup.name(), null) : parentItem.addItem(actionGroup.name(), null);
+		findNAddIcon(actionGroup.icon(), menuItem);
 
-				findNAddIcon(action.icon(), lastItem);
-				lastItem.setVisible(validatePermission (action));
+		if (StringHelper.isNotEmptyWithTrim(actionGroup.description()))
+			menuItem.setDescription(actionGroup.description());
 
-				if (StringHelper.isNotEmptyWithTrim(action.description()))
-					lastItem.setDescription(action.description());
-				else
-					lastItem.setDescription(actionsToName.get(action));
-
-				if (i == 0)
-					lastItem.setStyleName(first);
-				else 
-					lastItem.setStyleName(style);
-
-				i++;
-			}
-
-			if (lastItem != null) {
-				lastItem.setStyleName(last);
-			}
-		}
-		
+		if (StringHelper.isNotEmptyWithTrim(actionGroup.style()))
+			menuItem.setStyleName(actionGroup.style());
 		return menuItem;
 	}
+
+	/**
+	 * @param parentItem
+	 * @param first
+	 * @param style
+	 * @param i
+	 * @param action
+	 * @return
+	 */
+	private MenuItem processAction(MenuItem parentItem, String first, String style, int i, JNAction action) {
+		MenuItem lastItem;
+		lastItem = parentItem == null ? menuBar.addItem(actionsToName.get(action), listener) : parentItem.addItem(actionsToName.get(action), listener);
+
+		findNAddIcon(action.icon(), lastItem);
+		lastItem.setVisible(validatePermission (action));
+
+		if (StringHelper.isNotEmptyWithTrim(action.description()))
+			lastItem.setDescription(action.description());
+		else
+			lastItem.setDescription(actionsToName.get(action));
+
+		if (i == 0)
+			lastItem.setStyleName(first);
+		else 
+			lastItem.setStyleName(style);
+
+		if (action.separator() && parentItem != null) {
+			parentItem.addSeparator();
+		}
+		return lastItem;
+	}
 	
+
 	private void findNAddIcon(String actionIcon, MenuItem action) {
 		if (StringHelper.isNotEmptyWithTrim(actionIcon)) {
 			String iconPath = System.getProperty(actionIcon);
@@ -192,40 +225,27 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 		}
 	}
 
-	private void findActionGroups() {
+	
+	private void findActions() {
 		if (listener.getActionHandler() != null) {
 			JNActionGroups groups = listener.getActionHandler().getClass().getAnnotation(JNActionGroups.class);
 			if (groups != null) {
 				for (JNActionGroup group : groups.actionGroups()) {
 					if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
-						actionGroups.add(group);
+						actionGroupByName.put(group.name(), group);
 					}
 				}
 			}
 
 			JNActionGroup group = listener.getActionHandler().getClass().getAnnotation(JNActionGroup.class);
 			if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
-				actionGroups.add(group);
+				actionGroupByName.put(group.name(), group);
 			}
 
 			Method[]  methods = listener.getActionHandler().getClass().getMethods();
 			for (Method method : methods) {
 				JNAction action = method.getAnnotation(JNAction.class);
 				if(action != null) {
-					String actionGroupName = DEFAULT_ACTION_GROUP;
-
-					if(group != null && StringHelper.isNotEmptyWithTrim(group.name())) {
-						actionGroupName = group.name();
-					}else if(StringHelper.isNotEmptyWithTrim(action.actionGroup())) {
-						actionGroupName = action.actionGroup();
-					}
-
-					List<JNAction> actions =  actionByGroupName.get(actionGroupName);
-					if (actions == null) {
-						actions = new ArrayList<JNAction>();
-						actionByGroupName.put(actionGroupName, actions);
-					}
-
 					int position = findPosition(actions, action);
 					actions.add(position, action);
 
@@ -252,26 +272,18 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 	public void setShowSelectedAction(boolean showSelectedAction) {
 		this.listener.setShowSelectedAction(showSelectedAction);
 	}
-	
+
 	protected boolean validatePermission(JNAction action) {
 		if (secured != null) {
 			return secured.hasPermission(action.permission());
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Reinitialize a Action Bar by updating resources {@link JNAction} visibility after login.<br/> 
 	 */
 	public void onLogin() {
-		validatePermissions(actionByGroupName.get(DEFAULT_ACTION_GROUP));
-		for (JNActionGroup actionGroup : this.actionGroups) {
-			validatePermissions(actionByGroupName.get(actionGroup.name()));
-		}
-		markAsDirty();
-	}
-
-	private void validatePermissions(List<JNAction> actions) {
 		if (actions != null) {
 			for (JNAction action : actions) {
 				for (Iterator<MenuItem> iterator = menuBar.getItems().listIterator(); iterator.hasNext();) {
@@ -282,5 +294,6 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 				}
 			}
 		}
+		markAsDirty();
 	}
 }
