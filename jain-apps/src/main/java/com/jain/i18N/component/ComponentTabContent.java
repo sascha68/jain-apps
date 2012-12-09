@@ -13,7 +13,7 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 @JNActionGroups (actionGroups = {@JNActionGroup (name = "file.action.group.name"), 
 			@JNActionGroup (name = "new.action.group.name", parent = "file.action.group.name"), 
-			@JNActionGroup (name = "edit.action.group.name")})
+			@JNActionGroup (name = "edit.action.group.name", icon = "edit.action.icon")})
 public class ComponentTabContent extends VerticalLayout  {
 	@JNIComponentInit
 	public void init () {
@@ -38,7 +38,7 @@ public class ComponentTabContent extends VerticalLayout  {
 		callActionMessage("close.all.file.action.name", "file.action.group.name");
 	}
 	
-	@JNAction (name = "save.action.name", actionGroup = "file.action.group.name", tabIndex = 13)
+	@JNAction (name = "save.action.name", actionGroup = "file.action.group.name", tabIndex = 13, icon="save.action.icon")
 	public void save() {
 		callActionMessage("save.file.action.name", "file.action.group.name");
 	}
