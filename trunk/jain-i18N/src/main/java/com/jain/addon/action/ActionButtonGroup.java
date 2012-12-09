@@ -20,6 +20,7 @@ import com.jain.addon.JNStyleConstants;
 import com.jain.addon.StringHelper;
 import com.jain.addon.action.listener.JNButtonClickListener;
 import com.jain.addon.authentication.JNILoginListner;
+import com.jain.addon.resource.PropertyReader;
 import com.jain.addon.security.JNISecured;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
@@ -34,7 +35,7 @@ import com.vaadin.ui.Button;
 @SuppressWarnings("serial")
 public class ActionButtonGroup <T> extends ActionGroup<T> implements JNILoginListner {
 	private final JNButtonClickListener<T> listener;
-	
+
 	/**
 	 * Create a segment instance having {@link Button} style for all the buttons
 	 * @param secured -- {@link JNISecured}
@@ -43,7 +44,7 @@ public class ActionButtonGroup <T> extends ActionGroup<T> implements JNILoginLis
 	public ActionButtonGroup(JNISecured secured, JNButtonClickListener<T> listener) {
 		this(secured, listener, JNStyleConstants.J_FIRST_ACTION, JNStyleConstants.J_LAST_ACTION, JNStyleConstants.J_ACTION);
 	}
-	
+
 	/**
 	 * Create a segment instance having {@link Button} style for all the buttons
 	 * @param secured -- {@link JNISecured}
@@ -97,7 +98,7 @@ public class ActionButtonGroup <T> extends ActionGroup<T> implements JNILoginLis
 				actionButton.setVisible(validatePermission (action));
 
 				findNAddIcon(action, actionButton);
-				
+
 				if (StringHelper.isNotEmptyWithTrim(getActionStyle()))
 					actionButton.setStyleName(getActionStyle());
 
@@ -119,7 +120,7 @@ public class ActionButtonGroup <T> extends ActionGroup<T> implements JNILoginLis
 
 	private void findNAddIcon(JNAction action, Button actionButton) {
 		if (StringHelper.isNotEmptyWithTrim(action.icon())) {
-			String iconPath = System.getProperty(action.icon());
+			String iconPath = PropertyReader.instance().getProperty(action.icon());
 
 			if (StringHelper.isNotEmptyWithTrim(iconPath)) {
 				ThemeResource icon = new ThemeResource(iconPath);
@@ -127,7 +128,7 @@ public class ActionButtonGroup <T> extends ActionGroup<T> implements JNILoginLis
 			}
 		}
 	}
-	
+
 	public boolean isShowSelectedAction() {
 		return listener.isShowSelectedAction();
 	}

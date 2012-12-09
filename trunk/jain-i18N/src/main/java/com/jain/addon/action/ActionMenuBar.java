@@ -28,6 +28,7 @@ import com.jain.addon.StringHelper;
 import com.jain.addon.action.listener.JNCommandListener;
 import com.jain.addon.authentication.JNILoginListner;
 import com.jain.addon.i18N.I18NHelper;
+import com.jain.addon.resource.PropertyReader;
 import com.jain.addon.security.JNISecured;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
@@ -216,7 +217,7 @@ public class ActionMenuBar <T> extends HorizontalLayout implements JNILoginListn
 
 	private void findNAddIcon(String actionIcon, MenuItem action) {
 		if (StringHelper.isNotEmptyWithTrim(actionIcon)) {
-			String iconPath = System.getProperty(actionIcon);
+			String iconPath = PropertyReader.instance().getProperty(actionIcon);
 
 			if (StringHelper.isNotEmptyWithTrim(iconPath)) {
 				ThemeResource icon = new ThemeResource(iconPath);
