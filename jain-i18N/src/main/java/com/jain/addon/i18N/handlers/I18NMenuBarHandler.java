@@ -46,11 +46,18 @@ public class I18NMenuBarHandler extends I18NAbstractComponentHandler implements 
 
 	private void populateI18NItemCaptions(final MenuBar component) {
 		Collection<MenuItem> items = (Collection<MenuItem>) component.getItems();
-		for (MenuItem itemId : items) {
-			String i18NItemCaption = itemId.getText();
-			i18NItemCaptions.put(itemId, i18NItemCaption);
-			String i18NItemDescription = itemId.getDescription();
-			i18NItemDescriptions.put(itemId, i18NItemDescription);
+		processMenuItem(items);
+	}
+
+	private void processMenuItem(Collection<MenuItem> items) {
+		if (items != null) {
+			for (MenuItem itemId : items) {
+				String i18NItemCaption = itemId.getText();
+				i18NItemCaptions.put(itemId, i18NItemCaption);
+				String i18NItemDescription = itemId.getDescription();
+				i18NItemDescriptions.put(itemId, i18NItemDescription);
+				processMenuItem(itemId.getChildren());
+			}
 		}
 	}
 

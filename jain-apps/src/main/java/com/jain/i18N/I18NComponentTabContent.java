@@ -16,6 +16,7 @@ package com.jain.i18N;
 import com.jain.addon.JNIComponentInit;
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.i18N.annotation.PersonAnnotationTabContent;
+import com.jain.i18N.component.ComponentTabContent;
 import com.jain.i18N.definition.PersonDefinitionTabContent;
 import com.vaadin.ui.TabSheet;
 
@@ -29,5 +30,8 @@ public class I18NComponentTabContent extends TabSheet {
 		
 		PersonDefinitionTabContent definitionTabContent = CDIComponent.getInstance(PersonDefinitionTabContent.class);
 		addTab(definitionTabContent, "definition.approach.name");
+		
+		ComponentTabContent compopnetTabContent = CDIComponent.getInstance(ComponentTabContent.class);
+		addTab(compopnetTabContent, "component.demo.name");
 	}
 }

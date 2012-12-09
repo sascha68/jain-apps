@@ -24,7 +24,6 @@ import com.jain.addon.web.marker.JNIEditLocal;
 import com.jain.common.JAction;
 import com.jain.common.VaadinHelper;
 import com.jain.common.listeners.JainEditClickListener;
-import com.jain.i18N.annotation.PersonAnnotationGrid;
 import com.jain.i18N.domain.Address;
 import com.jain.i18N.domain.Person;
 import com.jain.i18N.domain.ZIP;
@@ -92,7 +91,7 @@ public class PersonDefinitionForm extends I18NWindow implements JNIEditLocal {
 	public void save() {
 		try {
 			fieldGroup.commit();
-			Events.instance().raiseEvent(getUI(), PersonAnnotationGrid.PERSON_CREATED_OR_UPDATED, person);
+			Events.instance().raiseEvent(getUI(), PersonDefinitionGrid.PERSON_CREATED_OR_UPDATED, person);
 			getUI().removeWindow(this);
 		} catch (CommitException e) {
 			e.printStackTrace();
