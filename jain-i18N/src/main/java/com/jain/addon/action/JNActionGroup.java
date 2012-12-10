@@ -21,8 +21,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.jain.addon.JNStyleConstants;
-
 /**
  * <code>JNActionGroup<code> Every Action provider having a Group should be annotated with this annotation.
  * Once you annotate your action provider  with this annotation, {@link ActionBar} or {@link ActionMenuBar} shows all these actions in same group.
@@ -80,5 +78,5 @@ public @interface JNActionGroup {
 	/**
 	 * Override action style for this action Group 
 	 */
-	String style() default JNStyleConstants.J_ACTION_SUBMENU;
+	String style() default "";
 }

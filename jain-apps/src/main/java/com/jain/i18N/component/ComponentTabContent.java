@@ -1,12 +1,14 @@
 package com.jain.i18N.component;
 
 import com.jain.addon.JNIComponentInit;
+import com.jain.addon.action.ActionBar;
 import com.jain.addon.action.ActionMenuBar;
 import com.jain.addon.action.JNAction;
 import com.jain.addon.action.JNActionGroup;
 import com.jain.addon.action.JNActionGroups;
+import com.jain.addon.component.upload.JImage;
 import com.jain.common.VaadinHelper;
-import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
@@ -17,10 +19,28 @@ import com.vaadin.ui.VerticalLayout;
 public class ComponentTabContent extends VerticalLayout  {
 	@JNIComponentInit
 	public void init () {
+		setMargin(true);
+		setSpacing(true);
+		setWidth("100%");
+		setHeight("100%");
+		
+		Label label = new Label("menu.bar.component.name");
+		addComponent(label);
 		ActionMenuBar<ComponentTabContent> menuBar = new ActionMenuBar<ComponentTabContent>(null, this);
 		addComponent(menuBar);
-		setComponentAlignment(menuBar, Alignment.TOP_CENTER);
-		setExpandRatio(menuBar, 1);
+		setExpandRatio(menuBar, 2);
+		
+		label = new Label("action.bar.component.name");
+		addComponent(label);
+		ActionBar<ComponentTabContent> actionBar = new ActionBar<ComponentTabContent>(null, this);
+		addComponent(actionBar);
+		setExpandRatio(actionBar, 2);
+		
+		label = new Label("picture.title");
+		addComponent(label);
+		JImage image = new JImage();
+		addComponent(image);
+		setExpandRatio(image, 2);
 	}
 
 	@JNAction (name = "open.file.action.name", actionGroup = "file.action.group.name", tabIndex = 10)
@@ -30,27 +50,27 @@ public class ComponentTabContent extends VerticalLayout  {
 	
 	@JNAction (name = "close.action.name", actionGroup = "file.action.group.name", tabIndex = 11)
 	public void newFile() {
-		callActionMessage("close.file.action.name", "file.action.group.name");
+		callActionMessage("close.action.name", "file.action.group.name");
 	}
 	
 	@JNAction (name = "close.all.action.name", actionGroup = "file.action.group.name", tabIndex = 12, separator = true)
 	public void close() {
-		callActionMessage("close.all.file.action.name", "file.action.group.name");
+		callActionMessage("close.all.action.name", "file.action.group.name");
 	}
 	
 	@JNAction (name = "save.action.name", actionGroup = "file.action.group.name", tabIndex = 13, icon="save.action.icon")
 	public void save() {
-		callActionMessage("save.file.action.name", "file.action.group.name");
+		callActionMessage("save.action.name", "file.action.group.name");
 	}
 	
 	@JNAction (name = "save.as.action.name", actionGroup = "file.action.group.name", tabIndex = 14)
 	public void saveAs() {
-		callActionMessage("save.as.file.action.name", "file.action.group.name");
+		callActionMessage("save.as.action.name", "file.action.group.name");
 	}
 	
 	@JNAction (name = "save.all.action.name", actionGroup = "file.action.group.name", tabIndex = 15)
 	public void saveAll() {
-		callActionMessage("save.all.file.action.name", "file.action.group.name");
+		callActionMessage("save.all.action.name", "file.action.group.name");
 	}
 	
 	@JNAction (name = "file.action.name", actionGroup = "new.action.group.name", tabIndex = 1)
