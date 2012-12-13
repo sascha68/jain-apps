@@ -19,6 +19,7 @@ import java.io.Serializable;
 
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.HasComponents;
 
 /**
  * <code>JLoginHandler<code> is a class to handle login and logout events <br/>
@@ -33,7 +34,7 @@ public class JLoginHandler implements Serializable {
 	 * This calls out all the {@link JNILoginListner} components onLogin method.  
 	 * @param container
 	 */
-	public static void onLogin (ComponentContainer container) {
+	public static void onLogin (HasComponents container) {
 		for (Component component : container) {
 			if (component instanceof JNILoginListner)
 				((JNILoginListner) component).onLogin();

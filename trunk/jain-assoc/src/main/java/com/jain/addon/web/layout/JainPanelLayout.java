@@ -108,7 +108,7 @@ public class JainPanelLayout extends JainLayout {
 				Panel panel = new Panel(group.getDisplayName());
 				panel.setWidth("100%");
 				JainLayout layout = new JainLayout(spacing, margin, group.getParent() == null ? group.getColumns() : group.getParent().getColumns());
-				panel.addComponent(layout);
+				panel.setContent(layout);
 				parentLayout.addComponent(panel, group.getColSpan());
 				groupLayoutMap.put(groupName, layout);
 				return layout;
@@ -118,7 +118,7 @@ public class JainPanelLayout extends JainLayout {
 		Panel panel = new Panel(group == null ? "" : group.getDisplayName());
 		panel.setWidth("100%");
 		JainLayout layout = new JainLayout(spacing, margin, group == null ? columns : group.getColumns());
-		panel.addComponent(layout);
+		panel.setContent(layout);
 		super.addComponent(panel);
 		groupLayoutMap.put(groupName, layout);
 		return layout;

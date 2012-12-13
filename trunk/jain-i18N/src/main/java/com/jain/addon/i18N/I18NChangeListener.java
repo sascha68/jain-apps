@@ -26,7 +26,7 @@ import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Component.Event;
-import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.HasComponents;
 
 /**
  * <code>I18NChangeListener<code> is a default listener provided for the locale change.
@@ -56,8 +56,8 @@ public class I18NChangeListener implements ValueChangeListener {
 	}
 
 	private void updateComponents(Component component) {
-		if(component instanceof ComponentContainer) {
-			ComponentContainer container = (ComponentContainer) component;
+		if(component instanceof HasComponents) {
+			HasComponents container = (HasComponents) component;
 
 			for (Component containerComponent : container) {
 				updateComponents(containerComponent);
