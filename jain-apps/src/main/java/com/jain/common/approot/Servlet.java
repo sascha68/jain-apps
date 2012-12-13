@@ -22,8 +22,8 @@ import javax.servlet.annotation.WebServlet;
 import com.vaadin.server.ServiceException;
 import com.vaadin.server.SessionInitEvent;
 import com.vaadin.server.SessionInitListener;
-import com.vaadin.server.VaadinServiceSession;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinSession;
 
 @WebServlet(urlPatterns = "/*")
 public class Servlet extends VaadinServlet {
@@ -36,7 +36,7 @@ public class Servlet extends VaadinServlet {
 	private final SessionInitListener sessionInitListener = new SessionInitListener() {
         public void sessionInit(SessionInitEvent event) throws ServiceException {
             event.getService();
-            final VaadinServiceSession session = event.getSession();
+            final VaadinSession session = event.getSession();
             session.addUIProvider(applicationProvider.get());
         }
     };

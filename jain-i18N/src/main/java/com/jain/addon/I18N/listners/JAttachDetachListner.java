@@ -27,10 +27,12 @@ import com.jain.addon.i18N.component.I18NUI;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.ComponentContainer.ComponentAttachEvent;
-import com.vaadin.ui.ComponentContainer.ComponentAttachListener;
-import com.vaadin.ui.ComponentContainer.ComponentDetachEvent;
-import com.vaadin.ui.ComponentContainer.ComponentDetachListener;
+import com.vaadin.ui.HasComponents;
+import com.vaadin.ui.HasComponents.ComponentAttachEvent;
+import com.vaadin.ui.HasComponents.ComponentAttachListener;
+import com.vaadin.ui.HasComponents.ComponentDetachEvent;
+import com.vaadin.ui.HasComponents.ComponentDetachListener;
+import com.vaadin.ui.SingleComponentContainer;
 
 /**
  * <code>JAttachDetachListner<code> is a listener for all the components to configure the i18N and Event handlers.
@@ -57,7 +59,14 @@ public class JAttachDetachListner implements ComponentDetachListener, ComponentA
 			ComponentContainer container = (ComponentContainer) component;
 			container.addComponentAttachListener(this);
 			container.addComponentDetachListener(this);
+		} else if (component instanceof SingleComponentContainer) {
+			SingleComponentContainer container = (SingleComponentContainer) component;
+			container.addComponentAttachListener(this);
+			container.addComponentDetachListener(this);
+		}
 
+		if(component instanceof HasComponents) {
+			HasComponents container = (HasComponents) component;
 			for (Component containerComponent : container) {
 				initializeNAddRemoveListner(containerComponent, remove);
 			}

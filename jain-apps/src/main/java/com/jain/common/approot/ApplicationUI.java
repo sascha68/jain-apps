@@ -31,7 +31,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-@Theme(ApplicationTheme.THEME_NAME)
+//@Theme(ApplicationTheme.THEME_NAME)
 @SessionScoped
 public class ApplicationUI extends I18NUI {
 	@Inject AuthenticatedUser user;

@@ -15,7 +15,7 @@
  */
 package com.jain.addon.i18N.component;
 
-import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Window;
 
 /**
@@ -26,7 +26,7 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 public class I18NWindow extends Window {
-	public void setContent(ComponentContainer newContent) {
+	public void setContent(Component newContent) {
 		super.setContent(newContent);
 		fireComponentAttachEvent(newContent);
 	}

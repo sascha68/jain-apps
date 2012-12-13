@@ -39,6 +39,8 @@ public class ComponentTabContent extends VerticalLayout  {
 		label = new Label("picture.title");
 		addComponent(label);
 		JImage image = new JImage();
+		image.setInterruptionMessage("picture.upload.interruption");
+		image.setUploadButtonCaption("picture.upload.button.caption");
 		addComponent(image);
 		setExpandRatio(image, 2);
 	}
