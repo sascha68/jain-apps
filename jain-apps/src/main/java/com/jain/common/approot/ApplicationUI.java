@@ -20,8 +20,8 @@ import javax.inject.Inject;
 
 import com.jain.addon.cdi.CDIComponent;
 import com.jain.addon.i18N.component.I18NUI;
-import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.resource.DefaultI18NResourceProvider;
+import com.jain.addon.resource.I18NProvider;
 import com.jain.common.authenticate.AuthenticatedUser;
 import com.jain.common.header.Header;
 import com.jain.common.header.WelcomeBar;
@@ -31,7 +31,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-//@Theme(ApplicationTheme.THEME_NAME)
+@Theme(ApplicationTheme.THEME_NAME)
 @SessionScoped
 public class ApplicationUI extends I18NUI {
 	@Inject AuthenticatedUser user;
