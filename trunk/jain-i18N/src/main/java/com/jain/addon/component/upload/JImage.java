@@ -33,7 +33,7 @@ import com.vaadin.ui.HorizontalLayout;
  * @since Aug 28, 2012
  * @version 1.0.0
  */
-public class JImage extends CustomField<Object> {
+public class JImage extends CustomField<byte []> {
 	private static final long serialVersionUID = 7490297043002025899L;
 	private Embedded image;
 	private HorizontalLayout layout;
@@ -42,7 +42,7 @@ public class JImage extends CustomField<Object> {
 	public JImage() {
 		this.uploader = new JImageUpload(this);
 	}
-	
+
 	public void createImage() {
 		if(image != null)
 			layout.removeComponent(image);
@@ -53,21 +53,17 @@ public class JImage extends CustomField<Object> {
 		layout.setComponentAlignment(image, Alignment.MIDDLE_LEFT);
 	}
 
-	public Class<?> getType() {
+	public Class<byte []> getType() {
 		return byte [].class;
 	}
 
-	protected Object getInternalValue() {
-		return uploader == null ? null : uploader.getStream() == null ? null : uploader.getStream().toByteArray();
-	}
-
 	public void updateImage(final byte [] imageData, String fileName) {
+		setValue(imageData);
 		JStreamSource source = new JStreamSource(new ByteArrayInputStream(imageData));
 		image.setSource(new StreamResource(source, fileName));
 		image.markAsDirty();
 	}
 
-	@Override
 	protected Component initContent() {
 		layout = new HorizontalLayout();
 		layout.setSpacing(true);
@@ -77,7 +73,9 @@ public class JImage extends CustomField<Object> {
 			createImage();
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 			String fileName = "myfilename-" + df.format(new Date()) + ".png";
-			updateImage((byte [])super.getInternalValue(), fileName);
+			JStreamSource source = new JStreamSource(new ByteArrayInputStream(super.getInternalValue()));
+			image.setSource(new StreamResource(source, fileName));
+			image.markAsDirty();
 		} 
 
 		if (!isReadOnly()) {
