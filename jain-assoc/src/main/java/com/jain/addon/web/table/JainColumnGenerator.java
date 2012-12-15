@@ -62,13 +62,16 @@ public class JainColumnGenerator implements ColumnGenerator {
 	}
 
 	private Component createImage(final Property<?> itemProperty, final Table source) {
-		JStreamSource streamSource = new JStreamSource((byte[]) itemProperty.getValue());
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		String filename = "myfilename-" + df.format(new Date()) + ".png";
-		StreamResource resource = new StreamResource(streamSource, filename);
-		Embedded embedded = new Embedded("", resource);
-		embedded.setHeight("20px");
-		return embedded;
+		if(itemProperty.getValue() != null) {
+			JStreamSource streamSource = new JStreamSource((byte[]) itemProperty.getValue());
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+			String filename = "myfilename-" + df.format(new Date()) + ".png";
+			StreamResource resource = new StreamResource(streamSource, filename);
+			Embedded embedded = new Embedded("", resource);
+			embedded.setHeight("20px");
+			return embedded;
+		}
+		return null;
 	}
 	
 	
