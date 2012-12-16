@@ -48,6 +48,36 @@ input.v-textfield,input[type="text"].v-textfield,textarea.v-textarea {
 	border-bottom-left-radius: 0px;
 }
 
+.v-filterselect-suggestpopup-j-field {
+	background: #B99B5F;
+	background-image: url(../images/bg-headliner.gif);
+	border: none;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	overflow: hidden;
+	color: #7C673C;
+	text-shadow: 2px 2px 0 #EFD9C4;
+	font-size: 14px;
+	padding: 4px 0;
+	text-shadow: 2px 2px 0 #EFD9C4;
+}
+
+.v-filterselect-suggestpopup-j-field .v-filterselect-suggestmenu .gwt-MenuItem-selected
+	{
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	background: #B99B5F;
+	background-image: url(../images/bg-navigation.gif);
+	color: #2E5306;
+	text-shadow: 2px 2px 0 #F2FCD9;
+	height: 17px;
+	line-height: 18px;
+}
+
 .v-caption-j-field {
 	color: #7C673C;
 	text-decoration: none;
