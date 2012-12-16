@@ -47,3 +47,10 @@ input.v-textfield,input[type="text"].v-textfield,textarea.v-textarea {
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 0px;
 }
+
+.v-caption-j-field {
+	color: #7C673C;
+	text-decoration: none;
+	text-shadow: 2px 1px 0 #EFD9C4;
+	padding-left: 7px;
+}

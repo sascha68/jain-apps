@@ -162,6 +162,7 @@ public final class JAnnotationProcessor implements Serializable {
 		property.setType(attribute.type());
 		property.setVisibility(attribute.visibility());
 		property.setOrder(attribute.order());
+		property.setStyle(attribute.style());
 		return property;
 	}
 }

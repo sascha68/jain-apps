@@ -37,4 +37,6 @@ public interface JNStyleConstants {
 	String J_CRUD = "j-crud";
 	String J_VIEW = "j-view";
 	String J_ALTERNATE_VIEW = "j-alternate-view";
+	
+	String J_FIELD = "j-field";
 }

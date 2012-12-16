@@ -28,5 +28,6 @@ public interface JNIProperty extends JNINamed {
 	JPropertyType getType(); 
 	JVisibilityType getVisibility();
 	int getOrder ();
+	String getStyle();
 }
  

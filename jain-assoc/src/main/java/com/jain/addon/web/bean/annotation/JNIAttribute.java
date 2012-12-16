@@ -21,6 +21,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.jain.addon.JNStyleConstants;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.JPropertyType;
 import com.jain.addon.web.bean.JVisibilityType;
@@ -35,8 +36,9 @@ import com.jain.addon.web.bean.JVisibilityType;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface JNIAttribute {
-	public String lable ();
-	public JPropertyType type() default JPropertyType.UN_SPECIFIED; 
-	public JVisibilityType visibility() default JVisibilityType.VISIBLE;
-	public int order() default -9999999;
+	String lable ();
+	JPropertyType type() default JPropertyType.UN_SPECIFIED; 
+	JVisibilityType visibility() default JVisibilityType.VISIBLE;
+	int order() default -9999999;
+	String style() default JNStyleConstants.J_FIELD;
 }

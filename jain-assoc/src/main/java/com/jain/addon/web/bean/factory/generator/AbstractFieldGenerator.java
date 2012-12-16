@@ -18,6 +18,7 @@ package com.jain.addon.web.bean.factory.generator;
 import java.util.Collection;
 import java.util.Locale;
 
+import com.jain.addon.JNStyleConstants;
 import com.jain.addon.StringHelper;
 import com.jain.addon.resource.I18NProvider;
 import com.jain.addon.web.bean.JConstraintType;
@@ -48,7 +49,7 @@ public abstract class AbstractFieldGenerator implements FieldGenerator {
 
 	public Field<?> createField(Class<?> type, JNIPropertyConstraint restriction){
 		Field<?> field = createField(type, restriction.getProperty());
-		updateFieldProperties(restriction, field);
+		updateField(restriction, field);
 		return field;
 	}
 
@@ -56,16 +57,13 @@ public abstract class AbstractFieldGenerator implements FieldGenerator {
 		throw new UnsupportedOperationException ();
 	}
 
-	protected String getCaption(JNIProperty property) {
-		return property.getDisplayName();
-	}
-
-	protected String getRequiredError(JNIProperty property) {
-		return "common.something.required";
-	}
-
-	protected String getDescription(JNIProperty property) {
-		return provider.getMessage(locale, property.getDisplayName());
+	/**
+	 * @param restriction
+	 * @param field
+	 */
+	protected void updateField(JNIPropertyConstraint restriction, Field<?> field) {
+		updateFieldStyle(restriction.getProperty(), field);
+		updateFieldProperties(restriction, field);
 	}
 
 	/**
@@ -73,21 +71,31 @@ public abstract class AbstractFieldGenerator implements FieldGenerator {
 	 * @param field
 	 */
 	protected void updateFieldProperties(JNIPropertyConstraint restriction, Field<?> field) {
-		if(restriction != null){
-			field.setCaption(getCaption(restriction.getProperty()));
-			field.setTabIndex(restriction.getProperty().getOrder());
+		field.setCaption(getCaption(restriction.getProperty()));
+		field.setTabIndex(restriction.getProperty().getOrder());
 
-			if(restriction.getValidator() != null){
-				field.addValidator(restriction.getValidator());
-			}
+		if(restriction.getValidator() != null){
+			field.addValidator(restriction.getValidator());
+		}
 
-			updateRestriction(restriction, field);
+		updateRestriction(restriction, field);
 
-			if(StringHelper.isNotEmptyWithTrim(restriction.getWidth())){
-				field.setWidth(restriction.getWidth());
-			}else{
-				field.setSizeFull();
-			}
+		if(StringHelper.isNotEmptyWithTrim(restriction.getWidth())){
+			field.setWidth(restriction.getWidth());
+		}else{
+			field.setSizeFull();
+		}
+	}
+
+	/**
+	 * @param property
+	 * @param field
+	 */
+	protected void updateFieldStyle (JNIProperty property, Field<?> field) {
+		if (StringHelper.isNotEmptyWithTrim(property.getStyle())) {
+			field.setStyleName(property.getStyle());
+		} else {
+			field.setStyleName(JNStyleConstants.J_FIELD);			
 		}
 	}
 
@@ -116,5 +124,17 @@ public abstract class AbstractFieldGenerator implements FieldGenerator {
 				}
 			}
 		}
+	}
+
+	protected String getCaption(JNIProperty property) {
+		return property.getDisplayName();
+	}
+
+	protected String getRequiredError(JNIProperty property) {
+		return "common.something.required";
+	}
+
+	protected String getDescription(JNIProperty property) {
+		return provider.getMessage(locale, property.getDisplayName());
 	}
 }
