@@ -48,6 +48,7 @@ public class CheckBoxFieldGenerator extends SelectFieldGenerator {
 				field.setItemCaption(object, ((JNINamed) object).getDisplayName());
 			}
 		}
+		updateField(restriction, field);
 		return field;
 	}
 }

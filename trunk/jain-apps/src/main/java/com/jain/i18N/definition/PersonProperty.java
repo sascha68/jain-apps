@@ -13,6 +13,7 @@
  */
 package com.jain.i18N.definition;
 
+import com.jain.addon.JNStyleConstants;
 import com.jain.addon.web.bean.JNIProperty;
 import com.jain.addon.web.bean.JPropertyType;
 import com.jain.addon.web.bean.JVisibilityType;
@@ -89,5 +90,9 @@ public enum PersonProperty implements JNIProperty {
 
 	public int getOrder() {
 		return ordinal();
+	}
+
+	public String getStyle() {
+		return JNStyleConstants.J_FIELD;
 	}
 }

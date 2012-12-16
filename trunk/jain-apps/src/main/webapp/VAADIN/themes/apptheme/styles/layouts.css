@@ -12,7 +12,7 @@
 	border-radius: 10px;
 }
 
-.v-caption-view {
+.v-caption-j-view .v-captiontext, .v-caption--alternate-view .v-captiontext {
 	width: 100%;
 	color: #7C673C;
 	text-decoration: none;

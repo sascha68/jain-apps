@@ -34,6 +34,7 @@ public class JNProperty implements JNIProperty {
 	private JPropertyType type;
 	private JVisibilityType visibility;
 	private int order;
+	private String style;
 
 	public String getName() {
 		return name;
@@ -81,5 +82,13 @@ public class JNProperty implements JNIProperty {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 }
