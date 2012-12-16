@@ -16,6 +16,7 @@ package com.jain.common.authenticate;
 import javax.inject.Inject;
 
 import com.jain.addon.JNIComponentInit;
+import com.jain.addon.JNStyleConstants;
 import com.jain.addon.event.Events;
 import com.jain.addon.i18N.I18NHelper;
 import com.jain.addon.i18N.component.I18NWindow;
@@ -82,12 +83,14 @@ public class LoginAction extends I18NWindow  implements ClickListener {
 		userName.setRequiredError(provider.getMessage(getLocale(), "common.something.required", "user.name.title", JAction.LOGIN.getDisplayName()));
 		userName.setDescription("user.name");
 		userName.setSizeFull();
+		userName.setStyleName(JNStyleConstants.J_FIELD);
 		
 		password = new PasswordField("password");
 		password.setRequired(true);
 		password.setRequiredError(provider.getMessage(getLocale(), "common.something.required", "password.title", JAction.LOGIN.getDisplayName()));
 		password.setDescription("password");
 		password.setSizeFull();
+		password.setStyleName(JNStyleConstants.J_FIELD);
 		
 		VerticalLayout verticalLayout = new VerticalLayout();
 		verticalLayout.setStyleName(ApplicationTheme.VIEW);
