@@ -18,6 +18,8 @@ package com.jain.addon.event;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
+import com.jain.addon.action.confirm.JNConfirm;
+
 /**
  * <pre> 
  * <code>MethodExpression<code> created for the observer method
@@ -32,6 +34,7 @@ import java.lang.reflect.Method;
 public final class MethodExpression implements Serializable {
 	private final Object instance;
 	private final Method method;
+	private JNConfirm confirm;
 
 	public MethodExpression(Object instance, Method method) {
 		this.instance = instance;
@@ -44,6 +47,14 @@ public final class MethodExpression implements Serializable {
 
 	public Method getMethod() {
 		return method;
+	}
+
+	public JNConfirm getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(JNConfirm confirm) {
+		this.confirm = confirm;
 	}
 
 	public Object invoke(Object ... parameters) {

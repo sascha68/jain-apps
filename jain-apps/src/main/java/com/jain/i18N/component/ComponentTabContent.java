@@ -6,6 +6,7 @@ import com.jain.addon.action.ActionMenuBar;
 import com.jain.addon.action.JNAction;
 import com.jain.addon.action.JNActionGroup;
 import com.jain.addon.action.JNActionGroups;
+import com.jain.addon.action.confirm.JNConfirm;
 import com.jain.addon.component.upload.JImage;
 import com.jain.common.VaadinHelper;
 import com.vaadin.ui.Label;
@@ -51,11 +52,15 @@ public class ComponentTabContent extends VerticalLayout  {
 	}
 	
 	@JNAction (name = "close.action.name", actionGroup = "file.action.group.name", tabIndex = 11)
+	@JNConfirm(title = "confirm.window.title", message = "close.action.confirm.message", 
+			icon = "confirm.window.message.icon")
 	public void newFile() {
 		callActionMessage("close.action.name", "file.action.group.name");
 	}
 	
 	@JNAction (name = "close.all.action.name", actionGroup = "file.action.group.name", tabIndex = 12, separator = true)
+	@JNConfirm(title = "confirm.window.title", message = "close.all.action.confirm.message", 
+			icon = "confirm.window.message.icon")
 	public void close() {
 		callActionMessage("close.all.action.name", "file.action.group.name");
 	}
