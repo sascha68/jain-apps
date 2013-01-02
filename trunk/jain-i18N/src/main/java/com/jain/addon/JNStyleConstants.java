@@ -39,4 +39,6 @@ public interface JNStyleConstants {
 	String J_ALTERNATE_VIEW = "j-alternate-view";
 	
 	String J_FIELD = "j-field";
+	
+	String J_CONFIRM_MESSGAE = "j-confirm-message";
 }

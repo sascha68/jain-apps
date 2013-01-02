@@ -21,7 +21,10 @@ import java.util.Map;
 
 import com.jain.addon.StringHelper;
 import com.jain.addon.action.JNAction;
+import com.jain.addon.action.confirm.ConfirmWindow;
+import com.jain.addon.action.confirm.JNConfirm;
 import com.jain.addon.event.MethodExpression;
+import com.vaadin.ui.UI;
 
 /**
  * <code>JNActionListener<code> abstract action listener for all the actions
@@ -85,7 +88,10 @@ public abstract class JNActionListener <T> {
 		} else {
 			actionName = StringHelper.methodToPropertyName(method.getName());
 		}
-		actions.put(actionName, new MethodExpression(actionHandler, method));
+		MethodExpression expression = new MethodExpression(actionHandler, method);
+		JNConfirm confirm = method.getAnnotation(JNConfirm.class);
+		expression.setConfirm(confirm);
+		actions.put(actionName, expression);
 		processParameters (actionName, method, params);
 		return actionName;
 	}
@@ -129,11 +135,17 @@ public abstract class JNActionListener <T> {
 	/**
 	 * Method to Invoke Action
 	 * @param actionName
+	 * @param ui 
 	 */
-	protected void invokeAction(String actionName) {
+	protected void invokeAction(String actionName, UI ui) {
 		MethodExpression action = actions.get(actionName);
 		if (action != null) {
-			action.invoke(this.actionParams.get(actionName));
+			if (action.getConfirm() != null) {
+				ConfirmWindow window = new ConfirmWindow(action, this.actionParams.get(actionName));
+				ui.addWindow(window);
+			} else {
+				action.invoke(this.actionParams.get(actionName));
+			}
 		}
 	}
 

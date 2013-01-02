@@ -59,6 +59,6 @@ public final class JNButtonClickListener <T> extends JNActionListener<T> impleme
 		this.currentAction.addStyleName(JNStyleConstants.J_SELECTED_ACTION);
 		
 		String actionName = I18NHelper.getKey(currentAction);
-		invokeAction(actionName);
+		invokeAction(actionName, currentAction.getUI());
 	}
 }

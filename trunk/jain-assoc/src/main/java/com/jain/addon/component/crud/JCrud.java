@@ -23,6 +23,7 @@ import com.jain.addon.JNINamed;
 import com.jain.addon.JNStyleConstants;
 import com.jain.addon.action.ActionBar;
 import com.jain.addon.action.JNAction;
+import com.jain.addon.action.confirm.JNConfirm;
 import com.jain.addon.helper.JNHelper;
 import com.jain.addon.security.JNISecured;
 import com.vaadin.ui.Alignment;
@@ -136,6 +137,7 @@ public class JCrud <T> extends VerticalLayout implements JNISecured {
 
 	@JNAction (name = "delete.action.name", tabIndex = 4, permission = DELETE_ACTION_PERMISSION, 
 			description = "delete.action.description",  icon="delete.action.icon")
+	@JNConfirm(title = "delete.action.confirm.title", message = "delete.action.confirm.message")
 	public void delete() {
 		if (grid.getSelected() != null) {
 			grid.delete();

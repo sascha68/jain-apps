@@ -61,6 +61,6 @@ public final class JNCommandListener <T> extends JNActionListener<T> implements 
 		this.currentAction.setStyleName(JNStyleConstants.J_SELECTED_ACTION);
 		
 		String actionName = I18NHelper.getKey(menuBar, currentAction);
-		invokeAction(actionName);
+		invokeAction(actionName, menuBar.getUI());
 	}
 }
