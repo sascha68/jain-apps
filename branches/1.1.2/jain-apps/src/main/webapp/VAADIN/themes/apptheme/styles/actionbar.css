@@ -1,0 +1,90 @@
+.j-action-button-group .v-button .v-button-wrap {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	background: url(../images/bg-navigation.gif) repeat-x;
+	color: #b99b5f;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #efd9c4;
+	font-size: 11px;
+}
+
+.j-action-button-group  .v-button-caption {
+	vertical-align: middle;
+	white-space: nowrap;
+	font: inherit;
+	color: inherit;
+	line-height: normal;
+}
+
+.j-action-button-group .j-first-action {
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-bottom-left-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	-moz-border-radius-bottomleft: 7px;
+	border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;
+	border-left-width: 1px;
+}
+
+.j-action-button-group .j-first-action .v-button-wrap {
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-bottom-left-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	-moz-border-radius-bottomleft: 7px;
+	border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;
+}
+
+.j-action-button-group .j-last-action {
+	-webkit-border-top-right-radius: 7px;
+	-webkit-border-bottom-right-radius: 7px;
+	-moz-border-radius-topright: 7px;
+	-moz-border-radius-bottomright: 7px;
+	border-top-right-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+
+.j-action-button-group .j-last-action .v-button-wrap {
+	-webkit-border-top-right-radius: 7px;
+	-webkit-border-bottom-right-radius: 7px;
+	-moz-border-radius-topright: 7px;
+	-moz-border-radius-bottomright: 7px;
+	border-top-right-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+
+.j-action-button-group .v-button-caption:hover {
+	color: #2e5306;
+	text-shadow: 1px 1px 0 #f2fcd9;
+}
+
+.j-action-button-group .j-selected-action .v-button-caption {
+	color: #2e5306;
+	text-shadow: 1px 1px 0 #f2fcd9;
+}
+
+
+.j-action-link-group .v-button-link, .j-action-link-group .v-nativebutton-link {
+	padding-right: 5px;
+	padding-left: 5px; 
+}
+
+.j-action-link-group .v-button-link .v-button-caption, .j-action-link-group .v-nativebutton-link .v-nativebutton-caption
+	{
+	text-decoration: underline;
+	color: #7C673C;
+	text-align: left;
+	vertical-align : middle;
+	text-shadow: 2px 1px 0 #EFD9C4;
+}
+
+.j-action-link-group .v-button-link .v-button-caption:hover, .j-action-link-group .v-nativebutton-link .v-nativebutton-caption:hover
+	{
+	color: #2e5306;
+	text-decoration: underline;
+	text-align: left;
+	vertical-align : middle;
+	text-shadow: 2px 1px 0 #f2fcd9;
+	text-align: left;
+}
