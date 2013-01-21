@@ -26,7 +26,7 @@ input.v-textfield,input[type="text"].v-textfield,textarea.v-textarea {
 
 .v-datefield input.v-textfield,.v-datefield input.v-textfield[type="text"]
 	{
-	height: 12px;
+	height: 24px;
 	width: 85%;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 0px;
