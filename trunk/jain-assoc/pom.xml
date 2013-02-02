@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.vaadin.addons</groupId>
 	<artifactId>jain-assoc</artifactId>
-	<version>1.1.3</version>
+	<version>1.1.4</version>
 	<name>Jain Association</name>
 	<description>A addon API for association / HAS-A relation objects</description>
 
