@@ -1,0 +1,86 @@
+.v-window-closebox {
+	width: 14px;
+	height: 15px;
+	overflow: hidden;
+	text-indent: -50px;
+	background: transparent url(../images/close-btn.png) no-repeat;
+	vertical-align: middle;
+	margin: 0px;
+	top: 8px;
+	right: 5px;
+	z-index: 2;
+}
+
+.v-window-closebox:hover {
+	background-position: 0 -25px;
+}
+
+.v-window-closebox:active {
+	background-position: 0 -50px;
+}
+
+.v-window {
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	background-color: rgb(204,230,255);
+	background-color: rgba(204,230,255,.85);
+	background: url(../images/bg-headliner.gif) repeat center;
+	border-color: rgb(167,186,204);
+	color: rgb(58,76,96);
+}
+
+.v-window-wrap {
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	background: transparent url(../images/bg-navigation.gif);
+	background-repeat: repeat-x;
+}
+
+.v-window-outerheader {
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	background: transparent url(../images/bg-navigation.gif);
+	background-repeat: repeat-x;
+	text-align: center;
+	vertical-align: middle;
+	padding: 6px;
+	margin: 0px;
+	height: 27px;
+}
+
+.v-window-header {
+	height: 20px;
+	padding: 0px;
+	margin: 0px;
+	color: #b99b5f;
+	text-decoration: none;
+	text-align: center;
+	text-shadow: 1px 1px 0 #efd9c4;
+	font-size: 14px;
+	line-height: 15px;
+	background: transparent;
+}
+
+.v-window-footer {
+	height: 0;
+	position: static;
+}
+
+.v-window-resizebox {
+	background: transparent url(../images/resize.png) no-repeat;
+	width: 14px;
+	height: 14px;
+	bottom: 0;
+}
+
+.v-window-contents > div {
+	background: none;
+	border: none;
+}
+
+.v-window div.v-window-footer {
+	height: 0px;
+}
