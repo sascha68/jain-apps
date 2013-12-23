@@ -107,7 +107,7 @@ public class ButtonSegment extends HorizontalLayout implements JNILoginListner {
 	public void onLogin() {
 		if (namedResources != null) {
 			for (JNINamedResourceVisible named : namedResources) {
-				for (Iterator<Component> iterator = getComponentIterator(); iterator.hasNext();) {
+				for (Iterator<Component> iterator = iterator(); iterator.hasNext();) {
 					Component component = iterator.next();
 					if (named.getDisplayName().equalsIgnoreCase(I18NHelper.getKey(component))) {
 						component.setVisible(named.isVisible());
