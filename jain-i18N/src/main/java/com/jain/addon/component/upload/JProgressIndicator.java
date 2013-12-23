@@ -15,7 +15,7 @@
  */
 package com.jain.addon.component.upload;
 
-import com.vaadin.ui.ProgressIndicator;
+import com.vaadin.ui.ProgressBar;
 import com.vaadin.ui.Upload.ProgressListener;
 
 /**
@@ -24,7 +24,7 @@ import com.vaadin.ui.Upload.ProgressListener;
  * @since Aug 28, 2012
  * @version 1.0.0
  */
-public class JProgressIndicator extends ProgressIndicator implements ProgressListener {
+public class JProgressIndicator extends ProgressBar implements ProgressListener {
 	private static final long serialVersionUID = 5756898625595137143L;
 	private long readBytes;
 	private long contentLength;
@@ -32,7 +32,6 @@ public class JProgressIndicator extends ProgressIndicator implements ProgressLis
 	public JProgressIndicator() {
 		setWidth("100%");
 		setValue(0f);
-		setPollingInterval(500);
 	}
 
 	public void updateProgress(long readBytes, long contentLength) {

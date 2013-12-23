@@ -87,7 +87,7 @@ public abstract class ActionGroup <T> extends HorizontalLayout implements JNILog
 	 */
 	public void onLogin() {
 		for (JNAction action : actions) {
-			for (Iterator<Component> iterator = getComponentIterator(); iterator.hasNext();) {
+			for (Iterator<Component> iterator = iterator(); iterator.hasNext();) {
 				Component component = iterator.next();
 				if (actionsToName.get(action).equalsIgnoreCase(I18NHelper.getKey(component))) {
 					component.setVisible(validatePermission (action));

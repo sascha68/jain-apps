@@ -106,7 +106,8 @@
 	</dependencies>
 	<properties>
 		<version.java.app>1.6</version.java.app>
-		<vaadin.version>7.0.1</vaadin.version>
+		<vaadin.version>7.1.9</vaadin.version>
 		<gwt.version>2.4.0</gwt.version>
 	</properties>
+	<packaging>pom</packaging>
 </project>

@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import com.jain.addon.component.JStreamSource;
+import com.vaadin.server.FileDownloader;
 import com.vaadin.server.StreamResource;
 import com.vaadin.ui.UI;
 
@@ -80,7 +81,7 @@ public class JDownloader implements Serializable {
 		resource.getStream().setParameter("Content-Disposition", "attachment;filename=\"" + fileName + "\"");
 		resource.setMIMEType ("application/octet-stream");
 		resource.setCacheTime (0);
-		//TODO: Check this again 
-		//ui.getPage().open(resource);
+		FileDownloader downloader = new FileDownloader(resource); 
+		downloader.extend(ui);
 	}
 }
