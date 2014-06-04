@@ -1,0 +1,84 @@
+.j-action-bar .v-menubar {
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	height: 23px;
+	background: #323336 repeat-x;
+	background-image: url(../images/bg-navigation.gif);
+	color: #7C673C;
+	text-shadow: 2px 2px 0 #EFD9C4;
+	font-size: 14px;
+	padding: 0px;
+}
+
+.j-action-bar .v-menubar .v-menubar-menuitem {
+	padding: 3px 8px;
+	height: 17px;
+	line-height: 14px;
+	cursor: pointer;
+}
+
+.j-action-bar .v-menubar .v-menubar-menuitem:hover {
+	color: #2E5306;
+	text-shadow: 2px 2px 0 #F2FCD9;
+}
+
+.v-menubar-submenu {
+	background: #B99B5F;
+	background-image: url(../images/bg-headliner.gif);
+	border: none;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	overflow: hidden;
+	color: #7C673C; text-shadow : 2px 2px 0 #EFD9C4;
+	font-size: 14px;
+	padding: 4px 0;
+	text-shadow: 2px 2px 0 #EFD9C4;
+}
+
+.v-menubar-submenu .v-menubar-menuitem {
+	padding: 3px 20px;
+	height: 17px;
+	line-height: 14px;
+	cursor: pointer;
+}
+
+.v-menubar-submenu .v-menubar-menuitem-caption * {
+	vertical-align: middle;
+}
+
+.v-menubar .v-menubar-menuitem-selected,.v-menubar-submenu .v-menubar-menuitem-selected
+	{
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	background: #B99B5F;
+	background-image: url(../images/bg-navigation.gif);
+	color: #2E5306;
+	text-shadow: 2px 2px 0 #F2FCD9;
+	height: 17px;
+	line-height: 18px;
+}
+
+.v-menubar .v-menubar-menuitem-selected {
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	background: #B99B5F;
+	background-image: url(../images/bg-navigation.gif);
+	color: #2E5306;
+	text-shadow: 2px 2px 0 #F2FCD9;
+	height: 17px;
+	line-height: 18px;
+}
+
+.v-menubar-submenu .v-menubar-submenu-indicator {
+	right: 2px;
+	top: 3px;
+	vertical-align: middle;
+	font-size: .9em;
+}
