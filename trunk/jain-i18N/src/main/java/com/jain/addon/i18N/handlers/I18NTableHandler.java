@@ -81,7 +81,7 @@ public class I18NTableHandler extends I18NAbstractComponentHandler implements Se
 
 		for (int i = 0; i < convertedHeaders.length; i++) {
 			String header = i18NHeaders[i];
-			String value = provider.getTitle(locale, header);
+			String value = header != null ? provider.getTitle(locale, header) : null;
 			convertedHeaders [i] = value;
 		}
 		return convertedHeaders;
