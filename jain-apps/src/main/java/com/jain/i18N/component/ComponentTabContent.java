@@ -9,8 +9,10 @@ import com.jain.addon.action.JNActionGroups;
 import com.jain.addon.action.confirm.JNConfirm;
 import com.jain.addon.component.upload.JImage;
 import com.jain.common.VaadinHelper;
+import com.vaadin.ui.AbstractSelect.ItemCaptionMode;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
@@ -18,6 +20,7 @@ import com.vaadin.ui.VerticalLayout;
 			@JNActionGroup (name = "new.action.group.name", parent = "file.action.group.name"), 
 			@JNActionGroup (name = "edit.action.group.name", icon = "edit.action.icon")})
 public class ComponentTabContent extends VerticalLayout  {
+	@SuppressWarnings("unchecked")
 	@JNIComponentInit
 	public void init () {
 		setMargin(true);
@@ -44,6 +47,21 @@ public class ComponentTabContent extends VerticalLayout  {
 		image.setUploadButtonCaption("picture.upload.button.caption");
 		addComponent(image);
 		setExpandRatio(image, 2);
+
+		
+		Tree tree = new Tree() {
+			public String getItemCaption(Object itemId) {
+				return super.getItemCaption(itemId);
+			}
+		};
+		tree.addContainerProperty("label", String.class, null);
+		tree.setItemCaptionMode(ItemCaptionMode.ITEM);
+		tree.setItemCaptionPropertyId("label");
+		tree.getItem(tree.addItem()).getItemProperty("label").setValue("test.property");
+		
+		addComponent(tree);
+		setExpandRatio(tree, 2);
+
 	}
 
 	@JNAction (name = "open.file.action.name", actionGroup = "file.action.group.name", tabIndex = 10)

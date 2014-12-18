@@ -62,6 +62,16 @@
 				</includes>
 			</resource>
 		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${version.java.app}</source>
+					<target>${version.java.app}</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<profiles>
@@ -168,11 +178,6 @@
 			<version>${vaadin.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-servlet</artifactId>
-			<version>${gwt.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>6.0</version>
@@ -198,10 +203,8 @@
 
 	<properties>
 		<version.java.app>1.6</version.java.app>
-		<vaadin.version>7.2.1</vaadin.version>
-		<gwt.version>2.4.0</gwt.version>
-		<gwt.plugin.version>2.2.0</gwt.plugin.version>
+		<vaadin.version>7.3.7</vaadin.version>
 		<com.vishudha.deployment.directory>${com.vishudha.jboss.home}/standalone/deployments</com.vishudha.deployment.directory>
-		<com.vishudha.jboss.home>/home/ljain/DevEnvironment/jboss-as-7.0.2</com.vishudha.jboss.home>
+		<com.vishudha.jboss.home>/home/ljain/DevEnvironment/I18N/jboss-as-7.0.2</com.vishudha.jboss.home>
 	</properties>
 </project>
