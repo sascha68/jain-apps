@@ -26,6 +26,7 @@ import com.jain.common.authenticate.AuthenticatedUser;
 import com.jain.common.header.Header;
 import com.jain.common.header.WelcomeBar;
 import com.jain.theme.ApplicationTheme;
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.VerticalLayout;
@@ -33,6 +34,7 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 @Theme(ApplicationTheme.THEME_NAME)
 @SessionScoped
+@PreserveOnRefresh
 public class ApplicationUI extends I18NUI {
 	@Inject AuthenticatedUser user;
 	
